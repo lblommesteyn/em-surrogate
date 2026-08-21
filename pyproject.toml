@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "emsurr"
+version = "0.1.0"
+description = "Learned electromagnetic surrogate baseline for PCB interconnects"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "h5py",
+    "scikit-rf",
+    "torch",
+    "matplotlib",
+    "pyyaml",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,8 @@
+# TUHH SI/PI-Database license forbids redistribution: keep ALL data out of git
+data/
+results/*.png
+*.h5
+__pycache__/
+*.egg-info/
+.pytest_cache/
+tools/

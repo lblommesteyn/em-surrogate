@@ -1,0 +1,16 @@
+# Baseline experiment configuration
+data:
+  source: synthetic          # synthetic | tuhh
+  n_per_family: 400
+  seed: 0
+  path: data/processed/synth.h5
+splits:
+  seed: 0
+  ood_families: [via_lc, stub_short]
+models:
+  knn: {k: 5}
+  mlp: {hidden: 256, depth: 3, epochs: 200, lr: 1.0e-3}
+  deepsets: {hidden: 256, depth: 3, epochs: 200, lr: 1.0e-3}
+uncertainty:
+  n_members: 5
+  fallback_fracs: [0.1, 0.2, 0.3]
