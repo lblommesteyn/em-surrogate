@@ -1,0 +1,25 @@
+# Frozen a-priori configuration for the TUHH real-data run.
+# Everything here was fixed BEFORE any TUHH model result existed
+# (2026-08-21); do not edit after inspecting results.
+data:
+  h5: data/processed/tuhh.h5
+splits:
+  seed: 0
+  # per-family subsample cap: compute control only (CPU training), applied
+  # with the split seed BEFORE any split; dropped counts are logged. Use
+  # --full to disable.
+  max_per_family: 500
+  # primary leave-one-super-family-out holdouts, chosen a priori in
+  # results/novelty_report.md ("e.g. hold out pi_central_rail or
+  # si_universal_diff") before TUHH data existed. Novelty/fallback runs on
+  # these; surrogate-quality metrics run on ALL super-family holdouts.
+  primary_loso: [pi_central_rail, si_universal_diff]
+novelty:
+  # per milestone-2 protocol: hyperparameters selected on a pseudo-OOD stage
+  # carved from TRAINING super-families only. Rule (a priori): the two
+  # alphabetically-first training super-families are pseudo-OOD.
+  k_grid: [3, 10, 30]
+  alpha_grid: [0.3, 0.5, 0.7]
+  budgets: [0.05, 0.1, 0.2, 0.3, 0.5]
+  # also evaluate with the synthetic-benchmark frozen hyperparameters
+  synth_frozen: {k: 3, alpha: 0.3}

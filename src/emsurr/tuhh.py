@@ -49,9 +49,11 @@ def load_tuhh_family(root: str | Path, family_id: str) -> list[dict]:
                 topology_family=family_id,
                 ports=net.nports,
                 params=row[param_cols].to_numpy(dtype=float),
+                param_names=list(param_cols),
                 elements=np.zeros((0, 5)),
                 freq=net.f,
                 s=net.s,
+                touchstone=matches[0].name,
             )
         )
     return samples
