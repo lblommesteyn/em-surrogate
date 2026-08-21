@@ -1,0 +1,27 @@
+# A-priori topology-family mapping for the TUHH SI/PI-Database.
+# Defined from the published structure descriptions ONLY (docs/data_audit.md),
+# never from model results. family = dataset ID; super_family groups
+# structurally similar datasets for leave-one-group-out OOD splits.
+families:
+  SI-1: {super_family: si_link_large_array,   description: link on 11-cavity PCB, 10x10 arrays}
+  SI-2: {super_family: si_link_large_array,   description: link on 8-cavity PCB, 10x10 arrays}
+  SI-3: {super_family: si_array_small,        description: 5x5 via array on 10-cavity PCB}
+  SI-4: {super_family: si_link_small_array,   description: link with two 5x5 arrays}
+  SI-5: {super_family: si_universal_se,       description: universal single-ended via array (LHS)}
+  SI-6: {super_family: si_universal_diff,     description: universal differential via array (LHS)}
+  SI-7: {super_family: si_universal_diff,     description: universal differential array link (LHS)}
+  SI-8: {super_family: si_fullwave,           description: 14-layer 9x8 array, full wave}
+  SI-9: {super_family: si_fullwave,           description: coaxial via, full wave}
+  PI-1: {super_family: pi_plane_pair,         description: PWR/GND plane pair, 11x11 array}
+  PI-2: {super_family: pi_pdn_two_arrays,     description: 4-layer PDN, two arrays}
+  PI-3: {super_family: pi_pdn_two_arrays,     description: 8-layer PDN, two arrays}
+  PI-4: {super_family: pi_pdn_two_arrays,     description: 6-layer PDN, two arrays}
+  PI-5: {super_family: pi_polygonal,          description: 4-layer polygonal PDN}
+  PI-6: {super_family: pi_plane_pair,         description: 2-layer PDN, large array}
+  PI-7: {super_family: pi_central_rail,       description: 4-layer, three arrays, central rail}
+  PI-8: {super_family: pi_central_rail,       description: 4-layer, two arrays, central rail}
+  PI-9: {super_family: pi_central_rail,       description: 14-layer, two arrays, central rail}
+  PI-10: {super_family: pi_eurocard,          description: eurocard, distant vias}
+  PI-11: {super_family: pi_eurocard,          description: eurocard, simple array}
+  PI-12: {super_family: pi_eurocard,          description: eurocard, medium array}
+  PI-13: {super_family: pi_eurocard,          description: eurocard, complex array}

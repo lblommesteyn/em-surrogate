@@ -139,6 +139,14 @@ class TorchRegressor:
         self.model.load_state_dict(best_state)
         return self
 
+    def embed(self, samples: list[dict]) -> np.ndarray:
+        """Penultimate-layer activations (input to the final Linear)."""
+        x = torch.tensor(self.norm(features(samples)), dtype=torch.float32)
+        self.model.eval()
+        with torch.no_grad():
+            h = self.model.net[:-1](x)
+        return h.numpy()
+
     def predict(self, samples: list[dict], mc_dropout: int = 0) -> np.ndarray:
         x = torch.tensor(self.norm(features(samples)), dtype=torch.float32)
         F = samples[0]["freq"].shape[0]

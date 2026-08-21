@@ -21,6 +21,15 @@ import pandas as pd
 import skrf
 
 
+def family_map(config_path: str | Path = "configs/tuhh_families.yaml") -> dict:
+    """A-priori dataset-ID -> super_family mapping (never derived from model
+    results); used to build leave-one-group-out OOD splits on TUHH data."""
+    import yaml
+
+    cfg = yaml.safe_load(Path(config_path).read_text())
+    return {k: v["super_family"] for k, v in cfg["families"].items()}
+
+
 def load_tuhh_family(root: str | Path, family_id: str) -> list[dict]:
     root = Path(root)
     fam_dir = root / family_id

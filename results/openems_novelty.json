@@ -1,0 +1,47 @@
+{
+  "knn_input": {
+    "auroc_all": 0.9845,
+    "auroc_oems_dstub": 1.0,
+    "deferred_oems_dstub@id95": 1.0,
+    "auroc_oems_gap": 0.96125,
+    "deferred_oems_gap@id95": 0.75,
+    "auroc_oems_patch": 1.0,
+    "deferred_oems_patch@id95": 1.0
+  },
+  "mahalanobis_emb": {
+    "auroc_all": 0.8506666666666667,
+    "auroc_oems_dstub": 0.9611111111111111,
+    "deferred_oems_dstub@id95": 0.6666666666666666,
+    "auroc_oems_gap": 0.6570833333333334,
+    "deferred_oems_gap@id95": 0.0,
+    "auroc_oems_patch": 0.9983333333333333,
+    "deferred_oems_patch@id95": 1.0
+  },
+  "knn_emb": {
+    "auroc_all": 0.8758333333333334,
+    "auroc_oems_dstub": 1.0,
+    "deferred_oems_dstub@id95": 1.0,
+    "auroc_oems_gap": 0.6925,
+    "deferred_oems_gap@id95": 0.0,
+    "auroc_oems_patch": 0.9961111111111111,
+    "deferred_oems_patch@id95": 1.0
+  },
+  "ensemble_var": {
+    "auroc_all": 0.9965,
+    "auroc_oems_dstub": 0.9988888888888889,
+    "deferred_oems_dstub@id95": 1.0,
+    "auroc_oems_gap": 0.9920833333333333,
+    "deferred_oems_gap@id95": 1.0,
+    "auroc_oems_patch": 1.0,
+    "deferred_oems_patch@id95": 1.0
+  },
+  "combined": {
+    "auroc_all": 0.9985,
+    "auroc_oems_dstub": 1.0,
+    "deferred_oems_dstub@id95": 1.0,
+    "auroc_oems_gap": 0.99625,
+    "deferred_oems_gap@id95": 1.0,
+    "auroc_oems_patch": 1.0,
+    "deferred_oems_patch@id95": 1.0
+  }
+}
