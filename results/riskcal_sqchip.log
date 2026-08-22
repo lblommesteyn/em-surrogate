@@ -1,0 +1,9 @@
+== fold batch300
+  pseudo-OOD family: sqchip (290), cal train 110
+  wrote results/riskcal/sqchip_batch300.npz
+== fold batchnear50
+  pseudo-OOD family: batch300 (300), cal train 314
+  wrote results/riskcal/sqchip_batchnear50.npz
+== fold sqchip
+  pseudo-OOD family: batch300 (300), cal train 112
+  wrote results/riskcal/sqchip_sqchip.npz

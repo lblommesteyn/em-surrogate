@@ -78,26 +78,39 @@ cut = int(0.85 * len(ids))
 strain = [by_id[i] for i in ids[:cut]]
 sval = [by_id[i] for i in ids[cut:]]
 
-print("calibration ensemble (train-side)...")
-mlp_c = models.TorchRegressor(**MK).fit(strain, sval)
-ens_c = uncertainty.Ensemble(n_members=5, **MK).fit(strain, sval)
-out["val_cal"] = signals(strain, mlp_c, ens_c, sval, [0] * len(sval))
+ck = Path("results/riskcal/synth_calside.npz")
+if ck.exists():
+    z = np.load(ck, allow_pickle=True)
+    for key in z.files:
+        p, k = key.split("/", 1)
+        out.setdefault(p, {})[k] = z[key]
+    print("resumed calibration-side pools from checkpoint")
 
-fams = sorted({s["topology_family"] for s in train})
-print("LOFO pseudo-OOD over training families:", fams)
-pseudo_parts = []
-for f in fams:
-    tr_f = [s for s in strain if s["topology_family"] != f]
-    va_f = [s for s in sval if s["topology_family"] != f]
-    held = [s for s in strain + sval if s["topology_family"] == f]
-    print(f"  fold {f}: train {len(tr_f)}, id {len(va_f)}, pseudo-ood {len(held)}")
-    mlp_f = models.TorchRegressor(**MK).fit(tr_f, va_f)
-    ens_f = uncertainty.Ensemble(n_members=5, **MK).fit(tr_f, va_f)
-    pool = va_f + held
-    pseudo_parts.append(signals(tr_f, mlp_f, ens_f, pool,
-                                [0] * len(va_f) + [1] * len(held)))
-out["pseudo"] = {k: np.concatenate([p[k] for p in pseudo_parts])
-                 for k in pseudo_parts[0]}
+if "pseudo" not in out:
+    print("calibration ensemble (train-side)...")
+    mlp_c = models.TorchRegressor(**MK).fit(strain, sval)
+    ens_c = uncertainty.Ensemble(n_members=5, **MK).fit(strain, sval)
+    out["val_cal"] = signals(strain, mlp_c, ens_c, sval, [0] * len(sval))
+
+    fams = sorted({s["topology_family"] for s in train})
+    print("LOFO pseudo-OOD over training families:", fams)
+    pseudo_parts = []
+    for f in fams:
+        tr_f = [s for s in strain if s["topology_family"] != f]
+        va_f = [s for s in sval if s["topology_family"] != f]
+        held = [s for s in strain + sval if s["topology_family"] == f]
+        print(f"  fold {f}: train {len(tr_f)}, id {len(va_f)}, pseudo-ood {len(held)}")
+        mlp_f = models.TorchRegressor(**MK).fit(tr_f, va_f)
+        ens_f = uncertainty.Ensemble(n_members=5, **MK).fit(tr_f, va_f)
+        pool = va_f + held
+        pseudo_parts.append(signals(tr_f, mlp_f, ens_f, pool,
+                                    [0] * len(va_f) + [1] * len(held)))
+    out["pseudo"] = {k: np.concatenate([p[k] for p in pseudo_parts])
+                     for k in pseudo_parts[0]}
+    Path("results/riskcal").mkdir(parents=True, exist_ok=True)
+    np.savez_compressed("results/riskcal/synth_calside.npz",
+                        **{f"{p}/{k}": v for p, t in out.items() for k, v in t.items()})
+    print("checkpointed calibration-side pools")
 
 # ---- evaluation side (frozen final models from checkpoints)
 print("loading frozen final models...")
@@ -106,11 +119,39 @@ out["val_final"] = signals(train, mlp_F, ens_F, sval, [0] * len(sval))
 out["eval_synth"] = signals(train, mlp_F, ens_F, id_pool + ood_pool,
                             [0] * len(id_pool) + [1] * len(ood_pool))
 
-from score_openems import load_openems  # noqa: E402
+from emsurr.openems_load import load_openems  # noqa: E402
 
+# openEMS truth lives on a 128-pt 0.1-7 GHz grid inside the synthetic band:
+# interpolate the predicted S onto each sample's own grid for the error.
 oems = load_openems()
-out["eval_openems"] = signals(train, mlp_F, ens_F, id_pool + oems,
-                              [0] * len(id_pool) + [1] * len(oems))
+pool_o = id_pool + oems
+sig_o = {}
+knn_in = novelty.KNNInputNovelty(k=K).fit(train)
+maha = novelty.MahalanobisEmbedding().fit(train, mlp_F)
+knn_e = novelty.KNNEmbedding(k=K).fit(train, mlp_F)
+sig_o["knn_input"] = knn_in.score(pool_o)
+sig_o["maha_emb"] = maha.score(pool_o)
+sig_o["knn_emb"] = knn_e.score(pool_o)
+grid = id_pool[0]["freq"]
+errs, uncs = [], []
+for s_ in pool_o:
+    # predict on the synthetic 256-pt grid (network output dim is fixed);
+    # hand the model a copy carrying that grid so vec_to_s reshapes correctly
+    s256 = {**s_, "freq": grid}
+    preds = np.stack([m.predict([s256]) for m in ens_F.members])
+    pred = preds.mean(0)[0]
+    uncs.append(float(np.abs(preds - preds.mean(0)).mean()))
+    interp = np.empty((len(s_["freq"]), 2, 2), complex)
+    for i in range(2):
+        for j in range(2):
+            interp[:, i, j] = np.interp(s_["freq"], grid, pred[:, i, j].real) + 1j * np.interp(
+                s_["freq"], grid, pred[:, i, j].imag)
+    errs.append(float(np.abs(interp - s_["s"]).mean()))
+sig_o["ens_var"] = np.array(uncs)
+sig_o["err"] = np.array(errs)
+sig_o["is_ood"] = np.array([0.0] * len(id_pool) + [1.0] * len(oems))
+sig_o["family"] = np.array([s_["topology_family"] for s_ in pool_o])
+out["eval_openems"] = sig_o
 
 Path("results/riskcal").mkdir(parents=True, exist_ok=True)
 np.savez_compressed("results/riskcal/synth.npz",

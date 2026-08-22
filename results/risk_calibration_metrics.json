@@ -1,0 +1,4273 @@
+{
+ "synth": {
+  "iid_choice": [
+   "knn_emb",
+   0.5
+  ],
+  "pseudo_choice": [
+   "knn_emb",
+   0.7
+  ],
+  "selection_tables": {
+   "iid_spearman": {
+    "knn_input_a0.1": 0.8523035838351087,
+    "knn_input_a0.3": 0.8144576482167669,
+    "knn_input_a0.5": 0.7387447892542844,
+    "knn_input_a0.7": 0.6250072371468272,
+    "knn_input_a0.9": 0.4960166743862899,
+    "knn_emb_a0.1": 0.8685061081519222,
+    "knn_emb_a0.3": 0.8836078624363132,
+    "knn_emb_a0.5": 0.8893404064381657,
+    "knn_emb_a0.7": 0.8810712424733672,
+    "knn_emb_a0.9": 0.8621605778138027
+   },
+   "pseudo_recovery20": {
+    "knn_input_a0.1": 0.6057564512635457,
+    "knn_input_a0.3": 0.6747053853755784,
+    "knn_input_a0.5": 0.6892723637308464,
+    "knn_input_a0.7": 0.7060432829819322,
+    "knn_input_a0.9": 0.6910602072821616,
+    "knn_emb_a0.1": 0.6059315383767782,
+    "knn_emb_a0.3": 0.6429272993265132,
+    "knn_emb_a0.5": 0.6915716294774195,
+    "knn_emb_a0.7": 0.7263051052879083,
+    "knn_emb_a0.9": 0.6940102584641505
+   }
+  },
+  "evals": {
+   "eval_synth": {
+    "novelty_input": {
+     "spearman_err": 0.4483259242363011,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.4690114456701131,
+       "remaining_mae_random": 0.4692550832906633,
+       "remaining_mae_oracle": 0.45034809901361783,
+       "catastrophic_caught": 0.0
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.46824084954502304,
+       "remaining_mae_random": 0.4688028196913661,
+       "remaining_mae_oracle": 0.4345398732052853,
+       "catastrophic_caught": 0.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.46103666524481,
+       "remaining_mae_random": 0.468395325675493,
+       "remaining_mae_oracle": 0.40222010726080026,
+       "catastrophic_caught": 0.01818181818181818
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.44415317148516287,
+       "remaining_mae_random": 0.4626674220557506,
+       "remaining_mae_oracle": 0.36682078043957655,
+       "catastrophic_caught": 0.07272727272727272
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.3696706929631677,
+       "remaining_mae_random": 0.4686665186189037,
+       "remaining_mae_oracle": 0.2768720249886364,
+       "catastrophic_caught": 0.43636363636363634
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.01288611747807822,
+      "0.1": 0.016401687653201977,
+      "0.2": 0.11119963948693483,
+      "0.3": 0.1931653551798886,
+      "0.5": 0.5161557236704389
+     },
+     "catastrophic_caught": {
+      "0.05": 0.0,
+      "0.1": 0.0,
+      "0.2": 0.01818181818181818,
+      "0.3": 0.07272727272727272,
+      "0.5": 0.43636363636363634
+     },
+     "budget_catch90": 0.6827272727272727,
+     "budget_catch95": 0.7190909090909091
+    },
+    "novelty_emb": {
+     "spearman_err": 0.5463023177554842,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.45824948204635163,
+       "remaining_mae_random": 0.4692550832906633,
+       "remaining_mae_oracle": 0.45034809901361783,
+       "catastrophic_caught": 0.18181818181818182
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.44719863249286174,
+       "remaining_mae_random": 0.4688028196913661,
+       "remaining_mae_oracle": 0.4345398732052853,
+       "catastrophic_caught": 0.36363636363636365
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.42506918919944414,
+       "remaining_mae_random": 0.468395325675493,
+       "remaining_mae_oracle": 0.40222010726080026,
+       "catastrophic_caught": 0.5454545454545454
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.3993221553798058,
+       "remaining_mae_random": 0.4626674220557506,
+       "remaining_mae_oracle": 0.36682078043957655,
+       "catastrophic_caught": 0.7636363636363637
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.3652445597212152,
+       "remaining_mae_random": 0.4686665186189037,
+       "remaining_mae_oracle": 0.2768720249886364,
+       "catastrophic_caught": 0.9272727272727272
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.5820918388171142,
+      "0.1": 0.630540844094684,
+      "0.2": 0.6547184507128013,
+      "0.3": 0.660902308185364,
+      "0.5": 0.5392332018512513
+     },
+     "catastrophic_caught": {
+      "0.05": 0.18181818181818182,
+      "0.1": 0.36363636363636365,
+      "0.2": 0.5454545454545454,
+      "0.3": 0.7636363636363637,
+      "0.5": 0.9272727272727272
+     },
+     "budget_catch90": 0.4818181818181818,
+     "budget_catch95": 0.5109090909090909
+    },
+    "uncertainty": {
+     "spearman_err": 0.7311364058978562,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.4579531625821859,
+       "remaining_mae_random": 0.4692550832906633,
+       "remaining_mae_oracle": 0.45034809901361783,
+       "catastrophic_caught": 0.23636363636363636
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.44471600476223194,
+       "remaining_mae_random": 0.4688028196913661,
+       "remaining_mae_oracle": 0.4345398732052853,
+       "catastrophic_caught": 0.41818181818181815
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.4195241448344226,
+       "remaining_mae_random": 0.468395325675493,
+       "remaining_mae_oracle": 0.40222010726080026,
+       "catastrophic_caught": 0.6909090909090909
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.39275747609672484,
+       "remaining_mae_random": 0.4626674220557506,
+       "remaining_mae_oracle": 0.36682078043957655,
+       "catastrophic_caught": 0.8727272727272727
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.32110003558229067,
+       "remaining_mae_random": 0.4686665186189037,
+       "remaining_mae_oracle": 0.2768720249886364,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.5977643257575888,
+      "0.1": 0.7029989361516048,
+      "0.2": 0.7385118177444454,
+      "0.3": 0.7293937980527897,
+      "0.5": 0.7693989553270751
+     },
+     "catastrophic_caught": {
+      "0.05": 0.23636363636363636,
+      "0.1": 0.41818181818181815,
+      "0.2": 0.6909090909090909,
+      "0.3": 0.8727272727272727,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.3281818181818182,
+     "budget_catch95": 0.3654545454545455
+    },
+    "fixed_alpha0.3": {
+     "spearman_err": 0.6948158469552455,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.4590738133398625,
+       "remaining_mae_random": 0.4692550832906633,
+       "remaining_mae_oracle": 0.45034809901361783,
+       "catastrophic_caught": 0.14545454545454545
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.44789422255609135,
+       "remaining_mae_random": 0.4688028196913661,
+       "remaining_mae_oracle": 0.4345398732052853,
+       "catastrophic_caught": 0.3090909090909091
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.4251802067856256,
+       "remaining_mae_random": 0.468395325675493,
+       "remaining_mae_oracle": 0.40222010726080026,
+       "catastrophic_caught": 0.6
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.3992916240351665,
+       "remaining_mae_random": 0.4626674220557506,
+       "remaining_mae_oracle": 0.36682078043957655,
+       "catastrophic_caught": 0.7818181818181819
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.3270148213022216,
+       "remaining_mae_random": 0.4686665186189037,
+       "remaining_mae_oracle": 0.2768720249886364,
+       "catastrophic_caught": 0.9454545454545454
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.5384925380808411,
+      "0.1": 0.6102393191364557,
+      "0.2": 0.6530408198890422,
+      "0.3": 0.661220851893568,
+      "0.5": 0.7385597711149716
+     },
+     "catastrophic_caught": {
+      "0.05": 0.14545454545454545,
+      "0.1": 0.3090909090909091,
+      "0.2": 0.6,
+      "0.3": 0.7818181818181819,
+      "0.5": 0.9454545454545454
+     },
+     "budget_catch90": 0.3936363636363636,
+     "budget_catch95": 0.51
+    },
+    "znorm_mean": {
+     "spearman_err": 0.5351169200816019,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.46341197275179885,
+       "remaining_mae_random": 0.4692550832906633,
+       "remaining_mae_oracle": 0.45034809901361783,
+       "catastrophic_caught": 0.07272727272727272
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.4594507517010604,
+       "remaining_mae_random": 0.4688028196913661,
+       "remaining_mae_oracle": 0.4345398732052853,
+       "catastrophic_caught": 0.12727272727272726
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.4468811513559617,
+       "remaining_mae_random": 0.468395325675493,
+       "remaining_mae_oracle": 0.40222010726080026,
+       "catastrophic_caught": 0.18181818181818182
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.4329051590368119,
+       "remaining_mae_random": 0.4626674220557506,
+       "remaining_mae_oracle": 0.36682078043957655,
+       "catastrophic_caught": 0.2
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.3572908227859388,
+       "remaining_mae_random": 0.4686665186189037,
+       "remaining_mae_oracle": 0.2768720249886364,
+       "catastrophic_caught": 0.6363636363636364
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.3090450837238187,
+      "0.1": 0.272949905055741,
+      "0.2": 0.3251092302364746,
+      "0.3": 0.31051962298401836,
+      "0.5": 0.5807033023986072
+     },
+     "catastrophic_caught": {
+      "0.05": 0.07272727272727272,
+      "0.1": 0.12727272727272726,
+      "0.2": 0.18181818181818182,
+      "0.3": 0.2,
+      "0.5": 0.6363636363636364
+     },
+     "budget_catch90": 0.6354545454545455,
+     "budget_catch95": 0.6845454545454546
+    },
+    "znorm_max": {
+     "spearman_err": 0.4671606836038708,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.4690114456701131,
+       "remaining_mae_random": 0.4692550832906633,
+       "remaining_mae_oracle": 0.45034809901361783,
+       "catastrophic_caught": 0.0
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.46824084954502304,
+       "remaining_mae_random": 0.4688028196913661,
+       "remaining_mae_oracle": 0.4345398732052853,
+       "catastrophic_caught": 0.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.46103666524481,
+       "remaining_mae_random": 0.468395325675493,
+       "remaining_mae_oracle": 0.40222010726080026,
+       "catastrophic_caught": 0.01818181818181818
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.44415317148516287,
+       "remaining_mae_random": 0.4626674220557506,
+       "remaining_mae_oracle": 0.36682078043957655,
+       "catastrophic_caught": 0.07272727272727272
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.3602674999145718,
+       "remaining_mae_random": 0.4686665186189037,
+       "remaining_mae_oracle": 0.2768720249886364,
+       "catastrophic_caught": 0.6363636363636364
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.01288611747807822,
+      "0.1": 0.016401687653201977,
+      "0.2": 0.11119963948693483,
+      "0.3": 0.1931653551798886,
+      "0.5": 0.5651831637737139
+     },
+     "catastrophic_caught": {
+      "0.05": 0.0,
+      "0.1": 0.0,
+      "0.2": 0.01818181818181818,
+      "0.3": 0.07272727272727272,
+      "0.5": 0.6363636363636364
+     },
+     "budget_catch90": 0.6554545454545454,
+     "budget_catch95": 0.6945454545454546
+    },
+    "iid_calibrated": {
+     "spearman_err": 0.665014755459227,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.45683192197556427,
+       "remaining_mae_random": 0.4692550832906633,
+       "remaining_mae_oracle": 0.45034809901361783,
+       "catastrophic_caught": 0.2545454545454545
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.4455390484446017,
+       "remaining_mae_random": 0.4688028196913661,
+       "remaining_mae_oracle": 0.4345398732052853,
+       "catastrophic_caught": 0.4
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.421478962764343,
+       "remaining_mae_random": 0.468395325675493,
+       "remaining_mae_oracle": 0.40222010726080026,
+       "catastrophic_caught": 0.6181818181818182
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.3933740338131946,
+       "remaining_mae_random": 0.4626674220557506,
+       "remaining_mae_oracle": 0.36682078043957655,
+       "catastrophic_caught": 0.8727272727272727
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.3295269485491235,
+       "remaining_mae_random": 0.4686665186189037,
+       "remaining_mae_oracle": 0.2768720249886364,
+       "catastrophic_caught": 0.9818181818181818
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.6570673108445803,
+      "0.1": 0.6789775437502217,
+      "0.2": 0.7089717878548517,
+      "0.3": 0.7229610456258576,
+      "0.5": 0.7254617556331263
+     },
+     "catastrophic_caught": {
+      "0.05": 0.2545454545454545,
+      "0.1": 0.4,
+      "0.2": 0.6181818181818182,
+      "0.3": 0.8727272727272727,
+      "0.5": 0.9818181818181818
+     },
+     "budget_catch90": 0.35,
+     "budget_catch95": 0.36272727272727273
+    },
+    "pseudo_ood_calibrated": {
+     "spearman_err": 0.6187777255112683,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.45728130025948305,
+       "remaining_mae_random": 0.4692550832906633,
+       "remaining_mae_oracle": 0.45034809901361783,
+       "catastrophic_caught": 0.23636363636363636
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.44612878782168053,
+       "remaining_mae_random": 0.4688028196913661,
+       "remaining_mae_oracle": 0.4345398732052853,
+       "catastrophic_caught": 0.36363636363636365
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.4229936127408734,
+       "remaining_mae_random": 0.468395325675493,
+       "remaining_mae_oracle": 0.40222010726080026,
+       "catastrophic_caught": 0.5818181818181818
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.3940237610615468,
+       "remaining_mae_random": 0.4626674220557506,
+       "remaining_mae_oracle": 0.36682078043957655,
+       "catastrophic_caught": 0.8181818181818182
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.3463913274137001,
+       "remaining_mae_random": 0.4686665186189037,
+       "remaining_mae_oracle": 0.2768720249886364,
+       "catastrophic_caught": 0.9636363636363636
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.6332994651990768,
+      "0.1": 0.6617653819964616,
+      "0.2": 0.6860833106753931,
+      "0.3": 0.7161822244027406,
+      "0.5": 0.6375323341707616
+     },
+     "catastrophic_caught": {
+      "0.05": 0.23636363636363636,
+      "0.1": 0.36363636363636365,
+      "0.2": 0.5818181818181818,
+      "0.3": 0.8181818181818182,
+      "0.5": 0.9636363636363636
+     },
+     "budget_catch90": 0.36727272727272725,
+     "budget_catch95": 0.4090909090909091
+    },
+    "dynamic_support": {
+     "spearman_err": 0.4542234287346144,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.4690114456701131,
+       "remaining_mae_random": 0.4692550832906633,
+       "remaining_mae_oracle": 0.45034809901361783,
+       "catastrophic_caught": 0.0
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.46824084954502304,
+       "remaining_mae_random": 0.4688028196913661,
+       "remaining_mae_oracle": 0.4345398732052853,
+       "catastrophic_caught": 0.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.46103666524481,
+       "remaining_mae_random": 0.468395325675493,
+       "remaining_mae_oracle": 0.40222010726080026,
+       "catastrophic_caught": 0.01818181818181818
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.44415317148516287,
+       "remaining_mae_random": 0.4626674220557506,
+       "remaining_mae_oracle": 0.36682078043957655,
+       "catastrophic_caught": 0.07272727272727272
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.3696706929631677,
+       "remaining_mae_random": 0.4686665186189037,
+       "remaining_mae_oracle": 0.2768720249886364,
+       "catastrophic_caught": 0.43636363636363634
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.01288611747807822,
+      "0.1": 0.016401687653201977,
+      "0.2": 0.11119963948693483,
+      "0.3": 0.1931653551798886,
+      "0.5": 0.5161557236704389
+     },
+     "catastrophic_caught": {
+      "0.05": 0.0,
+      "0.1": 0.0,
+      "0.2": 0.01818181818181818,
+      "0.3": 0.07272727272727272,
+      "0.5": 0.43636363636363634
+     },
+     "budget_catch90": 0.6781818181818182,
+     "budget_catch95": 0.6945454545454546
+    },
+    "_oracle": {
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.45034809901361783,
+       "remaining_mae_random": 0.4692550832906633,
+       "remaining_mae_oracle": 0.45034809901361783,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.4345398732052853,
+       "remaining_mae_random": 0.4688028196913661,
+       "remaining_mae_oracle": 0.4345398732052853,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.40222010726080026,
+       "remaining_mae_random": 0.468395325675493,
+       "remaining_mae_oracle": 0.40222010726080026,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.36682078043957655,
+       "remaining_mae_random": 0.4626674220557506,
+       "remaining_mae_oracle": 0.36682078043957655,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.2768720249886364,
+       "remaining_mae_random": 0.4686665186189037,
+       "remaining_mae_oracle": 0.2768720249886364,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "budget_catch90": 0.045454545454545456,
+     "budget_catch95": 0.04818181818181818
+    },
+    "_diag": {
+     "knn_input": {
+      "id_median_z": 1.9108892727819549,
+      "ood_median_z": 9.99729392434355,
+      "shift_ratio": 5.231749459536873,
+      "spearman_err_within_ood": -0.3739306623916599,
+      "spearman_err_within_id": 0.44670629673663037
+     },
+     "knn_emb": {
+      "id_median_z": 0.6210256381458539,
+      "ood_median_z": 1.9557128207677388,
+      "shift_ratio": 3.1491659900830937,
+      "spearman_err_within_ood": 0.26796958276497307,
+      "spearman_err_within_id": 0.7965759619551328
+     },
+     "ens_var": {
+      "id_median_z": 0.6079165262992231,
+      "ood_median_z": 3.9523913454360806,
+      "shift_ratio": 6.501536261886611,
+      "spearman_err_within_ood": 0.3558276497307027,
+      "spearman_err_within_id": 0.8263398482205357
+     },
+     "maha_emb": {
+      "id_median_z": 0.08411623714761471,
+      "ood_median_z": 0.6199948112589243,
+      "shift_ratio": 7.370691152056775,
+      "spearman_err_within_ood": 0.2238341934909273,
+      "spearman_err_within_id": 0.8803084478716431
+     }
+    },
+    "_pool": {
+     "n_id": 300,
+     "n_ood": 800,
+     "err_id": 0.13895068544835912,
+     "err_ood": 0.5933934070007251
+    }
+   },
+   "eval_openems": {
+    "novelty_input": {
+     "spearman_err": 0.5405860897079073,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.15227450861124533,
+       "remaining_mae_random": 0.18187244961113122,
+       "remaining_mae_oracle": 0.14543620187291484,
+       "catastrophic_caught": 0.625
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.14007812441781275,
+       "remaining_mae_random": 0.17250397740544143,
+       "remaining_mae_oracle": 0.12909179907061752,
+       "catastrophic_caught": 0.875
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.1309056597263044,
+       "remaining_mae_random": 0.17512503271095045,
+       "remaining_mae_oracle": 0.11187130720938263,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.12403474176406701,
+       "remaining_mae_random": 0.18911007918542927,
+       "remaining_mae_oracle": 0.09749848751443317,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.11072897143115146,
+       "remaining_mae_random": 0.18807635928189823,
+       "remaining_mae_oracle": 0.07272545174588065,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.8123213238788555,
+      "0.1": 0.7469298761637505,
+      "0.2": 0.6990793448766903,
+      "0.3": 0.7103395567568213,
+      "0.5": 0.670539916008858
+     },
+     "catastrophic_caught": {
+      "0.05": 0.625,
+      "0.1": 0.875,
+      "0.2": 1.0,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.13125,
+     "budget_catch95": 0.16875
+    },
+    "novelty_emb": {
+     "spearman_err": 0.8127548853016143,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.15688768358479785,
+       "remaining_mae_random": 0.18187244961113122,
+       "remaining_mae_oracle": 0.14543620187291484,
+       "catastrophic_caught": 0.4375
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.14959345883901748,
+       "remaining_mae_random": 0.17250397740544143,
+       "remaining_mae_oracle": 0.12909179907061752,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.1364569626503198,
+       "remaining_mae_random": 0.17512503271095045,
+       "remaining_mae_oracle": 0.11187130720938263,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.11953691952956214,
+       "remaining_mae_random": 0.18911007918542927,
+       "remaining_mae_oracle": 0.09749848751443317,
+       "catastrophic_caught": 0.6875
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.08698735397343042,
+       "remaining_mae_random": 0.18807635928189823,
+       "remaining_mae_oracle": 0.07272545174588065,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.6857118275691145,
+      "0.1": 0.5277440443030209,
+      "0.2": 0.6113168790298715,
+      "0.3": 0.7594362065635166,
+      "0.5": 0.8763607280411159
+     },
+     "catastrophic_caught": {
+      "0.05": 0.4375,
+      "0.1": 0.5,
+      "0.2": 0.5,
+      "0.3": 0.6875,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.365625,
+     "budget_catch95": 0.384375
+    },
+    "uncertainty": {
+     "spearman_err": 0.8565999179679489,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.14895718972170327,
+       "remaining_mae_random": 0.18187244961113122,
+       "remaining_mae_oracle": 0.14543620187291484,
+       "catastrophic_caught": 0.75
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.13192754704291335,
+       "remaining_mae_random": 0.17250397740544143,
+       "remaining_mae_oracle": 0.12909179907061752,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12116912599812114,
+       "remaining_mae_random": 0.17512503271095045,
+       "remaining_mae_oracle": 0.11187130720938263,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.10843229630027998,
+       "remaining_mae_random": 0.18911007918542927,
+       "remaining_mae_oracle": 0.09749848751443317,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.08318444153718078,
+       "remaining_mae_random": 0.18807635928189823,
+       "remaining_mae_oracle": 0.07272545174588065,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.9033657945767171,
+      "0.1": 0.9346785146226796,
+      "0.2": 0.8530075704630542,
+      "0.3": 0.8806503785556603,
+      "0.5": 0.9093289336450657
+     },
+     "catastrophic_caught": {
+      "0.05": 0.75,
+      "0.1": 1.0,
+      "0.2": 1.0,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.065625,
+     "budget_catch95": 0.071875
+    },
+    "fixed_alpha0.3": {
+     "spearman_err": 0.8233857264231095,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.1495519750849668,
+       "remaining_mae_random": 0.18187244961113122,
+       "remaining_mae_oracle": 0.14543620187291484,
+       "catastrophic_caught": 0.6875
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.13406456348569856,
+       "remaining_mae_random": 0.17250397740544143,
+       "remaining_mae_oracle": 0.12909179907061752,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12181511515575465,
+       "remaining_mae_random": 0.17512503271095045,
+       "remaining_mae_oracle": 0.11187130720938263,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.11186338723606006,
+       "remaining_mae_random": 0.18911007918542927,
+       "remaining_mae_oracle": 0.09749848751443317,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.0876997478732026,
+       "remaining_mae_random": 0.18807635928189823,
+       "remaining_mae_oracle": 0.07272545174588065,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.8870417930621574,
+      "0.1": 0.8854523176255349,
+      "0.2": 0.8427949046870677,
+      "0.3": 0.8431977934275455,
+      "0.5": 0.8701848433862878
+     },
+     "catastrophic_caught": {
+      "0.05": 0.6875,
+      "0.1": 1.0,
+      "0.2": 1.0,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.0625,
+     "budget_catch95": 0.06875
+    },
+    "znorm_mean": {
+     "spearman_err": 0.7818416195470659,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.1495519750849668,
+       "remaining_mae_random": 0.18187244961113122,
+       "remaining_mae_oracle": 0.14543620187291484,
+       "catastrophic_caught": 0.6875
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.13365325734942152,
+       "remaining_mae_random": 0.17250397740544143,
+       "remaining_mae_oracle": 0.12909179907061752,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.1222585594091358,
+       "remaining_mae_random": 0.17512503271095045,
+       "remaining_mae_oracle": 0.11187130720938263,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.11499654845312048,
+       "remaining_mae_random": 0.18911007918542927,
+       "remaining_mae_oracle": 0.09749848751443317,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.09037689049214832,
+       "remaining_mae_random": 0.18807635928189823,
+       "remaining_mae_oracle": 0.07272545174588065,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.8870417930621574,
+      "0.1": 0.8949267589471561,
+      "0.2": 0.8357843412796973,
+      "0.3": 0.8089973046038984,
+      "0.5": 0.8469761606274652
+     },
+     "catastrophic_caught": {
+      "0.05": 0.6875,
+      "0.1": 1.0,
+      "0.2": 1.0,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.06875,
+     "budget_catch95": 0.078125
+    },
+    "znorm_max": {
+     "spearman_err": 0.5979385785017434,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.153818694599402,
+       "remaining_mae_random": 0.18187244961113122,
+       "remaining_mae_oracle": 0.14543620187291484,
+       "catastrophic_caught": 0.5625
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.14007812441781275,
+       "remaining_mae_random": 0.17250397740544143,
+       "remaining_mae_oracle": 0.12909179907061752,
+       "catastrophic_caught": 0.875
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12832097734638692,
+       "remaining_mae_random": 0.17512503271095045,
+       "remaining_mae_oracle": 0.11187130720938263,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.12006683654872695,
+       "remaining_mae_random": 0.18911007918542927,
+       "remaining_mae_oracle": 0.09749848751443317,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.10497041528741195,
+       "remaining_mae_random": 0.18807635928189823,
+       "remaining_mae_oracle": 0.07272545174588065,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.7699408351070371,
+      "0.1": 0.7469298761637505,
+      "0.2": 0.7399414816033789,
+      "0.3": 0.7536518182617841,
+      "0.5": 0.7204619865564298
+     },
+     "catastrophic_caught": {
+      "0.05": 0.5625,
+      "0.1": 0.875,
+      "0.2": 1.0,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.128125,
+     "budget_catch95": 0.1625
+    },
+    "iid_calibrated": {
+     "spearman_err": 0.8612193478451938,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.1550616688041576,
+       "remaining_mae_random": 0.18187244961113122,
+       "remaining_mae_oracle": 0.14543620187291484,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.14914698328333795,
+       "remaining_mae_random": 0.17250397740544143,
+       "remaining_mae_oracle": 0.12909179907061752,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12112854606543386,
+       "remaining_mae_random": 0.17512503271095045,
+       "remaining_mae_oracle": 0.11187130720938263,
+       "catastrophic_caught": 0.9375
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.10478881880932135,
+       "remaining_mae_random": 0.18911007918542927,
+       "remaining_mae_oracle": 0.09749848751443317,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.08527346011121185,
+       "remaining_mae_random": 0.18807635928189823,
+       "remaining_mae_oracle": 0.07272545174588065,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.7358271630932233,
+      "0.1": 0.5380286135830052,
+      "0.2": 0.8536491126388788,
+      "0.3": 0.9204213008210808,
+      "0.5": 0.8912188154097256
+     },
+     "catastrophic_caught": {
+      "0.05": 0.5,
+      "0.1": 0.5,
+      "0.2": 0.9375,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.19375,
+     "budget_catch95": 0.221875
+    },
+    "pseudo_ood_calibrated": {
+     "spearman_err": 0.8466604898485336,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.15517624425839777,
+       "remaining_mae_random": 0.18187244961113122,
+       "remaining_mae_oracle": 0.14543620187291484,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.14929287238279165,
+       "remaining_mae_random": 0.17250397740544143,
+       "remaining_mae_oracle": 0.12909179907061752,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.13793142717503654,
+       "remaining_mae_random": 0.17512503271095045,
+       "remaining_mae_oracle": 0.11187130720938263,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.10573276738263701,
+       "remaining_mae_random": 0.18911007918542927,
+       "remaining_mae_oracle": 0.09749848751443317,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.0868452896465344,
+       "remaining_mae_random": 0.18807635928189823,
+       "remaining_mae_oracle": 0.07272545174588065,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.7326826171711687,
+      "0.1": 0.5346680565907135,
+      "0.2": 0.5880065599455011,
+      "0.3": 0.910117489304459,
+      "0.5": 0.8775923119959422
+     },
+     "catastrophic_caught": {
+      "0.05": 0.5,
+      "0.1": 0.5,
+      "0.2": 0.5,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.26875,
+     "budget_catch95": 0.284375
+    },
+    "dynamic_support": {
+     "spearman_err": 0.6915642486743035,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.15227450861124533,
+       "remaining_mae_random": 0.18187244961113122,
+       "remaining_mae_oracle": 0.14543620187291484,
+       "catastrophic_caught": 0.625
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.13996038007079037,
+       "remaining_mae_random": 0.17250397740544143,
+       "remaining_mae_oracle": 0.12909179907061752,
+       "catastrophic_caught": 0.875
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.13017772727084473,
+       "remaining_mae_random": 0.17512503271095045,
+       "remaining_mae_oracle": 0.11187130720938263,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.12249640059617896,
+       "remaining_mae_random": 0.18911007918542927,
+       "remaining_mae_oracle": 0.09749848751443317,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.09905129510952751,
+       "remaining_mae_random": 0.18807635928189823,
+       "remaining_mae_oracle": 0.07272545174588065,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.8123213238788555,
+      "0.1": 0.749642118477745,
+      "0.2": 0.7105874805586218,
+      "0.3": 0.727131549340169,
+      "0.5": 0.7717760187068594
+     },
+     "catastrophic_caught": {
+      "0.05": 0.625,
+      "0.1": 0.875,
+      "0.2": 1.0,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.109375,
+     "budget_catch95": 0.146875
+    },
+    "_oracle": {
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.14543620187291484,
+       "remaining_mae_random": 0.18187244961113122,
+       "remaining_mae_oracle": 0.14543620187291484,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.12909179907061752,
+       "remaining_mae_random": 0.17250397740544143,
+       "remaining_mae_oracle": 0.12909179907061752,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.11187130720938263,
+       "remaining_mae_random": 0.17512503271095045,
+       "remaining_mae_oracle": 0.11187130720938263,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.09749848751443317,
+       "remaining_mae_random": 0.18911007918542927,
+       "remaining_mae_oracle": 0.09749848751443317,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.07272545174588065,
+       "remaining_mae_random": 0.18807635928189823,
+       "remaining_mae_oracle": 0.07272545174588065,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "budget_catch90": 0.046875,
+     "budget_catch95": 0.05
+    },
+    "_diag": {
+     "knn_input": {
+      "id_median_z": 1.9108892727819549,
+      "ood_median_z": 7.457109575248166,
+      "shift_ratio": 3.9024289259258627,
+      "spearman_err_within_ood": 0.08721804511278196,
+      "spearman_err_within_id": 0.44670629673663037
+     },
+     "knn_emb": {
+      "id_median_z": 0.6210256381458539,
+      "ood_median_z": 3.9037948521790504,
+      "shift_ratio": 6.286044580298249,
+      "spearman_err_within_ood": -0.06165413533834585,
+      "spearman_err_within_id": 0.7965759619551328
+     },
+     "ens_var": {
+      "id_median_z": 0.6079163974304793,
+      "ood_median_z": 4.831825857495296,
+      "shift_ratio": 7.948174898670477,
+      "spearman_err_within_ood": 0.12481203007518799,
+      "spearman_err_within_id": 0.8263398482205357
+     },
+     "maha_emb": {
+      "id_median_z": 0.08411623714761471,
+      "ood_median_z": 0.99014577250719,
+      "shift_ratio": 11.771160899630265,
+      "spearman_err_within_ood": 0.0992481203007519,
+      "spearman_err_within_id": 0.8803084478716431
+     }
+    },
+    "_pool": {
+     "n_id": 300,
+     "n_ood": 20,
+     "err_id": 0.13895068524970544,
+     "err_ood": 0.7860601771974015
+    }
+   }
+  }
+ },
+ "planar": {
+  "iid_choice": [
+   "knn_input",
+   0.5
+  ],
+  "pseudo_choice": [
+   "knn_emb",
+   0.9
+  ],
+  "selection_tables": {
+   "iid_spearman": {
+    "knn_input_a0.1": 0.148856190260106,
+    "knn_input_a0.3": 0.1684028702969275,
+    "knn_input_a0.5": 0.17447372016521456,
+    "knn_input_a0.7": 0.156967245799622,
+    "knn_input_a0.9": 0.13222666863674498,
+    "knn_emb_a0.1": 0.14619503898838543,
+    "knn_emb_a0.3": 0.1544781466591408,
+    "knn_emb_a0.5": 0.14928288943718615,
+    "knn_emb_a0.7": 0.12957695453508522,
+    "knn_emb_a0.9": 0.10392956434273677
+   },
+   "pseudo_recovery20": {
+    "knn_input_a0.1": 0.5280294553923642,
+    "knn_input_a0.3": 0.564538731359417,
+    "knn_input_a0.5": 0.5651212646812706,
+    "knn_input_a0.7": 0.5163900326532829,
+    "knn_input_a0.9": 0.442795577111513,
+    "knn_emb_a0.1": 0.5373766196820232,
+    "knn_emb_a0.3": 0.6162914735508812,
+    "knn_emb_a0.5": 0.6772256397824421,
+    "knn_emb_a0.7": 0.7219095973614613,
+    "knn_emb_a0.9": 0.7528638411810473
+   }
+  },
+  "evals": {
+   "eval_ood": {
+    "novelty_input": {
+     "spearman_err": 0.7577802346832926,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.0970078359517245,
+       "remaining_mae_random": 0.1026458306462808,
+       "remaining_mae_oracle": 0.08233941635726919,
+       "catastrophic_caught": 0.21495327102803738
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.0935349731573313,
+       "remaining_mae_random": 0.10249472144260567,
+       "remaining_mae_oracle": 0.06542488699412079,
+       "catastrophic_caught": 0.22429906542056074
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.08699731451340799,
+       "remaining_mae_random": 0.10210575109689243,
+       "remaining_mae_oracle": 0.0390349039204458,
+       "catastrophic_caught": 0.42990654205607476
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.07914632447969026,
+       "remaining_mae_random": 0.10447343209858342,
+       "remaining_mae_oracle": 0.02333774274565403,
+       "catastrophic_caught": 0.5607476635514018
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.00457534418110056,
+       "remaining_mae_random": 0.10077014625959256,
+       "remaining_mae_oracle": 0.00356999677696313,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.2776459996488487,
+      "0.1": 0.24169917180842926,
+      "0.2": 0.23954706904787834,
+      "0.3": 0.31215742197892266,
+      "0.5": 0.9896569356169859
+     },
+     "catastrophic_caught": {
+      "0.05": 0.21495327102803738,
+      "0.1": 0.22429906542056074,
+      "0.2": 0.42990654205607476,
+      "0.3": 0.5607476635514018,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.35690866510538644,
+     "budget_catch95": 0.3733021077283372
+    },
+    "novelty_emb": {
+     "spearman_err": 0.8061662016472286,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.08678921436150656,
+       "remaining_mae_random": 0.1026458306462808,
+       "remaining_mae_oracle": 0.08233941635726919,
+       "catastrophic_caught": 0.616822429906542
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.0781064205752198,
+       "remaining_mae_random": 0.10249472144260567,
+       "remaining_mae_oracle": 0.06542488699412079,
+       "catastrophic_caught": 0.7570093457943925
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.06748573117057531,
+       "remaining_mae_random": 0.10210575109689243,
+       "remaining_mae_oracle": 0.0390349039204458,
+       "catastrophic_caught": 0.8411214953271028
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.05159168424435259,
+       "remaining_mae_random": 0.10447343209858342,
+       "remaining_mae_oracle": 0.02333774274565403,
+       "catastrophic_caught": 0.9719626168224299
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004232207888522651,
+       "remaining_mae_random": 0.10077014625959256,
+       "remaining_mae_oracle": 0.00356999677696313,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.780867368265736,
+      "0.1": 0.6579015318041883,
+      "0.2": 0.5489068480317754,
+      "0.3": 0.6517692556256262,
+      "0.5": 0.9931871389593093
+     },
+     "catastrophic_caught": {
+      "0.05": 0.616822429906542,
+      "0.1": 0.7570093457943925,
+      "0.2": 0.8411214953271028,
+      "0.3": 0.9719626168224299,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.23559718969555035,
+     "budget_catch95": 0.26697892271662765
+    },
+    "uncertainty": {
+     "spearman_err": 0.7233066787185275,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.10233398909840738,
+       "remaining_mae_random": 0.1026458306462808,
+       "remaining_mae_oracle": 0.08233941635726919,
+       "catastrophic_caught": 0.0
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.09754608148256182,
+       "remaining_mae_random": 0.10249472144260567,
+       "remaining_mae_oracle": 0.06542488699412079,
+       "catastrophic_caught": 0.12149532710280374
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.080890329960655,
+       "remaining_mae_random": 0.10210575109689243,
+       "remaining_mae_oracle": 0.0390349039204458,
+       "catastrophic_caught": 0.27102803738317754
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.06319240100556961,
+       "remaining_mae_random": 0.10447343209858342,
+       "remaining_mae_oracle": 0.02333774274565403,
+       "catastrophic_caught": 0.42990654205607476
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.022448025055086522,
+       "remaining_mae_random": 0.10077014625959256,
+       "remaining_mae_oracle": 0.00356999677696313,
+       "catastrophic_caught": 0.8785046728971962
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.015356800242284373,
+      "0.1": 0.1334950650216922,
+      "0.2": 0.3363744437566424,
+      "0.3": 0.5087900456905821,
+      "0.5": 0.8057819007624358
+     },
+     "catastrophic_caught": {
+      "0.05": 0.0,
+      "0.1": 0.12149532710280374,
+      "0.2": 0.27102803738317754,
+      "0.3": 0.42990654205607476,
+      "0.5": 0.8785046728971962
+     },
+     "budget_catch90": 0.5250585480093677,
+     "budget_catch95": 0.5423887587822014
+    },
+    "fixed_alpha0.3": {
+     "spearman_err": 0.7503292148715829,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.10184927068761715,
+       "remaining_mae_random": 0.1026458306462808,
+       "remaining_mae_oracle": 0.08233941635726919,
+       "catastrophic_caught": 0.0
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.09758161580235514,
+       "remaining_mae_random": 0.10249472144260567,
+       "remaining_mae_oracle": 0.06542488699412079,
+       "catastrophic_caught": 0.11214953271028037
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.08594443495555991,
+       "remaining_mae_random": 0.10210575109689243,
+       "remaining_mae_oracle": 0.0390349039204458,
+       "catastrophic_caught": 0.27102803738317754
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.06561189342303583,
+       "remaining_mae_random": 0.10447343209858342,
+       "remaining_mae_oracle": 0.02333774274565403,
+       "catastrophic_caught": 0.4205607476635514
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.01329710745278323,
+       "remaining_mae_random": 0.10077014625959256,
+       "remaining_mae_oracle": 0.00356999677696313,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.03922701208231983,
+      "0.1": 0.132536487236763,
+      "0.2": 0.25624067005346735,
+      "0.3": 0.4789697232558794,
+      "0.5": 0.8999269987999511
+     },
+     "catastrophic_caught": {
+      "0.05": 0.0,
+      "0.1": 0.11214953271028037,
+      "0.2": 0.27102803738317754,
+      "0.3": 0.4205607476635514,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.42903981264637003,
+     "budget_catch95": 0.4491803278688525
+    },
+    "znorm_mean": {
+     "spearman_err": 0.7608593915327703,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.10081097740985254,
+       "remaining_mae_random": 0.1026458306462808,
+       "remaining_mae_oracle": 0.08233941635726919,
+       "catastrophic_caught": 0.04672897196261682
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.09649242001948378,
+       "remaining_mae_random": 0.10249472144260567,
+       "remaining_mae_oracle": 0.06542488699412079,
+       "catastrophic_caught": 0.14018691588785046
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.08720584114773244,
+       "remaining_mae_random": 0.10210575109689243,
+       "remaining_mae_oracle": 0.0390349039204458,
+       "catastrophic_caught": 0.4205607476635514
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.0758283461702392,
+       "remaining_mae_random": 0.10447343209858342,
+       "remaining_mae_oracle": 0.02333774274565403,
+       "catastrophic_caught": 0.5794392523364486
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004383211761267888,
+       "remaining_mae_random": 0.10077014625959256,
+       "remaining_mae_oracle": 0.00356999677696313,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.09035830798651415,
+      "0.1": 0.16191875449196164,
+      "0.2": 0.23624084051822053,
+      "0.3": 0.3530516121424929,
+      "0.5": 0.9916336035630264
+     },
+     "catastrophic_caught": {
+      "0.05": 0.04672897196261682,
+      "0.1": 0.14018691588785046,
+      "0.2": 0.4205607476635514,
+      "0.3": 0.5794392523364486,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.37189695550351287,
+     "budget_catch95": 0.38969555035128806
+    },
+    "znorm_max": {
+     "spearman_err": 0.7639535388132557,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.0970078359517245,
+       "remaining_mae_random": 0.1026458306462808,
+       "remaining_mae_oracle": 0.08233941635726919,
+       "catastrophic_caught": 0.21495327102803738
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.0935349731573313,
+       "remaining_mae_random": 0.10249472144260567,
+       "remaining_mae_oracle": 0.06542488699412079,
+       "catastrophic_caught": 0.22429906542056074
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.08699731451340799,
+       "remaining_mae_random": 0.10210575109689243,
+       "remaining_mae_oracle": 0.0390349039204458,
+       "catastrophic_caught": 0.42990654205607476
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.07914632447969026,
+       "remaining_mae_random": 0.10447343209858342,
+       "remaining_mae_oracle": 0.02333774274565403,
+       "catastrophic_caught": 0.5607476635514018
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004427287099427676,
+       "remaining_mae_random": 0.10077014625959256,
+       "remaining_mae_oracle": 0.00356999677696313,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.2776459996488487,
+      "0.1": 0.24169917180842926,
+      "0.2": 0.23954706904787834,
+      "0.3": 0.31215742197892266,
+      "0.5": 0.9911801542793125
+     },
+     "catastrophic_caught": {
+      "0.05": 0.21495327102803738,
+      "0.1": 0.22429906542056074,
+      "0.2": 0.42990654205607476,
+      "0.3": 0.5607476635514018,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.3578454332552693,
+     "budget_catch95": 0.3648711943793911
+    },
+    "iid_calibrated": {
+     "spearman_err": 0.7588016025272608,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.1001407250314154,
+       "remaining_mae_random": 0.1026458306462808,
+       "remaining_mae_oracle": 0.08233941635726919,
+       "catastrophic_caught": 0.06542056074766354
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.09715472221197839,
+       "remaining_mae_random": 0.10249472144260567,
+       "remaining_mae_oracle": 0.06542488699412079,
+       "catastrophic_caught": 0.11214953271028037
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.09044297266627654,
+       "remaining_mae_random": 0.10210575109689243,
+       "remaining_mae_oracle": 0.0390349039204458,
+       "catastrophic_caught": 0.2616822429906542
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.06755411957771265,
+       "remaining_mae_random": 0.10447343209858342,
+       "remaining_mae_oracle": 0.02333774274565403,
+       "catastrophic_caught": 0.4672897196261682
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.01028554143010073,
+       "remaining_mae_random": 0.10077014625959256,
+       "remaining_mae_oracle": 0.00356999677696313,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.12336523717143834,
+      "0.1": 0.1440524164748606,
+      "0.2": 0.1849155188606896,
+      "0.3": 0.4550317229730643,
+      "0.5": 0.9309101406851464
+     },
+     "catastrophic_caught": {
+      "0.05": 0.06542056074766354,
+      "0.1": 0.11214953271028037,
+      "0.2": 0.2616822429906542,
+      "0.3": 0.4672897196261682,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.3981264637002342,
+     "budget_catch95": 0.419672131147541
+    },
+    "pseudo_ood_calibrated": {
+     "spearman_err": 0.8068929323662875,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.08863817229316538,
+       "remaining_mae_random": 0.1026458306462808,
+       "remaining_mae_oracle": 0.08233941635726919,
+       "catastrophic_caught": 0.5981308411214953
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.07848802663630788,
+       "remaining_mae_random": 0.10249472144260567,
+       "remaining_mae_oracle": 0.06542488699412079,
+       "catastrophic_caught": 0.7570093457943925
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.06757903979879987,
+       "remaining_mae_random": 0.10210575109689243,
+       "remaining_mae_oracle": 0.0390349039204458,
+       "catastrophic_caught": 0.8411214953271028
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.05175942008756352,
+       "remaining_mae_random": 0.10447343209858342,
+       "remaining_mae_oracle": 0.02333774274565403,
+       "catastrophic_caught": 0.9626168224299065
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004243626514859476,
+       "remaining_mae_random": 0.10077014625959256,
+       "remaining_mae_oracle": 0.00356999677696313,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.6898144671802232,
+      "0.1": 0.6476072840211723,
+      "0.2": 0.5474274223953396,
+      "0.3": 0.6497019059235574,
+      "0.5": 0.9930696635603762
+     },
+     "catastrophic_caught": {
+      "0.05": 0.5981308411214953,
+      "0.1": 0.7570093457943925,
+      "0.2": 0.8411214953271028,
+      "0.3": 0.9626168224299065,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.248711943793911,
+     "budget_catch95": 0.2908665105386417
+    },
+    "dynamic_support": {
+     "spearman_err": 0.7630797953330819,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.0970078359517245,
+       "remaining_mae_random": 0.1026458306462808,
+       "remaining_mae_oracle": 0.08233941635726919,
+       "catastrophic_caught": 0.21495327102803738
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.0935349731573313,
+       "remaining_mae_random": 0.10249472144260567,
+       "remaining_mae_oracle": 0.06542488699412079,
+       "catastrophic_caught": 0.22429906542056074
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.08699731451340799,
+       "remaining_mae_random": 0.10210575109689243,
+       "remaining_mae_oracle": 0.0390349039204458,
+       "catastrophic_caught": 0.42990654205607476
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.07914632447969026,
+       "remaining_mae_random": 0.10447343209858342,
+       "remaining_mae_oracle": 0.02333774274565403,
+       "catastrophic_caught": 0.5607476635514018
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.0043277358988612,
+       "remaining_mae_random": 0.10077014625959256,
+       "remaining_mae_oracle": 0.00356999677696313,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.2776459996488487,
+      "0.1": 0.24169917180842926,
+      "0.2": 0.23954706904787834,
+      "0.3": 0.31215742197892266,
+      "0.5": 0.9922043420104669
+     },
+     "catastrophic_caught": {
+      "0.05": 0.21495327102803738,
+      "0.1": 0.22429906542056074,
+      "0.2": 0.42990654205607476,
+      "0.3": 0.5607476635514018,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.3583138173302108,
+     "budget_catch95": 0.365807962529274
+    },
+    "_oracle": {
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.08233941635726919,
+       "remaining_mae_random": 0.1026458306462808,
+       "remaining_mae_oracle": 0.08233941635726919,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.06542488699412079,
+       "remaining_mae_random": 0.10249472144260567,
+       "remaining_mae_oracle": 0.06542488699412079,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.0390349039204458,
+       "remaining_mae_random": 0.10210575109689243,
+       "remaining_mae_oracle": 0.0390349039204458,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.02333774274565403,
+       "remaining_mae_random": 0.10447343209858342,
+       "remaining_mae_oracle": 0.02333774274565403,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.00356999677696313,
+       "remaining_mae_random": 0.10077014625959256,
+       "remaining_mae_oracle": 0.00356999677696313,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "budget_catch90": 0.04543325526932084,
+     "budget_catch95": 0.047775175644028105
+    },
+    "_diag": {
+     "knn_input": {
+      "id_median_z": -2.6366929966472107e-15,
+      "ood_median_z": 25.94752430815886,
+      "shift_ratio": 25947455893.683624,
+      "spearman_err_within_ood": 0.15410877278599408,
+      "spearman_err_within_id": 0.1335842150851648
+     },
+     "knn_emb": {
+      "id_median_z": -0.021321308692533545,
+      "ood_median_z": 19.34891142686389,
+      "shift_ratio": 907.491692906634,
+      "spearman_err_within_ood": 0.4686622871925204,
+      "spearman_err_within_id": 0.13734769683909429
+     },
+     "ens_var": {
+      "id_median_z": -0.026922935688526713,
+      "ood_median_z": 5.115605260921225,
+      "shift_ratio": 190.00918514588545,
+      "spearman_err_within_ood": 0.12183679328691893,
+      "spearman_err_within_id": 0.18926907140462465
+     },
+     "maha_emb": {
+      "id_median_z": 0.004058449416642896,
+      "ood_median_z": 4.217331422258993,
+      "shift_ratio": 1039.1481945829762,
+      "spearman_err_within_ood": 0.22527905151533392,
+      "spearman_err_within_id": 0.21073166018704825
+     }
+    },
+    "_pool": {
+     "n_id": 1011,
+     "n_ood": 1124,
+     "err_id": 0.004126045148555296,
+     "err_ood": 0.19265676402151286
+    }
+   },
+   "eval_meas": {
+    "novelty_input": {
+     "spearman_err": 0.11335732515544604,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.004817355625027047,
+       "remaining_mae_random": 0.006966984240392361,
+       "remaining_mae_oracle": 0.003733188153073212,
+       "catastrophic_caught": 0.25925925925925924
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.004669182509381475,
+       "remaining_mae_random": 0.006960937327966233,
+       "remaining_mae_oracle": 0.003202326116257316,
+       "catastrophic_caught": 0.37037037037037035
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.004537795472437385,
+       "remaining_mae_random": 0.006874610922254515,
+       "remaining_mae_oracle": 0.002603385215058139,
+       "catastrophic_caught": 0.46296296296296297
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.004526372820469226,
+       "remaining_mae_random": 0.0072499067974170035,
+       "remaining_mae_oracle": 0.002166198972283181,
+       "catastrophic_caught": 0.5185185185185185
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004693643387969256,
+       "remaining_mae_random": 0.008021663551162574,
+       "remaining_mae_oracle": 0.00146723226029208,
+       "catastrophic_caught": 0.5740740740740741
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.664738455153299,
+      "0.1": 0.6097344709251723,
+      "0.2": 0.5471065239844256,
+      "0.3": 0.5357377077184965,
+      "0.5": 0.5077511710022555
+     },
+     "catastrophic_caught": {
+      "0.05": 0.25925925925925924,
+      "0.1": 0.37037037037037035,
+      "0.2": 0.46296296296296297,
+      "0.3": 0.5185185185185185,
+      "0.5": 0.5740740740740741
+     },
+     "budget_catch90": 0.9896810506566605,
+     "budget_catch95": 0.9943714821763602
+    },
+    "novelty_emb": {
+     "spearman_err": 0.11328213659151762,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.004774856141665875,
+       "remaining_mae_random": 0.006966984240392361,
+       "remaining_mae_oracle": 0.003733188153073212,
+       "catastrophic_caught": 0.2962962962962963
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.004722898320746171,
+       "remaining_mae_random": 0.006960937327966233,
+       "remaining_mae_oracle": 0.003202326116257316,
+       "catastrophic_caught": 0.3148148148148148
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.004641122514980744,
+       "remaining_mae_random": 0.006874610922254515,
+       "remaining_mae_oracle": 0.002603385215058139,
+       "catastrophic_caught": 0.4074074074074074
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.004600895381419482,
+       "remaining_mae_random": 0.0072499067974170035,
+       "remaining_mae_oracle": 0.002166198972283181,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004709645882650894,
+       "remaining_mae_random": 0.008021663551162574,
+       "remaining_mae_oracle": 0.00146723226029208,
+       "catastrophic_caught": 0.6481481481481481
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.6778807443433401,
+      "0.1": 0.5954430722305273,
+      "0.2": 0.5229150975352759,
+      "0.3": 0.5210786117370524,
+      "0.5": 0.50530969378303
+     },
+     "catastrophic_caught": {
+      "0.05": 0.2962962962962963,
+      "0.1": 0.3148148148148148,
+      "0.2": 0.4074074074074074,
+      "0.3": 0.5,
+      "0.5": 0.6481481481481481
+     },
+     "budget_catch90": 0.9906191369606003,
+     "budget_catch95": 0.9953095684803002
+    },
+    "uncertainty": {
+     "spearman_err": 0.21114430233272025,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.004841713804195518,
+       "remaining_mae_random": 0.006966984240392361,
+       "remaining_mae_oracle": 0.003733188153073212,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.004522664659239281,
+       "remaining_mae_random": 0.006960937327966233,
+       "remaining_mae_oracle": 0.003202326116257316,
+       "catastrophic_caught": 0.42592592592592593
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.004378276047460207,
+       "remaining_mae_random": 0.006874610922254515,
+       "remaining_mae_oracle": 0.002603385215058139,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.004283067933041919,
+       "remaining_mae_random": 0.0072499067974170035,
+       "remaining_mae_oracle": 0.002166198972283181,
+       "catastrophic_caught": 0.5740740740740741
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.00420019031595689,
+       "remaining_mae_random": 0.008021663551162574,
+       "remaining_mae_oracle": 0.00146723226029208,
+       "catastrophic_caught": 0.6851851851851852
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.6572060757110737,
+      "0.1": 0.6487163825647051,
+      "0.2": 0.5844539825156879,
+      "0.3": 0.5835974384104158,
+      "0.5": 0.5830365848107248
+     },
+     "catastrophic_caught": {
+      "0.05": 0.3333333333333333,
+      "0.1": 0.42592592592592593,
+      "0.2": 0.5,
+      "0.3": 0.5740740740740741,
+      "0.5": 0.6851851851851852
+     },
+     "budget_catch90": 0.8133208255159474,
+     "budget_catch95": 0.8696060037523452
+    },
+    "fixed_alpha0.3": {
+     "spearman_err": 0.20363059719854246,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.004632492941553818,
+       "remaining_mae_random": 0.006966984240392361,
+       "remaining_mae_oracle": 0.003733188153073212,
+       "catastrophic_caught": 0.37037037037037035
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.004521805825465455,
+       "remaining_mae_random": 0.006960937327966233,
+       "remaining_mae_oracle": 0.003202326116257316,
+       "catastrophic_caught": 0.4074074074074074
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.004452221069106274,
+       "remaining_mae_random": 0.006874610922254515,
+       "remaining_mae_oracle": 0.002603385215058139,
+       "catastrophic_caught": 0.46296296296296297
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.0042811089804864425,
+       "remaining_mae_random": 0.0072499067974170035,
+       "remaining_mae_oracle": 0.002166198972283181,
+       "catastrophic_caught": 0.5555555555555556
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004278943502640563,
+       "remaining_mae_random": 0.008021663551162574,
+       "remaining_mae_oracle": 0.00146723226029208,
+       "catastrophic_caught": 0.6666666666666666
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.7219042994061697,
+      "0.1": 0.6489448801999889,
+      "0.2": 0.567141616765154,
+      "0.3": 0.5839827777380993,
+      "0.5": 0.5710213262491826
+     },
+     "catastrophic_caught": {
+      "0.05": 0.37037037037037035,
+      "0.1": 0.4074074074074074,
+      "0.2": 0.46296296296296297,
+      "0.3": 0.5555555555555556,
+      "0.5": 0.6666666666666666
+     },
+     "budget_catch90": 0.850844277673546,
+     "budget_catch95": 0.9577861163227017
+    },
+    "znorm_mean": {
+     "spearman_err": 0.15891145087899664,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.004664524652760653,
+       "remaining_mae_random": 0.006966984240392361,
+       "remaining_mae_oracle": 0.003733188153073212,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.004604305338702225,
+       "remaining_mae_random": 0.006960937327966233,
+       "remaining_mae_oracle": 0.003202326116257316,
+       "catastrophic_caught": 0.37037037037037035
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.004553542994417952,
+       "remaining_mae_random": 0.006874610922254515,
+       "remaining_mae_oracle": 0.002603385215058139,
+       "catastrophic_caught": 0.42592592592592593
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.00436718895984639,
+       "remaining_mae_random": 0.0072499067974170035,
+       "remaining_mae_oracle": 0.002166198972283181,
+       "catastrophic_caught": 0.5185185185185185
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004500940260064264,
+       "remaining_mae_random": 0.008021663551162574,
+       "remaining_mae_oracle": 0.00146723226029208,
+       "catastrophic_caught": 0.6296296296296297
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.7119990022439763,
+      "0.1": 0.6269954130724058,
+      "0.2": 0.5434196380504805,
+      "0.3": 0.5670502587340824,
+      "0.5": 0.5371516055103421
+     },
+     "catastrophic_caught": {
+      "0.05": 0.3333333333333333,
+      "0.1": 0.37037037037037035,
+      "0.2": 0.42592592592592593,
+      "0.3": 0.5185185185185185,
+      "0.5": 0.6296296296296297
+     },
+     "budget_catch90": 0.9915572232645403,
+     "budget_catch95": 0.9962476547842402
+    },
+    "znorm_max": {
+     "spearman_err": 0.17151079556459786,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.004734061432340396,
+       "remaining_mae_random": 0.006966984240392361,
+       "remaining_mae_oracle": 0.003733188153073212,
+       "catastrophic_caught": 0.2962962962962963
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.004652040564818834,
+       "remaining_mae_random": 0.006960937327966233,
+       "remaining_mae_oracle": 0.003202326116257316,
+       "catastrophic_caught": 0.37037037037037035
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.004563088855074859,
+       "remaining_mae_random": 0.006874610922254515,
+       "remaining_mae_oracle": 0.002603385215058139,
+       "catastrophic_caught": 0.46296296296296297
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.004401121703683931,
+       "remaining_mae_random": 0.0072499067974170035,
+       "remaining_mae_oracle": 0.002166198972283181,
+       "catastrophic_caught": 0.5370370370370371
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004469878818608174,
+       "remaining_mae_random": 0.008021663551162574,
+       "remaining_mae_oracle": 0.00146723226029208,
+       "catastrophic_caught": 0.6111111111111112
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.6904958592806889,
+      "0.1": 0.6142951832726588,
+      "0.2": 0.5411847150304155,
+      "0.3": 0.5603754566005339,
+      "0.5": 0.541890604223984
+     },
+     "catastrophic_caught": {
+      "0.05": 0.2962962962962963,
+      "0.1": 0.37037037037037035,
+      "0.2": 0.46296296296296297,
+      "0.3": 0.5370370370370371,
+      "0.5": 0.6111111111111112
+     },
+     "budget_catch90": 0.9924953095684803,
+     "budget_catch95": 0.9962476547842402
+    },
+    "iid_calibrated": {
+     "spearman_err": 0.18636108178512206,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.004652896765546774,
+       "remaining_mae_random": 0.006966984240392361,
+       "remaining_mae_oracle": 0.003733188153073212,
+       "catastrophic_caught": 0.35185185185185186
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.004564046714688588,
+       "remaining_mae_random": 0.006960937327966233,
+       "remaining_mae_oracle": 0.003202326116257316,
+       "catastrophic_caught": 0.3888888888888889
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.004407750807591577,
+       "remaining_mae_random": 0.006874610922254515,
+       "remaining_mae_oracle": 0.002603385215058139,
+       "catastrophic_caught": 0.48148148148148145
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.004300820888292128,
+       "remaining_mae_random": 0.0072499067974170035,
+       "remaining_mae_oracle": 0.002166198972283181,
+       "catastrophic_caught": 0.5370370370370371
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004509600600499654,
+       "remaining_mae_random": 0.008021663551162574,
+       "remaining_mae_oracle": 0.00146723226029208,
+       "catastrophic_caught": 0.5925925925925926
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.7155947414000338,
+      "0.1": 0.6377064501406244,
+      "0.2": 0.5775532092594984,
+      "0.3": 0.5801053110378633,
+      "0.5": 0.5358303100308315
+     },
+     "catastrophic_caught": {
+      "0.05": 0.35185185185185186,
+      "0.1": 0.3888888888888889,
+      "0.2": 0.48148148148148145,
+      "0.3": 0.5370370370370371,
+      "0.5": 0.5925925925925926
+     },
+     "budget_catch90": 0.9146341463414634,
+     "budget_catch95": 0.9812382739212008
+    },
+    "pseudo_ood_calibrated": {
+     "spearman_err": 0.12716447159069702,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.0047536592046397855,
+       "remaining_mae_random": 0.006966984240392361,
+       "remaining_mae_oracle": 0.003733188153073212,
+       "catastrophic_caught": 0.2962962962962963
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.004624151334866162,
+       "remaining_mae_random": 0.006960937327966233,
+       "remaining_mae_oracle": 0.003202326116257316,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.004546757639853443,
+       "remaining_mae_random": 0.006874610922254515,
+       "remaining_mae_oracle": 0.002603385215058139,
+       "catastrophic_caught": 0.46296296296296297
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.0044884485022358865,
+       "remaining_mae_random": 0.0072499067974170035,
+       "remaining_mae_oracle": 0.002166198972283181,
+       "catastrophic_caught": 0.5555555555555556
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.0047003332437471155,
+       "remaining_mae_random": 0.008021663551162574,
+       "remaining_mae_oracle": 0.00146723226029208,
+       "catastrophic_caught": 0.6296296296296297
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.6844355599389216,
+      "0.1": 0.6217152723379472,
+      "0.2": 0.5450082580461593,
+      "0.3": 0.5431976797581646,
+      "0.5": 0.5067305094862552
+     },
+     "catastrophic_caught": {
+      "0.05": 0.2962962962962963,
+      "0.1": 0.3333333333333333,
+      "0.2": 0.46296296296296297,
+      "0.3": 0.5555555555555556,
+      "0.5": 0.6296296296296297
+     },
+     "budget_catch90": 0.9831144465290806,
+     "budget_catch95": 0.9953095684803002
+    },
+    "dynamic_support": {
+     "spearman_err": 0.20679854202539216,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.004644008097962012,
+       "remaining_mae_random": 0.006966984240392361,
+       "remaining_mae_oracle": 0.003733188153073212,
+       "catastrophic_caught": 0.35185185185185186
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.004520260764776312,
+       "remaining_mae_random": 0.006960937327966233,
+       "remaining_mae_oracle": 0.003202326116257316,
+       "catastrophic_caught": 0.42592592592592593
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.004469066038131326,
+       "remaining_mae_random": 0.006874610922254515,
+       "remaining_mae_oracle": 0.002603385215058139,
+       "catastrophic_caught": 0.46296296296296297
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.004267440217987075,
+       "remaining_mae_random": 0.0072499067974170035,
+       "remaining_mae_oracle": 0.002166198972283181,
+       "catastrophic_caught": 0.5740740740740741
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.004229499646188481,
+       "remaining_mae_random": 0.008021663551162574,
+       "remaining_mae_oracle": 0.00146723226029208,
+       "catastrophic_caught": 0.6851851851851852
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.7183434204585611,
+      "0.1": 0.6493559524290957,
+      "0.2": 0.5631977912265805,
+      "0.3": 0.5866715165424399,
+      "0.5": 0.57856490314516
+     },
+     "catastrophic_caught": {
+      "0.05": 0.35185185185185186,
+      "0.1": 0.42592592592592593,
+      "0.2": 0.46296296296296297,
+      "0.3": 0.5740740740740741,
+      "0.5": 0.6851851851851852
+     },
+     "budget_catch90": 0.8630393996247655,
+     "budget_catch95": 0.9127579737335835
+    },
+    "_oracle": {
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.003733188153073212,
+       "remaining_mae_random": 0.006966984240392361,
+       "remaining_mae_oracle": 0.003733188153073212,
+       "catastrophic_caught": 0.9814814814814815
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.003202326116257316,
+       "remaining_mae_random": 0.006960937327966233,
+       "remaining_mae_oracle": 0.003202326116257316,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.002603385215058139,
+       "remaining_mae_random": 0.006874610922254515,
+       "remaining_mae_oracle": 0.002603385215058139,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.002166198972283181,
+       "remaining_mae_random": 0.0072499067974170035,
+       "remaining_mae_oracle": 0.002166198972283181,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.00146723226029208,
+       "remaining_mae_random": 0.008021663551162574,
+       "remaining_mae_oracle": 0.00146723226029208,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "budget_catch90": 0.04596622889305816,
+     "budget_catch95": 0.04878048780487805
+    },
+    "_diag": {
+     "knn_input": {
+      "id_median_z": -2.6366929966472107e-15,
+      "ood_median_z": 0.03527728558886283,
+      "shift_ratio": 35277193.57373359,
+      "spearman_err_within_ood": 0.3059884559884559,
+      "spearman_err_within_id": 0.1335842150851648
+     },
+     "knn_emb": {
+      "id_median_z": -0.021321308692533545,
+      "ood_median_z": -0.6233821849173523,
+      "shift_ratio": -29.23751837513307,
+      "spearman_err_within_ood": 0.2960317460317459,
+      "spearman_err_within_id": 0.13734769683909429
+     },
+     "ens_var": {
+      "id_median_z": -0.026922935688526713,
+      "ood_median_z": 0.37195072068998547,
+      "shift_ratio": 13.815384480270808,
+      "spearman_err_within_ood": 0.3585137085137085,
+      "spearman_err_within_id": 0.18926907140462465
+     },
+     "maha_emb": {
+      "id_median_z": 0.004058449416642896,
+      "ood_median_z": 0.8542657731722316,
+      "shift_ratio": 210.49062732639482,
+      "spearman_err_within_ood": 0.3552669552669553,
+      "spearman_err_within_id": 0.21073166018704825
+     }
+    },
+    "_pool": {
+     "n_id": 1011,
+     "n_ood": 55,
+     "err_id": 0.004126045148555296,
+     "err_ood": 0.055918013399163476
+    }
+   }
+  }
+ },
+ "sqchip_batch300": {
+  "iid_choice": [
+   "knn_input",
+   0.9
+  ],
+  "pseudo_choice": [
+   "knn_input",
+   0.7
+  ],
+  "selection_tables": {
+   "iid_spearman": {
+    "knn_input_a0.1": -0.7494505494505493,
+    "knn_input_a0.3": -0.7142857142857143,
+    "knn_input_a0.5": -0.4857142857142856,
+    "knn_input_a0.7": -0.11208791208791212,
+    "knn_input_a0.9": 0.07692307692307694,
+    "knn_emb_a0.1": -0.7494505494505493,
+    "knn_emb_a0.3": -0.7142857142857143,
+    "knn_emb_a0.5": -0.4857142857142856,
+    "knn_emb_a0.7": -0.11208791208791212,
+    "knn_emb_a0.9": 0.07692307692307694
+   },
+   "pseudo_recovery20": {
+    "knn_input_a0.1": 0.12940937846252293,
+    "knn_input_a0.3": 0.14850521948045842,
+    "knn_input_a0.5": 0.30164014864794436,
+    "knn_input_a0.7": 0.5273751457948547,
+    "knn_input_a0.9": 0.4430089759944881,
+    "knn_emb_a0.1": 0.12940937846252293,
+    "knn_emb_a0.3": 0.11374536908820586,
+    "knn_emb_a0.5": 0.27001056995779416,
+    "knn_emb_a0.7": 0.5061199931317336,
+    "knn_emb_a0.9": 0.5027473647305972
+   }
+  },
+  "evals": {
+   "eval": {
+    "novelty_input": {
+     "spearman_err": 0.14562574969352282,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.13022257404312795,
+       "remaining_mae_random": 0.15006639656583382,
+       "remaining_mae_oracle": 0.11330372081807523,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.13059298224408789,
+       "remaining_mae_random": 0.15000765991348836,
+       "remaining_mae_oracle": 0.09979443597689634,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12953435450209866,
+       "remaining_mae_random": 0.1495450134215515,
+       "remaining_mae_oracle": 0.08878780242342595,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.130056053436118,
+       "remaining_mae_random": 0.14561885494093185,
+       "remaining_mae_oracle": 0.0820257401218607,
+       "catastrophic_caught": 0.5555555555555556
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.13401270823417613,
+       "remaining_mae_random": 0.15077643314751632,
+       "remaining_mae_oracle": 0.07138661478104108,
+       "catastrophic_caught": 0.7222222222222222
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.5397817791844419,
+      "0.1": 0.3866447152231618,
+      "0.2": 0.3293544682304491,
+      "0.3": 0.24472463015990945,
+      "0.5": 0.21115711382480226
+     },
+     "catastrophic_caught": {
+      "0.05": 0.3333333333333333,
+      "0.1": 0.3333333333333333,
+      "0.2": 0.5,
+      "0.3": 0.5555555555555556,
+      "0.5": 0.7222222222222222
+     },
+     "budget_catch90": 0.9883040935672515,
+     "budget_catch95": 1.0
+    },
+    "novelty_emb": {
+     "spearman_err": 0.14580664360644266,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.13022257404312795,
+       "remaining_mae_random": 0.15006639656583382,
+       "remaining_mae_oracle": 0.11330372081807523,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.13038139734043447,
+       "remaining_mae_random": 0.15000765991348836,
+       "remaining_mae_oracle": 0.09979443597689634,
+       "catastrophic_caught": 0.3888888888888889
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12766967537302476,
+       "remaining_mae_random": 0.1495450134215515,
+       "remaining_mae_oracle": 0.08878780242342595,
+       "catastrophic_caught": 0.5555555555555556
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.12903497566211755,
+       "remaining_mae_random": 0.14561885494093185,
+       "remaining_mae_oracle": 0.0820257401218607,
+       "catastrophic_caught": 0.6111111111111112
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.13386872024878746,
+       "remaining_mae_random": 0.15077643314751632,
+       "remaining_mae_oracle": 0.07138661478104108,
+       "catastrophic_caught": 0.7222222222222222
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.5397817791844419,
+      "0.1": 0.39085844393973657,
+      "0.2": 0.360045131913669,
+      "0.3": 0.2607810503699515,
+      "0.5": 0.21297079709491634
+     },
+     "catastrophic_caught": {
+      "0.05": 0.3333333333333333,
+      "0.1": 0.3888888888888889,
+      "0.2": 0.5555555555555556,
+      "0.3": 0.6111111111111112,
+      "0.5": 0.7222222222222222
+     },
+     "budget_catch90": 0.9883040935672515,
+     "budget_catch95": 1.0
+    },
+    "uncertainty": {
+     "spearman_err": 0.24738652544341883,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.11555286100828897,
+       "remaining_mae_random": 0.15006639656583382,
+       "remaining_mae_oracle": 0.11330372081807523,
+       "catastrophic_caught": 0.6666666666666666
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.1100712974726132,
+       "remaining_mae_random": 0.15000765991348836,
+       "remaining_mae_oracle": 0.09979443597689634,
+       "catastrophic_caught": 0.7777777777777778
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.10808890718991929,
+       "remaining_mae_random": 0.1495450134215515,
+       "remaining_mae_oracle": 0.08878780242342595,
+       "catastrophic_caught": 0.8333333333333334
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.10413465067238797,
+       "remaining_mae_random": 0.14561885494093185,
+       "remaining_mae_oracle": 0.0820257401218607,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.10551152292294924,
+       "remaining_mae_random": 0.15077643314751632,
+       "remaining_mae_oracle": 0.07138661478104108,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.9388200084877969,
+      "0.1": 0.7953355572489388,
+      "0.2": 0.6823240492871075,
+      "0.3": 0.6523379832324716,
+      "0.5": 0.5701601434029928
+     },
+     "catastrophic_caught": {
+      "0.05": 0.6666666666666666,
+      "0.1": 0.7777777777777778,
+      "0.2": 0.8333333333333334,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.14327485380116958,
+     "budget_catch95": 0.19298245614035087
+    },
+    "fixed_alpha0.3": {
+     "spearman_err": 0.22509547553724818,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.13019863916448743,
+       "remaining_mae_random": 0.15006639656583382,
+       "remaining_mae_oracle": 0.11330372081807523,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.12970327882183746,
+       "remaining_mae_random": 0.15000765991348836,
+       "remaining_mae_oracle": 0.09979443597689634,
+       "catastrophic_caught": 0.3888888888888889
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12331507399577057,
+       "remaining_mae_random": 0.1495450134215515,
+       "remaining_mae_oracle": 0.08878780242342595,
+       "catastrophic_caught": 0.6666666666666666
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.12370582991507753,
+       "remaining_mae_random": 0.14561885494093185,
+       "remaining_mae_oracle": 0.0820257401218607,
+       "catastrophic_caught": 0.7222222222222222
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.10544171403230364,
+       "remaining_mae_random": 0.15077643314751632,
+       "remaining_mae_oracle": 0.07138661478104108,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.5404328438350334,
+      "0.1": 0.40436322346660614,
+      "0.2": 0.4317173055654275,
+      "0.3": 0.34458172222258804,
+      "0.5": 0.5710394613316894
+     },
+     "catastrophic_caught": {
+      "0.05": 0.3333333333333333,
+      "0.1": 0.3888888888888889,
+      "0.2": 0.6666666666666666,
+      "0.3": 0.7222222222222222,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.3304093567251462,
+     "budget_catch95": 0.3508771929824561
+    },
+    "znorm_mean": {
+     "spearman_err": 0.24887897522248376,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.12174823812456584,
+       "remaining_mae_random": 0.15006639656583382,
+       "remaining_mae_oracle": 0.11330372081807523,
+       "catastrophic_caught": 0.5555555555555556
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.11333040035048773,
+       "remaining_mae_random": 0.15000765991348836,
+       "remaining_mae_oracle": 0.09979443597689634,
+       "catastrophic_caught": 0.6666666666666666
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.11155036496635452,
+       "remaining_mae_random": 0.1495450134215515,
+       "remaining_mae_oracle": 0.08878780242342595,
+       "catastrophic_caught": 0.7222222222222222
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.10693101988111166,
+       "remaining_mae_random": 0.14561885494093185,
+       "remaining_mae_oracle": 0.0820257401218607,
+       "catastrophic_caught": 0.8888888888888888
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.10532363302806093,
+       "remaining_mae_random": 0.15077643314751632,
+       "remaining_mae_oracle": 0.07138661478104108,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.7702964451110317,
+      "0.1": 0.7304302868367053,
+      "0.2": 0.6253520830040925,
+      "0.3": 0.608365153521588,
+      "0.5": 0.5725268183589801
+     },
+     "catastrophic_caught": {
+      "0.05": 0.5555555555555556,
+      "0.1": 0.6666666666666666,
+      "0.2": 0.7222222222222222,
+      "0.3": 0.8888888888888888,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.3713450292397661,
+     "budget_catch95": 0.3742690058479532
+    },
+    "znorm_max": {
+     "spearman_err": 0.2322331353549953,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.12614785908312573,
+       "remaining_mae_random": 0.15006639656583382,
+       "remaining_mae_oracle": 0.11330372081807523,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.11333322090500374,
+       "remaining_mae_random": 0.15000765991348836,
+       "remaining_mae_oracle": 0.09979443597689634,
+       "catastrophic_caught": 0.6666666666666666
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.11177237255747721,
+       "remaining_mae_random": 0.1495450134215515,
+       "remaining_mae_oracle": 0.08878780242342595,
+       "catastrophic_caught": 0.7222222222222222
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.10796638718779818,
+       "remaining_mae_random": 0.14561885494093185,
+       "remaining_mae_oracle": 0.0820257401218607,
+       "catastrophic_caught": 0.8888888888888888
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.10659582679383878,
+       "remaining_mae_random": 0.15077643314751632,
+       "remaining_mae_oracle": 0.07138661478104108,
+       "catastrophic_caught": 0.9444444444444444
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.6506201465535706,
+      "0.1": 0.7303741152887568,
+      "0.2": 0.6216980707893196,
+      "0.3": 0.592084030798912,
+      "0.5": 0.5565021719754197
+     },
+     "catastrophic_caught": {
+      "0.05": 0.5,
+      "0.1": 0.6666666666666666,
+      "0.2": 0.7222222222222222,
+      "0.3": 0.8888888888888888,
+      "0.5": 0.9444444444444444
+     },
+     "budget_catch90": 0.37719298245614036,
+     "budget_catch95": 0.9853801169590644
+    },
+    "iid_calibrated": {
+     "spearman_err": 0.15479464116032496,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.13037878318431723,
+       "remaining_mae_random": 0.15006639656583382,
+       "remaining_mae_oracle": 0.11330372081807523,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.13084956490068372,
+       "remaining_mae_random": 0.15000765991348836,
+       "remaining_mae_oracle": 0.09979443597689634,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12899144845237306,
+       "remaining_mae_random": 0.1495450134215515,
+       "remaining_mae_oracle": 0.08878780242342595,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.130056053436118,
+       "remaining_mae_random": 0.14561885494093185,
+       "remaining_mae_oracle": 0.0820257401218607,
+       "catastrophic_caught": 0.5555555555555556
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.13401270823417613,
+       "remaining_mae_random": 0.15077643314751632,
+       "remaining_mae_oracle": 0.07138661478104108,
+       "catastrophic_caught": 0.7222222222222222
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.5355326559089469,
+      "0.1": 0.38153485299006074,
+      "0.2": 0.33829013266939684,
+      "0.3": 0.24472463015990945,
+      "0.5": 0.21115711382480226
+     },
+     "catastrophic_caught": {
+      "0.05": 0.3333333333333333,
+      "0.1": 0.3333333333333333,
+      "0.2": 0.5,
+      "0.3": 0.5555555555555556,
+      "0.5": 0.7222222222222222
+     },
+     "budget_catch90": 0.9035087719298246,
+     "budget_catch95": 0.9269005847953217
+    },
+    "pseudo_ood_calibrated": {
+     "spearman_err": 0.1814895428768822,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.13019863916448743,
+       "remaining_mae_random": 0.15006639656583382,
+       "remaining_mae_oracle": 0.11330372081807523,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.13090546759253682,
+       "remaining_mae_random": 0.15000765991348836,
+       "remaining_mae_oracle": 0.09979443597689634,
+       "catastrophic_caught": 0.3333333333333333
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12936419344578648,
+       "remaining_mae_random": 0.1495450134215515,
+       "remaining_mae_oracle": 0.08878780242342595,
+       "catastrophic_caught": 0.5
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.12507660347133331,
+       "remaining_mae_random": 0.14561885494093185,
+       "remaining_mae_oracle": 0.0820257401218607,
+       "catastrophic_caught": 0.7222222222222222
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.13416970848716506,
+       "remaining_mae_random": 0.15077643314751632,
+       "remaining_mae_oracle": 0.07138661478104108,
+       "catastrophic_caught": 0.7222222222222222
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.5404328438350334,
+      "0.1": 0.3804215468234682,
+      "0.2": 0.3321551408340258,
+      "0.3": 0.32302634535268987,
+      "0.5": 0.20917952707351145
+     },
+     "catastrophic_caught": {
+      "0.05": 0.3333333333333333,
+      "0.1": 0.3333333333333333,
+      "0.2": 0.5,
+      "0.3": 0.7222222222222222,
+      "0.5": 0.7222222222222222
+     },
+     "budget_catch90": 0.6871345029239766,
+     "budget_catch95": 0.695906432748538
+    },
+    "dynamic_support": {
+     "spearman_err": 0.24790820788880452,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.12773232956671712,
+       "remaining_mae_random": 0.15006639656583382,
+       "remaining_mae_oracle": 0.11330372081807523,
+       "catastrophic_caught": 0.4444444444444444
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.11072097923583832,
+       "remaining_mae_random": 0.15000765991348836,
+       "remaining_mae_oracle": 0.09979443597689634,
+       "catastrophic_caught": 0.7222222222222222
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.10808890718991929,
+       "remaining_mae_random": 0.1495450134215515,
+       "remaining_mae_oracle": 0.08878780242342595,
+       "catastrophic_caught": 0.8333333333333334
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.10413465067238797,
+       "remaining_mae_random": 0.14561885494093185,
+       "remaining_mae_oracle": 0.0820257401218607,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.10551152292294924,
+       "remaining_mae_random": 0.15077643314751632,
+       "remaining_mae_oracle": 0.07138661478104108,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.6075201694337604,
+      "0.1": 0.7823970977697082,
+      "0.2": 0.6823240492871075,
+      "0.3": 0.6523379832324716,
+      "0.5": 0.5701601434029928
+     },
+     "catastrophic_caught": {
+      "0.05": 0.4444444444444444,
+      "0.1": 0.7222222222222222,
+      "0.2": 0.8333333333333334,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.2309941520467836,
+     "budget_catch95": 0.28654970760233917
+    },
+    "_oracle": {
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.11330372081807523,
+       "remaining_mae_random": 0.15006639656583382,
+       "remaining_mae_oracle": 0.11330372081807523,
+       "catastrophic_caught": 0.9444444444444444
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.09979443597689634,
+       "remaining_mae_random": 0.15000765991348836,
+       "remaining_mae_oracle": 0.09979443597689634,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.08878780242342595,
+       "remaining_mae_random": 0.1495450134215515,
+       "remaining_mae_oracle": 0.08878780242342595,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.0820257401218607,
+       "remaining_mae_random": 0.14561885494093185,
+       "remaining_mae_oracle": 0.0820257401218607,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.07138661478104108,
+       "remaining_mae_random": 0.15077643314751632,
+       "remaining_mae_oracle": 0.07138661478104108,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "budget_catch90": 0.049707602339181284,
+     "budget_catch95": 0.05263157894736842
+    },
+    "_diag": {
+     "knn_input": {
+      "id_median_z": 0.0,
+      "ood_median_z": -0.06123759838832283,
+      "shift_ratio": -61237597.38832282,
+      "spearman_err_within_ood": 0.0880374226380293,
+      "spearman_err_within_id": 0.29535694028036624
+     },
+     "knn_emb": {
+      "id_median_z": 0.0,
+      "ood_median_z": -0.12534029593831003,
+      "shift_ratio": -125340294.93831003,
+      "spearman_err_within_ood": 0.0880374226380293,
+      "spearman_err_within_id": 0.28611943926748235
+     },
+     "ens_var": {
+      "id_median_z": 2.3332030751888055e-16,
+      "ood_median_z": -0.16919116609481455,
+      "shift_ratio": -169191125.61908907,
+      "spearman_err_within_ood": 0.11179413104590051,
+      "spearman_err_within_id": 0.7522080868649219
+     },
+     "maha_emb": {
+      "id_median_z": -8.326672684688674e-17,
+      "ood_median_z": -0.4610336180756743,
+      "shift_ratio": -461033578.6869172,
+      "spearman_err_within_ood": -0.11995155501727797,
+      "spearman_err_within_id": 0.5207843772789887
+     }
+    },
+    "_pool": {
+     "n_id": 42,
+     "n_ood": 300,
+     "err_id": 0.42655072014216,
+     "err_ood": 0.11065415120124503
+    }
+   }
+  }
+ },
+ "sqchip_batchnear50": {
+  "iid_choice": [
+   "knn_input",
+   0.1
+  ],
+  "pseudo_choice": [
+   "knn_input",
+   0.1
+  ],
+  "selection_tables": {
+   "iid_spearman": {
+    "knn_input_a0.1": 0.5833020637898686,
+    "knn_input_a0.3": 0.5333958724202627,
+    "knn_input_a0.5": 0.32457786116322707,
+    "knn_input_a0.7": 0.010881801125703536,
+    "knn_input_a0.9": -0.14727954971857407,
+    "knn_emb_a0.1": 0.5801125703564728,
+    "knn_emb_a0.3": 0.5015009380863039,
+    "knn_emb_a0.5": 0.250281425891182,
+    "knn_emb_a0.7": -0.03771106941838649,
+    "knn_emb_a0.9": -0.1836772983114446
+   },
+   "pseudo_recovery20": {
+    "knn_input_a0.1": 0.4881819343729583,
+    "knn_input_a0.3": 0.46929437805521534,
+    "knn_input_a0.5": 0.11836356569756425,
+    "knn_input_a0.7": 0.25982820181172,
+    "knn_input_a0.9": 0.09437194930542596,
+    "knn_emb_a0.1": 0.4881819343729583,
+    "knn_emb_a0.3": 0.4640105434987482,
+    "knn_emb_a0.5": 0.11474461457981014,
+    "knn_emb_a0.7": 0.23442026856524026,
+    "knn_emb_a0.9": 0.0796719676374241
+   }
+  },
+  "evals": {
+   "eval": {
+    "novelty_input": {
+     "spearman_err": -0.019548556430446187,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.25626317943885973,
+       "remaining_mae_random": 0.2786072955569226,
+       "remaining_mae_oracle": 0.19890187366898165,
+       "catastrophic_caught": 0.14285714285714285
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.2164372426634093,
+       "remaining_mae_random": 0.29066190784783474,
+       "remaining_mae_oracle": 0.15493084945533978,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.2299798725937884,
+       "remaining_mae_random": 0.27812924678234235,
+       "remaining_mae_oracle": 0.1068156359344358,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.2510607596212302,
+       "remaining_mae_random": 0.3144632505535254,
+       "remaining_mae_oracle": 0.08072663197117104,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.30766309829668537,
+       "remaining_mae_random": 0.3398285524431375,
+       "remaining_mae_oracle": 0.06441103509086743,
+       "catastrophic_caught": 0.42857142857142855
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.280333703640347,
+      "0.1": 0.546851001263021,
+      "0.2": 0.2810598291066394,
+      "0.3": 0.27125613143905425,
+      "0.5": 0.11678797505574492
+     },
+     "catastrophic_caught": {
+      "0.05": 0.14285714285714285,
+      "0.1": 0.42857142857142855,
+      "0.2": 0.42857142857142855,
+      "0.3": 0.42857142857142855,
+      "0.5": 0.42857142857142855
+     },
+     "budget_catch90": 0.9285714285714286,
+     "budget_catch95": 0.9285714285714286
+    },
+    "novelty_emb": {
+     "spearman_err": 0.018918635170603666,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.25626317943885973,
+       "remaining_mae_random": 0.2786072955569226,
+       "remaining_mae_oracle": 0.19890187366898165,
+       "catastrophic_caught": 0.14285714285714285
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.2164372426634093,
+       "remaining_mae_random": 0.29066190784783474,
+       "remaining_mae_oracle": 0.15493084945533978,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.2266487271862887,
+       "remaining_mae_random": 0.27812924678234235,
+       "remaining_mae_oracle": 0.1068156359344358,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.248257919178245,
+       "remaining_mae_random": 0.3144632505535254,
+       "remaining_mae_oracle": 0.08072663197117104,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.3027720710364696,
+       "remaining_mae_random": 0.3398285524431375,
+       "remaining_mae_oracle": 0.06441103509086743,
+       "catastrophic_caught": 0.42857142857142855
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.280333703640347,
+      "0.1": 0.546851001263021,
+      "0.2": 0.3005045503463144,
+      "0.3": 0.28324757916335536,
+      "0.5": 0.13454656683754496
+     },
+     "catastrophic_caught": {
+      "0.05": 0.14285714285714285,
+      "0.1": 0.42857142857142855,
+      "0.2": 0.42857142857142855,
+      "0.3": 0.42857142857142855,
+      "0.5": 0.42857142857142855
+     },
+     "budget_catch90": 0.9285714285714286,
+     "budget_catch95": 0.9285714285714286
+    },
+    "uncertainty": {
+     "spearman_err": 0.5960764904386953,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.23560568918596894,
+       "remaining_mae_random": 0.2786072955569226,
+       "remaining_mae_oracle": 0.19890187366898165,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.18641292040305388,
+       "remaining_mae_random": 0.29066190784783474,
+       "remaining_mae_oracle": 0.15493084945533978,
+       "catastrophic_caught": 0.7142857142857143
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.13114635149039533,
+       "remaining_mae_random": 0.27812924678234235,
+       "remaining_mae_oracle": 0.1068156359344358,
+       "catastrophic_caught": 0.8571428571428571
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.09391194198987073,
+       "remaining_mae_random": 0.3144632505535254,
+       "remaining_mae_oracle": 0.08072663197117104,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.09935046530187498,
+       "remaining_mae_random": 0.3398285524431375,
+       "remaining_mae_oracle": 0.06441103509086743,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.5395066653233486,
+      "0.1": 0.7680555112399031,
+      "0.2": 0.8579755838690453,
+      "0.3": 0.9435890272620931,
+      "0.5": 0.8731401308569686
+     },
+     "catastrophic_caught": {
+      "0.05": 0.42857142857142855,
+      "0.1": 0.7142857142857143,
+      "0.2": 0.8571428571428571,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.21428571428571427,
+     "budget_catch95": 0.21428571428571427
+    },
+    "fixed_alpha0.3": {
+     "spearman_err": 0.5983622047244094,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.2528377397275455,
+       "remaining_mae_random": 0.2786072955569226,
+       "remaining_mae_oracle": 0.19890187366898165,
+       "catastrophic_caught": 0.14285714285714285
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.2164372426634093,
+       "remaining_mae_random": 0.29066190784783474,
+       "remaining_mae_oracle": 0.15493084945533978,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.13158259994580063,
+       "remaining_mae_random": 0.27812924678234235,
+       "remaining_mae_oracle": 0.1068156359344358,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.09376654538378947,
+       "remaining_mae_random": 0.3144632505535254,
+       "remaining_mae_oracle": 0.08072663197117104,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.09193367149092935,
+       "remaining_mae_random": 0.3398285524431375,
+       "remaining_mae_oracle": 0.06441103509086743,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.32330994829444515,
+      "0.1": 0.546851001263021,
+      "0.2": 0.8554290935274658,
+      "0.3": 0.9442110804387118,
+      "0.5": 0.900069404936
+     },
+     "catastrophic_caught": {
+      "0.05": 0.14285714285714285,
+      "0.1": 0.42857142857142855,
+      "0.2": 1.0,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.19047619047619047,
+     "budget_catch95": 0.19047619047619047
+    },
+    "znorm_mean": {
+     "spearman_err": 0.14920434945631794,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.25626317943885973,
+       "remaining_mae_random": 0.2786072955569226,
+       "remaining_mae_oracle": 0.19890187366898165,
+       "catastrophic_caught": 0.14285714285714285
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.2164372426634093,
+       "remaining_mae_random": 0.29066190784783474,
+       "remaining_mae_oracle": 0.15493084945533978,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.2299798725937884,
+       "remaining_mae_random": 0.27812924678234235,
+       "remaining_mae_oracle": 0.1068156359344358,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.2510607596212302,
+       "remaining_mae_random": 0.3144632505535254,
+       "remaining_mae_oracle": 0.08072663197117104,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.3049121331015354,
+       "remaining_mae_random": 0.3398285524431375,
+       "remaining_mae_oracle": 0.06441103509086743,
+       "catastrophic_caught": 0.42857142857142855
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.280333703640347,
+      "0.1": 0.546851001263021,
+      "0.2": 0.2810598291066394,
+      "0.3": 0.27125613143905425,
+      "0.5": 0.12677632010219073
+     },
+     "catastrophic_caught": {
+      "0.05": 0.14285714285714285,
+      "0.1": 0.42857142857142855,
+      "0.2": 0.42857142857142855,
+      "0.3": 0.42857142857142855,
+      "0.5": 0.42857142857142855
+     },
+     "budget_catch90": 0.6587301587301587,
+     "budget_catch95": 0.6587301587301587
+    },
+    "znorm_max": {
+     "spearman_err": 0.13007274090738655,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.25626317943885973,
+       "remaining_mae_random": 0.2786072955569226,
+       "remaining_mae_oracle": 0.19890187366898165,
+       "catastrophic_caught": 0.14285714285714285
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.2164372426634093,
+       "remaining_mae_random": 0.29066190784783474,
+       "remaining_mae_oracle": 0.15493084945533978,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.2299798725937884,
+       "remaining_mae_random": 0.27812924678234235,
+       "remaining_mae_oracle": 0.1068156359344358,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.2510607596212302,
+       "remaining_mae_random": 0.3144632505535254,
+       "remaining_mae_oracle": 0.08072663197117104,
+       "catastrophic_caught": 0.42857142857142855
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.30766309829668537,
+       "remaining_mae_random": 0.3398285524431375,
+       "remaining_mae_oracle": 0.06441103509086743,
+       "catastrophic_caught": 0.42857142857142855
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.280333703640347,
+      "0.1": 0.546851001263021,
+      "0.2": 0.2810598291066394,
+      "0.3": 0.27125613143905425,
+      "0.5": 0.11678797505574492
+     },
+     "catastrophic_caught": {
+      "0.05": 0.14285714285714285,
+      "0.1": 0.42857142857142855,
+      "0.2": 0.42857142857142855,
+      "0.3": 0.42857142857142855,
+      "0.5": 0.42857142857142855
+     },
+     "budget_catch90": 0.6428571428571429,
+     "budget_catch95": 0.6428571428571429
+    },
+    "iid_calibrated": {
+     "spearman_err": 0.5967784026996626,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.2474141269160828,
+       "remaining_mae_random": 0.2786072955569226,
+       "remaining_mae_oracle": 0.19890187366898165,
+       "catastrophic_caught": 0.2857142857142857
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.19043238356229375,
+       "remaining_mae_random": 0.29066190784783474,
+       "remaining_mae_oracle": 0.15493084945533978,
+       "catastrophic_caught": 0.7142857142857143
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12166145077387776,
+       "remaining_mae_random": 0.27812924678234235,
+       "remaining_mae_oracle": 0.1068156359344358,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.09384138424929503,
+       "remaining_mae_random": 0.3144632505535254,
+       "remaining_mae_oracle": 0.08072663197117104,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.09798068927323983,
+       "remaining_mae_random": 0.3398285524431375,
+       "remaining_mae_oracle": 0.06441103509086743,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.39135566818396295,
+      "0.1": 0.7384420741471432,
+      "0.2": 0.9133412998187157,
+      "0.3": 0.9438908958396557,
+      "0.5": 0.8781135836779929
+     },
+     "catastrophic_caught": {
+      "0.05": 0.2857142857142857,
+      "0.1": 0.7142857142857143,
+      "0.2": 1.0,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.16666666666666666,
+     "budget_catch95": 0.16666666666666666
+    },
+    "pseudo_ood_calibrated": {
+     "spearman_err": 0.5967784026996626,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.2474141269160828,
+       "remaining_mae_random": 0.2786072955569226,
+       "remaining_mae_oracle": 0.19890187366898165,
+       "catastrophic_caught": 0.2857142857142857
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.19043238356229375,
+       "remaining_mae_random": 0.29066190784783474,
+       "remaining_mae_oracle": 0.15493084945533978,
+       "catastrophic_caught": 0.7142857142857143
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.12166145077387776,
+       "remaining_mae_random": 0.27812924678234235,
+       "remaining_mae_oracle": 0.1068156359344358,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.09384138424929503,
+       "remaining_mae_random": 0.3144632505535254,
+       "remaining_mae_oracle": 0.08072663197117104,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.09798068927323983,
+       "remaining_mae_random": 0.3398285524431375,
+       "remaining_mae_oracle": 0.06441103509086743,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.39135566818396295,
+      "0.1": 0.7384420741471432,
+      "0.2": 0.9133412998187157,
+      "0.3": 0.9438908958396557,
+      "0.5": 0.8781135836779929
+     },
+     "catastrophic_caught": {
+      "0.05": 0.2857142857142857,
+      "0.1": 0.7142857142857143,
+      "0.2": 1.0,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.16666666666666666,
+     "budget_catch95": 0.16666666666666666
+    },
+    "dynamic_support": {
+     "spearman_err": 0.5932208473940758,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.2520058613232775,
+       "remaining_mae_random": 0.2786072955569226,
+       "remaining_mae_oracle": 0.19890187366898165,
+       "catastrophic_caught": 0.14285714285714285
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.19283328310686607,
+       "remaining_mae_random": 0.29066190784783474,
+       "remaining_mae_oracle": 0.15493084945533978,
+       "catastrophic_caught": 0.7142857142857143
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.13089599001881244,
+       "remaining_mae_random": 0.27812924678234235,
+       "remaining_mae_oracle": 0.1068156359344358,
+       "catastrophic_caught": 0.8571428571428571
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.09391194198987073,
+       "remaining_mae_random": 0.3144632505535254,
+       "remaining_mae_oracle": 0.08072663197117104,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.09935046530187498,
+       "remaining_mae_random": 0.3398285524431375,
+       "remaining_mae_oracle": 0.06441103509086743,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.333746859417474,
+      "0.1": 0.7207534215056114,
+      "0.2": 0.8594370058211233,
+      "0.3": 0.9435890272620931,
+      "0.5": 0.8731401308569686
+     },
+     "catastrophic_caught": {
+      "0.05": 0.14285714285714285,
+      "0.1": 0.7142857142857143,
+      "0.2": 0.8571428571428571,
+      "0.3": 1.0,
+      "0.5": 1.0
+     },
+     "budget_catch90": 0.21428571428571427,
+     "budget_catch95": 0.21428571428571427
+    },
+    "_oracle": {
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 0.19890187366898165,
+       "remaining_mae_random": 0.2786072955569226,
+       "remaining_mae_oracle": 0.19890187366898165,
+       "catastrophic_caught": 0.8571428571428571
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 0.15493084945533978,
+       "remaining_mae_random": 0.29066190784783474,
+       "remaining_mae_oracle": 0.15493084945533978,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.1068156359344358,
+       "remaining_mae_random": 0.27812924678234235,
+       "remaining_mae_oracle": 0.1068156359344358,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.08072663197117104,
+       "remaining_mae_random": 0.3144632505535254,
+       "remaining_mae_oracle": 0.08072663197117104,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.06441103509086743,
+       "remaining_mae_random": 0.3398285524431375,
+       "remaining_mae_oracle": 0.06441103509086743,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "budget_catch90": 0.05555555555555555,
+     "budget_catch95": 0.05555555555555555
+    },
+    "_diag": {
+     "knn_input": {
+      "id_median_z": 0.0,
+      "ood_median_z": 2.8334568608821824,
+      "shift_ratio": 2833456861.882182,
+      "spearman_err_within_ood": -0.05479299805501529,
+      "spearman_err_within_id": 0.17348919736979435
+     },
+     "knn_emb": {
+      "id_median_z": 0.0,
+      "ood_median_z": 1.8117601566450032,
+      "shift_ratio": 1811760157.645003,
+      "spearman_err_within_ood": -0.05479299805501529,
+      "spearman_err_within_id": 0.16969001148105622
+     },
+     "ens_var": {
+      "id_median_z": 0.0,
+      "ood_median_z": -0.011373654492265049,
+      "shift_ratio": -11373653.492265048,
+      "spearman_err_within_ood": 0.1162545151430953,
+      "spearman_err_within_id": 0.7815259367498173
+     },
+     "maha_emb": {
+      "id_median_z": 0.0,
+      "ood_median_z": -0.13082295199217242,
+      "shift_ratio": -130822950.99217242,
+      "spearman_err_within_ood": 0.1162545151430953,
+      "spearman_err_within_id": 0.7275858469888321
+     }
+    },
+    "_pool": {
+     "n_id": 66,
+     "n_ood": 60,
+     "err_id": 0.44962594009561585,
+     "err_ood": 0.0978392383545554
+    }
+   }
+  }
+ },
+ "sqchip_sqchip": {
+  "iid_choice": [
+   "knn_input",
+   0.9
+  ],
+  "pseudo_choice": [
+   "knn_input",
+   0.1
+  ],
+  "selection_tables": {
+   "iid_spearman": {
+    "knn_input_a0.1": -0.7832167832167835,
+    "knn_input_a0.3": -0.7132867132867133,
+    "knn_input_a0.5": -0.5314685314685315,
+    "knn_input_a0.7": -0.4335664335664337,
+    "knn_input_a0.9": -0.18881118881118883,
+    "knn_emb_a0.1": -0.7832167832167835,
+    "knn_emb_a0.3": -0.7132867132867133,
+    "knn_emb_a0.5": -0.5314685314685315,
+    "knn_emb_a0.7": -0.4335664335664337,
+    "knn_emb_a0.9": -0.18881118881118883
+   },
+   "pseudo_recovery20": {
+    "knn_input_a0.1": -0.41061600326223147,
+    "knn_input_a0.3": -0.4778336477162276,
+    "knn_input_a0.5": -0.6054105991528629,
+    "knn_input_a0.7": -0.5620558804065794,
+    "knn_input_a0.9": -0.5483727941520621,
+    "knn_emb_a0.1": -0.41061600326223147,
+    "knn_emb_a0.3": -0.41061600326223147,
+    "knn_emb_a0.5": -0.41061600326223147,
+    "knn_emb_a0.7": -0.41061600326223147,
+    "knn_emb_a0.9": -0.41061600326223147
+   }
+  },
+  "evals": {
+   "eval": {
+    "novelty_input": {
+     "spearman_err": 0.6686841231246397,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 1.2521927843163143,
+       "remaining_mae_random": 1.3182816843870544,
+       "remaining_mae_oracle": 1.1118160340830896,
+       "catastrophic_caught": 0.23529411764705882
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 1.2310337080584288,
+       "remaining_mae_random": 1.3285676174752994,
+       "remaining_mae_oracle": 1.0353429670503844,
+       "catastrophic_caught": 0.29411764705882354
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 1.1666728659773078,
+       "remaining_mae_random": 1.3481280586611581,
+       "remaining_mae_oracle": 0.8979296039404551,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 1.068256732315176,
+       "remaining_mae_random": 1.4388744795637318,
+       "remaining_mae_oracle": 0.7718318217808738,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.872987819356739,
+       "remaining_mae_random": 1.3343835159634607,
+       "remaining_mae_oracle": 0.5360713985648795,
+       "catastrophic_caught": 0.47058823529411764
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.3200963451956394,
+      "0.1": 0.3326252048575491,
+      "0.2": 0.4030560095911983,
+      "0.3": 0.555613262396785,
+      "0.5": 0.5779640400677473
+     },
+     "catastrophic_caught": {
+      "0.05": 0.23529411764705882,
+      "0.1": 0.29411764705882354,
+      "0.2": 0.47058823529411764,
+      "0.3": 0.47058823529411764,
+      "0.5": 0.47058823529411764
+     },
+     "budget_catch90": 0.6756756756756757,
+     "budget_catch95": 0.9579579579579579
+    },
+    "novelty_emb": {
+     "spearman_err": 0.6466571903409071,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 1.2530728086811285,
+       "remaining_mae_random": 1.3182816843870544,
+       "remaining_mae_oracle": 1.1118160340830896,
+       "catastrophic_caught": 0.23529411764705882
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 1.2297541644646186,
+       "remaining_mae_random": 1.3285676174752994,
+       "remaining_mae_oracle": 1.0353429670503844,
+       "catastrophic_caught": 0.29411764705882354
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 1.1948332368116585,
+       "remaining_mae_random": 1.3481280586611581,
+       "remaining_mae_oracle": 0.8979296039404551,
+       "catastrophic_caught": 0.4117647058823529
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 1.0960684777010228,
+       "remaining_mae_random": 1.4388744795637318,
+       "remaining_mae_oracle": 0.7718318217808738,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.8792295686570742,
+       "remaining_mae_random": 1.3343835159634607,
+       "remaining_mae_oracle": 0.5360713985648795,
+       "catastrophic_caught": 0.47058823529411764
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.3158340169898649,
+      "0.1": 0.3369889020840818,
+      "0.2": 0.34050499339141804,
+      "0.3": 0.5139191592365934,
+      "0.5": 0.5701453571687892
+     },
+     "catastrophic_caught": {
+      "0.05": 0.23529411764705882,
+      "0.1": 0.29411764705882354,
+      "0.2": 0.4117647058823529,
+      "0.3": 0.47058823529411764,
+      "0.5": 0.47058823529411764
+     },
+     "budget_catch90": 0.6816816816816816,
+     "budget_catch95": 0.933933933933934
+    },
+    "uncertainty": {
+     "spearman_err": 0.49615844832640155,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 1.2773700095147882,
+       "remaining_mae_random": 1.3182816843870544,
+       "remaining_mae_oracle": 1.1118160340830896,
+       "catastrophic_caught": 0.23529411764705882
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 1.2360065479810514,
+       "remaining_mae_random": 1.3285676174752994,
+       "remaining_mae_oracle": 1.0353429670503844,
+       "catastrophic_caught": 0.4117647058823529
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 1.1862974399082504,
+       "remaining_mae_random": 1.3481280586611581,
+       "remaining_mae_oracle": 0.8979296039404551,
+       "catastrophic_caught": 0.6470588235294118
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 1.0773288086019177,
+       "remaining_mae_random": 1.4388744795637318,
+       "remaining_mae_oracle": 0.7718318217808738,
+       "catastrophic_caught": 0.8823529411764706
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.842028730565406,
+       "remaining_mae_random": 1.3343835159634607,
+       "remaining_mae_oracle": 0.5360713985648795,
+       "catastrophic_caught": 0.9411764705882353
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.19815245205212026,
+      "0.1": 0.3156660579528931,
+      "0.2": 0.35946506936214434,
+      "0.3": 0.5420128184358306,
+      "0.5": 0.616744722606073
+     },
+     "catastrophic_caught": {
+      "0.05": 0.23529411764705882,
+      "0.1": 0.4117647058823529,
+      "0.2": 0.6470588235294118,
+      "0.3": 0.8823529411764706,
+      "0.5": 0.9411764705882353
+     },
+     "budget_catch90": 0.42342342342342343,
+     "budget_catch95": 0.5255255255255256
+    },
+    "fixed_alpha0.3": {
+     "spearman_err": 0.5471482953987824,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 1.2536702067917032,
+       "remaining_mae_random": 1.3182816843870544,
+       "remaining_mae_oracle": 1.1118160340830896,
+       "catastrophic_caught": 0.23529411764705882
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 1.20917346531983,
+       "remaining_mae_random": 1.3285676174752994,
+       "remaining_mae_oracle": 1.0353429670503844,
+       "catastrophic_caught": 0.4117647058823529
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 1.1221480296448323,
+       "remaining_mae_random": 1.3481280586611581,
+       "remaining_mae_oracle": 0.8979296039404551,
+       "catastrophic_caught": 0.6470588235294118
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 1.0428726847594467,
+       "remaining_mae_random": 1.4388744795637318,
+       "remaining_mae_oracle": 0.7718318217808738,
+       "catastrophic_caught": 0.8823529411764706
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.8422668442218214,
+       "remaining_mae_random": 1.3343835159634607,
+       "remaining_mae_oracle": 0.5360713985648795,
+       "catastrophic_caught": 0.9411764705882353
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.3129405666280484,
+      "0.1": 0.4071763815983888,
+      "0.2": 0.5019564741876352,
+      "0.3": 0.5936678714379843,
+      "0.5": 0.616446451226714
+     },
+     "catastrophic_caught": {
+      "0.05": 0.23529411764705882,
+      "0.1": 0.4117647058823529,
+      "0.2": 0.6470588235294118,
+      "0.3": 0.8823529411764706,
+      "0.5": 0.9411764705882353
+     },
+     "budget_catch90": 0.4264264264264264,
+     "budget_catch95": 0.5045045045045045
+    },
+    "znorm_mean": {
+     "spearman_err": 0.6791025568530799,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 1.2521927843163143,
+       "remaining_mae_random": 1.3182816843870544,
+       "remaining_mae_oracle": 1.1118160340830896,
+       "catastrophic_caught": 0.23529411764705882
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 1.2310337080584288,
+       "remaining_mae_random": 1.3285676174752994,
+       "remaining_mae_oracle": 1.0353429670503844,
+       "catastrophic_caught": 0.29411764705882354
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 1.1666728659773078,
+       "remaining_mae_random": 1.3481280586611581,
+       "remaining_mae_oracle": 0.8979296039404551,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 1.068256732315176,
+       "remaining_mae_random": 1.4388744795637318,
+       "remaining_mae_oracle": 0.7718318217808738,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.872987819356739,
+       "remaining_mae_random": 1.3343835159634607,
+       "remaining_mae_oracle": 0.5360713985648795,
+       "catastrophic_caught": 0.47058823529411764
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.3200963451956394,
+      "0.1": 0.3326252048575491,
+      "0.2": 0.4030560095911983,
+      "0.3": 0.555613262396785,
+      "0.5": 0.5779640400677473
+     },
+     "catastrophic_caught": {
+      "0.05": 0.23529411764705882,
+      "0.1": 0.29411764705882354,
+      "0.2": 0.47058823529411764,
+      "0.3": 0.47058823529411764,
+      "0.5": 0.47058823529411764
+     },
+     "budget_catch90": 0.6756756756756757,
+     "budget_catch95": 0.8738738738738738
+    },
+    "znorm_max": {
+     "spearman_err": 0.6787278585128668,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 1.2521927843163143,
+       "remaining_mae_random": 1.3182816843870544,
+       "remaining_mae_oracle": 1.1118160340830896,
+       "catastrophic_caught": 0.23529411764705882
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 1.2310337080584288,
+       "remaining_mae_random": 1.3285676174752994,
+       "remaining_mae_oracle": 1.0353429670503844,
+       "catastrophic_caught": 0.29411764705882354
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 1.1666728659773078,
+       "remaining_mae_random": 1.3481280586611581,
+       "remaining_mae_oracle": 0.8979296039404551,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 1.068256732315176,
+       "remaining_mae_random": 1.4388744795637318,
+       "remaining_mae_oracle": 0.7718318217808738,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.872987819356739,
+       "remaining_mae_random": 1.3343835159634607,
+       "remaining_mae_oracle": 0.5360713985648795,
+       "catastrophic_caught": 0.47058823529411764
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.3200963451956394,
+      "0.1": 0.3326252048575491,
+      "0.2": 0.4030560095911983,
+      "0.3": 0.555613262396785,
+      "0.5": 0.5779640400677473
+     },
+     "catastrophic_caught": {
+      "0.05": 0.23529411764705882,
+      "0.1": 0.29411764705882354,
+      "0.2": 0.47058823529411764,
+      "0.3": 0.47058823529411764,
+      "0.5": 0.47058823529411764
+     },
+     "budget_catch90": 0.6756756756756757,
+     "budget_catch95": 0.8738738738738738
+    },
+    "iid_calibrated": {
+     "spearman_err": 0.678600467576732,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 1.2534825354405623,
+       "remaining_mae_random": 1.3182816843870544,
+       "remaining_mae_oracle": 1.1118160340830896,
+       "catastrophic_caught": 0.23529411764705882
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 1.2267159580238838,
+       "remaining_mae_random": 1.3285676174752994,
+       "remaining_mae_oracle": 1.0353429670503844,
+       "catastrophic_caught": 0.29411764705882354
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 1.1666728659773078,
+       "remaining_mae_random": 1.3481280586611581,
+       "remaining_mae_oracle": 0.8979296039404551,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 1.068256732315176,
+       "remaining_mae_random": 1.4388744795637318,
+       "remaining_mae_oracle": 0.7718318217808738,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.8662018860908318,
+       "remaining_mae_random": 1.3343835159634607,
+       "remaining_mae_oracle": 0.5360713985648795,
+       "catastrophic_caught": 0.5294117647058824
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.3138495379308513,
+      "0.1": 0.34735026302809563,
+      "0.2": 0.4030560095911983,
+      "0.3": 0.555613262396785,
+      "0.5": 0.5864643911434896
+     },
+     "catastrophic_caught": {
+      "0.05": 0.23529411764705882,
+      "0.1": 0.29411764705882354,
+      "0.2": 0.47058823529411764,
+      "0.3": 0.47058823529411764,
+      "0.5": 0.5294117647058824
+     },
+     "budget_catch90": 0.6756756756756757,
+     "budget_catch95": 0.8618618618618619
+    },
+    "pseudo_ood_calibrated": {
+     "spearman_err": 0.5037196853443878,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 1.254212761245019,
+       "remaining_mae_random": 1.3182816843870544,
+       "remaining_mae_oracle": 1.1118160340830896,
+       "catastrophic_caught": 0.29411764705882354
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 1.2292831609353119,
+       "remaining_mae_random": 1.3285676174752994,
+       "remaining_mae_oracle": 1.0353429670503844,
+       "catastrophic_caught": 0.4117647058823529
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 1.139406863240031,
+       "remaining_mae_random": 1.3481280586611581,
+       "remaining_mae_oracle": 0.8979296039404551,
+       "catastrophic_caught": 0.7647058823529411
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 1.0773288086019177,
+       "remaining_mae_random": 1.4388744795637318,
+       "remaining_mae_oracle": 0.7718318217808738,
+       "catastrophic_caught": 0.8823529411764706
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.842028730565406,
+       "remaining_mae_random": 1.3343835159634607,
+       "remaining_mae_oracle": 0.5360713985648795,
+       "catastrophic_caught": 0.9411764705882353
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.3103127471698626,
+      "0.1": 0.3385951910799906,
+      "0.2": 0.46362041724602315,
+      "0.3": 0.5420128184358306,
+      "0.5": 0.616744722606073
+     },
+     "catastrophic_caught": {
+      "0.05": 0.29411764705882354,
+      "0.1": 0.4117647058823529,
+      "0.2": 0.7647058823529411,
+      "0.3": 0.8823529411764706,
+      "0.5": 0.9411764705882353
+     },
+     "budget_catch90": 0.4174174174174174,
+     "budget_catch95": 0.5105105105105106
+    },
+    "dynamic_support": {
+     "spearman_err": 0.6953890980656727,
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 1.2521927843163143,
+       "remaining_mae_random": 1.3182816843870544,
+       "remaining_mae_oracle": 1.1118160340830896,
+       "catastrophic_caught": 0.23529411764705882
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 1.2310337080584288,
+       "remaining_mae_random": 1.3285676174752994,
+       "remaining_mae_oracle": 1.0353429670503844,
+       "catastrophic_caught": 0.29411764705882354
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 1.1666728659773078,
+       "remaining_mae_random": 1.3481280586611581,
+       "remaining_mae_oracle": 0.8979296039404551,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 1.068256732315176,
+       "remaining_mae_random": 1.4388744795637318,
+       "remaining_mae_oracle": 0.7718318217808738,
+       "catastrophic_caught": 0.47058823529411764
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.8670798060965966,
+       "remaining_mae_random": 1.3343835159634607,
+       "remaining_mae_oracle": 0.5360713985648795,
+       "catastrophic_caught": 0.5294117647058824
+      }
+     ],
+     "oracle_recovery": {
+      "0.05": 0.3200963451956394,
+      "0.1": 0.3326252048575491,
+      "0.2": 0.4030560095911983,
+      "0.3": 0.555613262396785,
+      "0.5": 0.5853646708879263
+     },
+     "catastrophic_caught": {
+      "0.05": 0.23529411764705882,
+      "0.1": 0.29411764705882354,
+      "0.2": 0.47058823529411764,
+      "0.3": 0.47058823529411764,
+      "0.5": 0.5294117647058824
+     },
+     "budget_catch90": 0.6396396396396397,
+     "budget_catch95": 0.6936936936936937
+    },
+    "_oracle": {
+     "risk_coverage": [
+      {
+       "budget": 0.05,
+       "remaining_mae": 1.1118160340830896,
+       "remaining_mae_random": 1.3182816843870544,
+       "remaining_mae_oracle": 1.1118160340830896,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.1,
+       "remaining_mae": 1.0353429670503844,
+       "remaining_mae_random": 1.3285676174752994,
+       "remaining_mae_oracle": 1.0353429670503844,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.2,
+       "remaining_mae": 0.8979296039404551,
+       "remaining_mae_random": 1.3481280586611581,
+       "remaining_mae_oracle": 0.8979296039404551,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.3,
+       "remaining_mae": 0.7718318217808738,
+       "remaining_mae_random": 1.4388744795637318,
+       "remaining_mae_oracle": 0.7718318217808738,
+       "catastrophic_caught": 1.0
+      },
+      {
+       "budget": 0.5,
+       "remaining_mae": 0.5360713985648795,
+       "remaining_mae_random": 1.3343835159634607,
+       "remaining_mae_oracle": 0.5360713985648795,
+       "catastrophic_caught": 1.0
+      }
+     ],
+     "budget_catch90": 0.04804804804804805,
+     "budget_catch95": 0.05105105105105105
+    },
+    "_diag": {
+     "knn_input": {
+      "id_median_z": 0.0,
+      "ood_median_z": 4832080161250.969,
+      "shift_ratio": 4.832080161250969e+21,
+      "spearman_err_within_ood": 0.5848744767558431,
+      "spearman_err_within_id": -0.13243733011174869
+     },
+     "knn_emb": {
+      "id_median_z": 0.0,
+      "ood_median_z": 315927445888.5193,
+      "shift_ratio": 3.1592744588851924e+20,
+      "spearman_err_within_ood": 0.5525898663766963,
+      "spearman_err_within_id": -0.13243733011174869
+     },
+     "ens_var": {
+      "id_median_z": 0.0,
+      "ood_median_z": 80.26965603957494,
+      "shift_ratio": 80269656040.57494,
+      "spearman_err_within_ood": 0.33901842286861417,
+      "spearman_err_within_id": 0.5770160072485654
+     },
+     "maha_emb": {
+      "id_median_z": 0.0,
+      "ood_median_z": 458.40600791988857,
+      "shift_ratio": 458406007920.88855,
+      "spearman_err_within_ood": 0.3201352593064577,
+      "spearman_err_within_id": 0.1421020839625491
+     }
+    },
+    "_pool": {
+     "n_id": 43,
+     "n_ood": 290,
+     "err_id": 0.3347756928791083,
+     "err_ood": 1.4511104980813092
+    }
+   }
+  }
+ }
+}

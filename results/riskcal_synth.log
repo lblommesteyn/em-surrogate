@@ -1,0 +1,10 @@
+calibration ensemble (train-side)...
+LOFO pseudo-OOD over training families: ['mismatch', 'mstrip_line', 'sline_line', 'stepped', 'stub_open']
+  fold mismatch: train 1151, id 205, pseudo-ood 344
+  fold mstrip_line: train 1159, id 200, pseudo-ood 341
+  fold sline_line: train 1167, id 202, pseudo-ood 331
+  fold stepped: train 1152, id 205, pseudo-ood 343
+  fold stub_open: train 1151, id 208, pseudo-ood 341
+checkpointed calibration-side pools
+loading frozen final models...
+wrote results/riskcal/synth.npz
