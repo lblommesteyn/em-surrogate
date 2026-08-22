@@ -59,3 +59,31 @@ def test_planar_loader_if_present():
     assert d["OOD"]["x"].shape == (1124, 9)
     assert d["MEAS"]["x"].shape == (55, 9)
     assert (d["CORE"]["y"] > 0).all()
+
+
+def test_budget_to_catch():
+    from emsurr.risk_cal import budget_to_catch
+
+    err = np.arange(100, dtype=float)
+    # perfect score = error itself: 5 catastrophic (>=95), catch all with top-5
+    assert budget_to_catch(err, err, 0.9) <= 0.05
+    # anti-correlated score: needs nearly the full budget
+    assert budget_to_catch(-err, err, 0.9) > 0.9
+
+
+def test_select_prefers_informative_signal():
+    from emsurr.risk_cal import fit_calibration
+
+    rng = np.random.default_rng(0)
+    n = 400
+    err = rng.gamma(2, 1, n)
+    pool = dict(
+        knn_input=err + rng.normal(0, 0.1, n),   # informative
+        knn_emb=rng.normal(0, 1, n),             # noise
+        ens_var=rng.normal(0, 1, n),             # noise
+        maha_emb=rng.normal(0, 1, n),
+        err=err,
+    )
+    cal = fit_calibration(pool, pool)
+    assert cal.iid_choice[0] == "knn_input"
+    assert cal.iid_choice[1] >= 0.7  # leans on the informative signal
