@@ -1,0 +1,165 @@
+{
+ "files": {
+  "Test_Fixture_Quality_Check\\differential\\2X_thru.s4p": {
+   "kind": "measured",
+   "ports": 4,
+   "n_freq": 5000,
+   "f_min_ghz": 0.01,
+   "f_max_ghz": 50.0,
+   "finite": true,
+   "reciprocity_err_max": 0.006570448759191111,
+   "passivity_violation_freqs": 1
+  },
+  "Test_Fixture_Quality_Check\\differential\\differential_fixture_dut_fixture.s4p": {
+   "kind": "measured",
+   "ports": 4,
+   "n_freq": 5000,
+   "f_min_ghz": 0.01,
+   "f_max_ghz": 50.0,
+   "finite": true,
+   "reciprocity_err_max": 0.000790240931615203,
+   "passivity_violation_freqs": 1
+  },
+  "Test_Fixture_Quality_Check\\differential\\fixture_model_1.s4p": {
+   "kind": "synthesized",
+   "ports": 4,
+   "n_freq": 2500,
+   "f_min_ghz": 0.01,
+   "f_max_ghz": 25.0,
+   "finite": true,
+   "reciprocity_err_max": 0.0,
+   "passivity_violation_freqs": 0
+  },
+  "Test_Fixture_Quality_Check\\differential\\fixture_model_2.s4p": {
+   "kind": "synthesized",
+   "ports": 4,
+   "n_freq": 2500,
+   "f_min_ghz": 0.01,
+   "f_max_ghz": 25.0,
+   "finite": true,
+   "reciprocity_err_max": 0.0,
+   "passivity_violation_freqs": 0
+  },
+  "Test_Fixture_Quality_Check\\single_ended\\S2_M16_Fix_DUT_Fix.s2p": {
+   "kind": "measured",
+   "ports": 2,
+   "n_freq": 10000,
+   "f_min_ghz": 0.006,
+   "f_max_ghz": 60.0,
+   "finite": true,
+   "reciprocity_err_max": 0.002419864004443203,
+   "passivity_violation_freqs": 0
+  },
+  "Test_Fixture_Quality_Check\\single_ended\\S2_M9_2xthru.s2p": {
+   "kind": "measured",
+   "ports": 2,
+   "n_freq": 10000,
+   "f_min_ghz": 0.006,
+   "f_max_ghz": 60.0,
+   "finite": true,
+   "reciprocity_err_max": 0.003578878888702461,
+   "passivity_violation_freqs": 0
+  },
+  "Test_Fixture_Quality_Check\\single_ended\\S2_M9_AFR_1.s2p": {
+   "kind": "synthesized",
+   "ports": 2,
+   "n_freq": 10000,
+   "f_min_ghz": 0.006,
+   "f_max_ghz": 60.0,
+   "finite": true,
+   "reciprocity_err_max": 1.4130832128153977e-15,
+   "passivity_violation_freqs": 0
+  },
+  "Test_Fixture_Quality_Check\\single_ended\\S2_M9_AFR_2.s2p": {
+   "kind": "synthesized",
+   "ports": 2,
+   "n_freq": 10000,
+   "f_min_ghz": 0.006,
+   "f_max_ghz": 60.0,
+   "finite": true,
+   "reciprocity_err_max": 1.4130832128153977e-15,
+   "passivity_violation_freqs": 7
+  },
+  "Test_Sparam_Quality\\S5_M1_plugandplay.s2p": {
+   "kind": "measured",
+   "ports": 2,
+   "n_freq": 10000,
+   "f_min_ghz": 0.006,
+   "f_max_ghz": 60.0,
+   "finite": true,
+   "reciprocity_err_max": 0.0027765741499192987,
+   "passivity_violation_freqs": 0
+  },
+  "Test_Sparam_Quality\\Test8_afterAFR_42p5.s4p": {
+   "kind": "synthesized",
+   "ports": 4,
+   "n_freq": 5001,
+   "f_min_ghz": 0.01,
+   "f_max_ghz": 50.0,
+   "finite": true,
+   "reciprocity_err_max": 0.0033726955881481753,
+   "passivity_violation_freqs": 326
+  },
+  "Test_Sparam_Similarity\\File1_DUT_S2_M1.s2p": {
+   "kind": "measured",
+   "ports": 2,
+   "n_freq": 10000,
+   "f_min_ghz": 0.006,
+   "f_max_ghz": 60.0,
+   "finite": true,
+   "reciprocity_err_max": 0.0031789813777372816,
+   "passivity_violation_freqs": 0
+  },
+  "Test_Sparam_Similarity\\File2_DUT_dmbd_S2_M16.s2p": {
+   "kind": "synthesized",
+   "ports": 2,
+   "n_freq": 10000,
+   "f_min_ghz": 0.006,
+   "f_max_ghz": 60.0,
+   "finite": true,
+   "reciprocity_err_max": 8.35151881242551e-12,
+   "passivity_violation_freqs": 0
+  },
+  "Test_Sparam_Similarity\\File3_2X_thru_data_S2_M9.s2p": {
+   "kind": "measured",
+   "ports": 2,
+   "n_freq": 10000,
+   "f_min_ghz": 0.006,
+   "f_max_ghz": 60.0,
+   "finite": true,
+   "reciprocity_err_max": 0.003578878888702461,
+   "passivity_violation_freqs": 0
+  },
+  "Test_Sparam_Similarity\\File4_2X_thru_And_DUT_S2_M16.s2p": {
+   "kind": "measured",
+   "ports": 2,
+   "n_freq": 10000,
+   "f_min_ghz": 0.006,
+   "f_max_ghz": 60.0,
+   "finite": true,
+   "reciprocity_err_max": 0.002419864004443203,
+   "passivity_violation_freqs": 0
+  }
+ },
+ "response_novelty": {
+  "auroc_p370_vs_id": 0.9891071428571429,
+  "id_dist_p95": 6.2886703904137615,
+  "frac_above_id_p95": 1.0,
+  "per_file": {
+   "2X_thru.s4p": 41.45546901639372,
+   "differential_fixture_dut_fixture.s4p": 30.001729580887076,
+   "fixture_model_1.s4p": 124.39516500974271,
+   "fixture_model_2.s4p": 118.13041216277402,
+   "S2_M16_Fix_DUT_Fix.s2p": 11.179883209425986,
+   "S2_M9_2xthru.s2p": 8.999697224002233,
+   "S2_M9_AFR_1.s2p": 7.393611329635519,
+   "S2_M9_AFR_2.s2p": 7.442483948944486,
+   "S5_M1_plugandplay.s2p": 7.9816391318798665,
+   "Test8_afterAFR_42p5.s4p": 10.385778636220437,
+   "File1_DUT_S2_M1.s2p": 7.978025507701434,
+   "File2_DUT_dmbd_S2_M16.s2p": 6.917456461968932,
+   "File3_2X_thru_data_S2_M9.s2p": 8.999697224002233,
+   "File4_2X_thru_And_DUT_S2_M16.s2p": 11.179883209425986
+  }
+ }
+}

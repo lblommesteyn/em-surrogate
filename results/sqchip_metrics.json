@@ -1,0 +1,150 @@
+{
+ "n": 714,
+ "n_param_keys": 80,
+ "n_geom_feats": 24,
+ "families": {
+  "batch300": 300,
+  "sqchip": 290,
+  "batchnear50": 60,
+  "full": 18,
+  "chip": 14,
+  "batch300refined": 7,
+  "hfss": 6,
+  "swaptee": 5,
+  "case": 4,
+  "cand1": 1,
+  "cand2": 1,
+  "cand3": 1,
+  "cand4": 1,
+  "cand5": 1,
+  "cand6": 1,
+  "debug": 1,
+  "rerun2": 1,
+  "rerun": 1,
+  "try": 1
+ },
+ "frozen_config": {
+  "hidden": 256,
+  "depth": 3,
+  "epochs": 200,
+  "lr": 0.001,
+  "n_members": 5,
+  "knn_k": 3,
+  "alpha": 0.3
+ },
+ "random_split": {
+  "param": {
+   "linear": {
+    "f01_mae_ghz": 0.13960686695180347,
+    "chi_mae_mhz": 2.163359332165397,
+    "fr_mae_ghz": 0.27258980040474623
+   },
+   "mlp_ensemble": {
+    "f01_mae_ghz": 0.12370189936216605,
+    "chi_mae_mhz": 2.0506310918091017,
+    "fr_mae_ghz": 0.27424627293044157,
+    "spearman_unc_err": 0.5691298138481237
+   }
+  },
+  "geom": {
+   "linear": {
+    "f01_mae_ghz": 0.15105388506799217,
+    "chi_mae_mhz": 2.3526456745372704,
+    "fr_mae_ghz": 0.2783653792131538
+   },
+   "mlp_ensemble": {
+    "f01_mae_ghz": 0.15116620511941847,
+    "chi_mae_mhz": 2.2772092446776684,
+    "fr_mae_ghz": 0.2858903932217097,
+    "spearman_unc_err": 0.6333390787616141
+   }
+  },
+  "both": {
+   "linear": {
+    "f01_mae_ghz": 0.1487942321577371,
+    "chi_mae_mhz": 2.465577108768164,
+    "fr_mae_ghz": 0.3282709463538949
+   },
+   "mlp_ensemble": {
+    "f01_mae_ghz": 0.11983750470819209,
+    "chi_mae_mhz": 2.04403988762121,
+    "fr_mae_ghz": 0.27357847474630653,
+    "spearman_unc_err": 0.7073073639975047
+   }
+  }
+ },
+ "family_holdout": {
+  "batch300": {
+   "n_holdout": 300,
+   "param": {
+    "f01_mae_ghz": 0.09421628295029791,
+    "chi_mae_mhz": 0.4585962660641394,
+    "fr_mae_ghz": 0.05108448099585334,
+    "spearman_unc_err": -0.016092178801986694,
+    "novelty_auroc": 0.386984126984127
+   },
+   "geom": {
+    "f01_mae_ghz": 0.09267460703218272,
+    "chi_mae_mhz": 0.6882881892329947,
+    "fr_mae_ghz": 0.06215875253683457,
+    "spearman_unc_err": 0.088540539339326,
+    "novelty_auroc": 0.6850793650793651
+   },
+   "both": {
+    "f01_mae_ghz": 0.08884212638161147,
+    "chi_mae_mhz": 0.4612385580287564,
+    "fr_mae_ghz": 0.07138828296951916,
+    "spearman_unc_err": 0.1729694774386382,
+    "novelty_auroc": 0.4734126984126984
+   }
+  },
+  "batchnear50": {
+   "n_holdout": 60,
+   "param": {
+    "f01_mae_ghz": 0.064160577677106,
+    "chi_mae_mhz": 0.30978053339440487,
+    "fr_mae_ghz": 0.059610333796627564,
+    "spearman_unc_err": -0.045901639344262266,
+    "novelty_auroc": 0.803030303030303
+   },
+   "geom": {
+    "f01_mae_ghz": 0.06079604584675565,
+    "chi_mae_mhz": 0.336293006808116,
+    "fr_mae_ghz": 0.06118516430375046,
+    "spearman_unc_err": -0.17299249791608784,
+    "novelty_auroc": 0.8568181818181818
+   },
+   "both": {
+    "f01_mae_ghz": 0.06080322634585241,
+    "chi_mae_mhz": 0.2683437927664383,
+    "fr_mae_ghz": 0.05923404216715577,
+    "spearman_unc_err": 0.20422339538760764,
+    "novelty_auroc": 0.7575757575757576
+   }
+  },
+  "sqchip": {
+   "n_holdout": 290,
+   "param": {
+    "f01_mae_ghz": 0.3323098303040361,
+    "chi_mae_mhz": 3.9011940242923737,
+    "fr_mae_ghz": 0.7402894856440002,
+    "spearman_unc_err": 0.47743459986198533,
+    "novelty_auroc": 0.9935846030473136
+   },
+   "geom": {
+    "f01_mae_ghz": 0.6018896352988968,
+    "chi_mae_mhz": 10.47025905053117,
+    "fr_mae_ghz": 0.9167824673747473,
+    "spearman_unc_err": 0.7369720661732416,
+    "novelty_auroc": 0.8518845228548516
+   },
+   "both": {
+    "f01_mae_ghz": 0.28571291148028993,
+    "chi_mae_mhz": 4.591642634860548,
+    "fr_mae_ghz": 0.7646125671380345,
+    "spearman_unc_err": 0.33398051803477924,
+    "novelty_auroc": 0.9672814755412991
+   }
+  }
+ }
+}

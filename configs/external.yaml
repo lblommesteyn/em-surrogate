@@ -1,0 +1,33 @@
+# External-dataset expansion (2026-08-22). Frozen methodology carried over
+# verbatim from milestone 2; nothing retuned on external data, nothing tuned
+# on MEAS or measured subsets.
+frozen:
+  mlp: {hidden: 256, depth: 3, epochs: 200, lr: 1.0e-3}
+  ensemble_members: 5
+  knn_novelty_k: 3
+  combined_alpha: 0.3
+  fallback_budgets: [0.05, 0.10, 0.20, 0.30, 0.50]
+
+datasets:
+  planar_windings:
+    source: zenodo:21762502
+    path: data/external/planar_windings/dataset_planar_windings_v1.1.xlsx
+    splits: provided CORE/OOD/MEAS (preserved); CORE 80/10/10 train/val/test seed 0
+    target: log10(self-inductance L)
+    runner: scripts/run_planar_windings.py
+  tlines:
+    source: zenodo:167116
+    path: data/external/tlines/rawdata
+    role: measured-physics external test only (no prediction; representation
+      cannot encode these structures)
+    runner: scripts/run_tlines.py
+  p370:
+    source: opensource.ieee.org elec-char/ieee-370 (briefcase testcases subtree)
+    path: data/external/p370/briefcase
+    role: Touchstone ingestion + physics sanity + novelty behavior
+    runner: scripts/run_p370.py
+  sqchip:
+    source: github.com/Secbrain/SQChip-EM (shallow clone)
+    path: data/external/sqchip/SQChip-EM
+    subset: examples/poor_2q (892 GDS+JSON pairs, 714 usable records)
+    runner: scripts/run_sqchip.py

@@ -1,0 +1,141 @@
+{
+ "physics": {
+  "network_L11": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.004656336842071522,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L12": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.030980131984734694,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.011823237108519326,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_0grad": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.020987452465486785,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_10cm": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.039506130521494,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_20cm": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.028655199872027488,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_30cm": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.03878158345333644,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_40cm": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.011392257766862661,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_60grad": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.011743504108754592,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_90grad": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.02103489306128814,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_open_open": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.02804375886783139,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_open_short": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.017781002306421465,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_short_open": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.035509925155479086,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  },
+  "network_L23_short_short": {
+   "ports": 3,
+   "n_angles": 72,
+   "n_freq": 5001,
+   "finite": true,
+   "reciprocity_err_max": 0.017867700278246496,
+   "passivity_violation_freqs_max": 0,
+   "passivity_violation_freqs_mean": 0.0
+  }
+ },
+ "response_novelty": {
+  "n_ref": 2000,
+  "n_id": 400,
+  "n_meas": 126,
+  "auroc_meas_vs_id": 1.0,
+  "id_dist_p95": 0.9547492919687237,
+  "meas_dist_min": 20.079386032043384,
+  "meas_dist_median": 22.10538157161041,
+  "frac_meas_above_id_p95": 1.0
+ },
+ "note": "No surrogate prediction attempted: the frozen input representation cannot encode these physical structures. Angles/frequencies treated as replicates of 14 structures, never as independent samples."
+}
