@@ -31,3 +31,5 @@ Update log:
   `tlines_metrics.json`, `p370_metrics.json`, `sqchip_metrics.json`,
   `external_data_report.md`): <1 MB combined; no model checkpoints persisted.
   Running total ~0.91 GB, well under the 3 GB target.
+- 2026-08-22 (risk-calibration milestone): per-sample signal tables
+  `results/riskcal/*.npz` ~1 MB total; no new downloads. Total unchanged.
