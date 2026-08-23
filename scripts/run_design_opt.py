@@ -38,7 +38,7 @@ from emsurr.risk_cal import spearman
 from emsurr.topo_rep import TopoEmbedding
 
 STACK = Path("results/design_stack")
-RUNS = Path("results/design_runs")   # per-run summaries, written as each run ends
+RUNS = Path(f"results/design_runs_v{DT.TASK_VERSION}")   # per-run summaries
 
 
 def _jsonable(o):
@@ -347,9 +347,9 @@ def main():
     res["final_verification"] = qa
     res["final_verification_new_calls"] = final.calls
     res["total_wall_min"] = round((time.perf_counter() - t0) / 60, 1)
-    Path("results/design_opt_metrics.json").write_text(
+    Path(f"results/design_opt_v{DT.TASK_VERSION}_metrics.json").write_text(
         json.dumps(res, indent=1, default=lambda o: o if not isinstance(o, np.ndarray) else o.tolist()))
-    print("wrote results/design_opt_metrics.json")
+    print(f"wrote results/design_opt_v{DT.TASK_VERSION}_metrics.json")
 
 
 if __name__ == "__main__":

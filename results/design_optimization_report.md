@@ -1,121 +1,131 @@
-# Design-optimization report: the selective stack on a stub-and-gap interconnect
+# Design-optimization report: the selective stack on a stub-loaded interconnect
 
 Date: 2026-08-23. Branch `external-data`. Question: can the hybrid
 surrogate + selective-solver system find designs comparable to full openEMS
 optimization with fewer full-wave calls?
 
-**Short answer: on this task, no solver calls were saved, because the task
-turned out to be physically infeasible and the surrogate has no skill on
-it; but the selective machinery did exactly its safety job, and every
-number below is openEMS-verified.** Everything is reproducible from
-`scripts/run_design_opt.py`, `src/emsurr/design_task.py`,
-`results/design_opt_metrics.json`, per-run checkpoints in
-`results/design_runs/`, and the content-addressed solver cache
-`results/design_cache/` (568 solves, 21 flagged non-passive -> scored
-invalid per protocol).
+**Verdict: demonstrated on one of three seeds, not robustly.** On seed 0 the
+hybrid reached a verified objective of 0.422 with **8 openEMS calls**, better
+than solver-only's 0.579 after **60 calls** (7.5x fewer calls, better
+design). On seeds 1 and 2 the hybrid spent its full 60-call budget verifying
+surrogate-favoured gap designs and finished worse than solver-only at equal
+budget (0.818 / 0.983 vs 0.690 / 0.682). The selective machinery never
+reported an unverified design and correctly flagged the designs that fooled
+the surrogate; the failure mode is a verification *policy* that did not act
+on a risk signal that had the right answer. All numbers below are true
+openEMS objectives; no methodology was retuned on outcomes.
 
-## Task (declared before optimization)
+Two campaigns were run. **Task v1** (mandatory 300-700 um series gap) proved
+physically infeasible in-band: every method converged to J ~1.49 (|S21|
+<= 0.018) and nothing could separate; it is kept as
+`design_optimization_report_v1_infeasible.md`. **Task v2** (this report)
+makes the gap optional, as the milestone specification allows; nothing else
+changed. Both were declared before running. Two evaluator fixes were logged
+en route: the frozen simulate() fabricates S22 := S11 (valid only for
+symmetric structures), so the passivity gate for these asymmetric designs
+uses the measured port-1 column norm; and per-run checkpointing was added
+after a PC reboot (solver-only replays bit-identically, DE-driven hybrid
+runs do not). Artifacts: results/design_opt_v2_metrics.json,
+results/design_runs_v2/, solver cache results/design_cache/ (~900 solves,
+content-addressed), scripts/run_design_opt.py, src/emsurr/design_task.py,
+scripts/oems_eval.py.
 
-Microstrip interconnect on the frozen 254 um / er 3.5 stackup: line width w
-(400-800 um), two mandatory open stubs (lengths 3-10 mm, width 300-700 um,
-positions on the left half), and a mandatory series gap g (300-700 um) at
-center. Objective over 2-6 GHz: J = max|S11| + max(0, 0.5 - min|S21|),
-lower is better, invalid -> 2.0. Optimizer: one differential-evolution
-implementation for all methods (pop 12, 40 generations for surrogate-driven
-methods; pop 8 for solver-only), solver budget 60 per run, seeds 0-2.
-Hybrid policy: verify a candidate iff it would become the verified
-incumbent, or its retrieval-gap exceeds the train p95 while being within
-20% of the incumbent. Reported bests are always openEMS-verified.
+## Task v2 (declared before optimization)
 
-Stack (frozen recipes, no retuning): DeepSets ensemble (existing
-architecture, 6-type token slot for the gap, frozen config) trained on the
-5 synthetic training families + the analytic gapped_line family;
-retrieval-gap (distance-weighted k=3, train-side choice) in the frozen
-extended-vocabulary encoder; ensemble variance; frozen logistic switch.
+Microstrip on the frozen 254 um / er 3.5 stackup; line width w 400-800 um;
+two mandatory open stubs (3-10 mm long, 300-700 um wide, positions on the
+left half); optional series gap g (0 or 300-700 um). Objective over 2-6 GHz:
+J = max|S11| + max(0, 0.5 - min|S21|), lower better, invalid -> 2.0.
+Optimizer: one differential-evolution implementation for all methods (pop
+12, 40 generations for surrogate-driven runs; pop 8 solver-only); solver
+budget 60; seeds 0-2; anytime best recorded at every solver call. Hybrid
+policy: verify a candidate iff it would become the verified incumbent, or
+its retrieval-gap exceeds the train p95 while within 20% of the incumbent.
+Stack: frozen-size DeepSets ensemble (6-type tokens) trained on the
+synthetic training families + analytic gapped_line; retrieval-gap
+(distance-weighted k=3) in the frozen extended-vocabulary encoder;
+ensemble variance; frozen logistic deployment switch.
 
-## Validation set (24 random designs, openEMS vs surrogate; no retuning)
+## Validation set (24 random designs; no retuning)
 
-Pool novelty z-shift ~36 on both features -> the frozen switch selects the
-topology regime (retrieval-gap ranking); 100% of designs exceed the train
-gap-p95. Surrogate skill on this space is essentially nil: objective
-Spearman 0.31, objective MAE 0.53, response error 1.85 (predictions are
-unphysical, |S21| > 1). Risk ordering still behaves as established:
-retrieval-gap 0.42 vs ensemble variance 0.34 Spearman against true error.
+Pool novelty z-shift ~21-24, so the switch selects the topology regime;
+100% of designs exceed the train gap-p95. The surrogate's objective ranking
+is anti-correlated with openEMS (Spearman -0.50, MAE 0.28; response error
+1.60, unphysical |S21| > 1 on gap designs), while both risk signals predict
+its error well (retrieval-gap 0.75, ensemble variance 0.77 Spearman). The
+stack knew the surrogate was untrustworthy before optimization began.
 
-## Results (true openEMS objective only)
+## Results (true openEMS objective; anytime best at 5/10/20/40/60 calls)
 
-| run | best verified J | solver calls | surrogate evals | wall (min) |
-|---|---|---|---|---|
-| solver-only s0 / s1 / s2 | 1.4911 / 1.4924 / 1.4948 | 60 each | 0 | ~35-45 each |
-| hybrid s0 / s1 / s2 | 1.4907 / 1.4940 / 1.4920 | 60 each | 492 each | 45 / 77 / 54 |
-| surrogate-only s0 / s1 / s2 | 1.4996 / 1.5001 / 1.4987 | 1 each (final verify) | 492 each | ~2 each |
-| uncertainty-only fallback s0 | 1.4907 | 60 | 492 | (identical verification sequence to hybrid s0) |
-| random fallback s0 | 1.4925 | 53 | 492 | 50 |
+| run | 5 | 10 | 20 | 40 | 60 | final verified J | calls | surrogate evals | wall |
+|---|---|---|---|---|---|---|---|---|---|
+| solver-only s0 | - | .711 | .711 | .711 | .579 | 0.579 | 60 | 0 | 26 min |
+| **hybrid s0** | .730 | **.422** | .422 | .422 | .422 | **0.422** | **8** | 492 | 6 min |
+| surrogate-only s0 | .357 | | | | | 0.357 | 1 | 492 | <1 min |
+| uncertainty-fallback s0 | .730 | .347 | .347 | .347 | .347 | 0.347 | 8 | 492 | cache |
+| random-fallback s0 | 1.497 | .854 | .593 | .349 | .335 | 0.335 | 53 | 492 | 24 min |
+| solver-only s1 | - | 1.484 | .702 | .702 | .690 | 0.690 | 59 | 0 | 35 min |
+| hybrid s1 | 1.44 | 1.44 | .818 | .818 | .818 | 0.818 | 60 | 492 | 42 min |
+| surrogate-only s1 | 1.494 | | | | | 1.494 | 1 | 492 | 1 min |
+| solver-only s2 | - | .826 | .797 | .773 | .682 | 0.682 | 59 | 0 | 36 min |
+| hybrid s2 | 1.496 | 1.494 | 1.494 | .983 | .983 | 0.983 | 60 | 492 | 32 min |
+| surrogate-only s2 | 1.494 | | | | | 1.494 | 1 | 492 | <1 min |
 
-Anytime best at 10/20/40/60 solver calls: solver-only s0 1.496/1.494/
-1.493/1.491; hybrid s0 1.497/1.491/1.491/1.491; s1 and s2 analogous
-(differences 0.001-0.005, within run-to-run noise).
-
-**The objective floor is ~1.49 for every method**: openEMS shows
-max|S11| = 1.000 and min|S21| <= 0.018 in-band for every verified best. A
-300-700 um series gap simply does not transmit 2-6 GHz on this stackup;
-the optimizer correctly drives all methods to the same bound corner
-(w = 800 um, g = 300 um, shortest stubs) and then has nothing left to
-improve. The task as declared is infeasible, which makes "comparable
-quality" trivially true and the call-reduction question unanswerable on
-quality grounds. This is reported as the outcome, not re-declared.
-
-Deviations forced by the PC reboot mid-campaign (logged): per-run
-checkpointing was added to the driver; solver-only seeds replayed
-bit-identically from cache, but hybrid seeds 0-1 were re-executed because
-DE amplifies float-level differences after the encoder/ensemble reload.
-Pre-reboot hybrid values (1.491, 1.495) agree with the re-executions
-(1.4907, 1.4940) and are kept as an independent replicate.
+The uncertainty-gated run chose nearly the same verification set as hybrid
+s0 (cache hits). Invalid designs: 16 of ~900 solves failed the column
+passivity gate and scored 2.0. Final geometries of every winning run are
+gap-free, wide-line (w 700-800 um), shortest-stub designs at the left
+boundary: physically sensible broadband-match solutions, not artifacts
+(column norms 1.002-1.017, within the 1.1 gate). Final S-curves, surrogate
+vs openEMS responses, retrieval gaps and geometries for every run are in
+the metrics file (final_verification); trajectories and verification logs
+per run in design_runs_v2/.
 
 ## Answers
 
-**1. Calls saved:** none demonstrable. Hybrid consumed its full 60-call
-budget on every seed: with the whole design space flagged OOD, the gates
-never closed, and the "would-be incumbent" rule fired on 58 of 60
-verifications per run. Uncertainty-gated fallback chose the identical
-verification sequence, random fallback was marginally worse (1.4925 at 53
-calls) - on a saturated regime, the risk signal has nothing to select.
+**1. Calls saved:** seed 0: 8 vs 60 (7.5x) with a better design (0.422 vs
+0.579); no solver-only run reached 0.422 at any budget. Seeds 1-2: none;
+the hybrid used all 60 calls and finished behind solver-only. The
+uncertainty-gated and random-fallback ablations on seed 0 reached 0.347 (8
+calls) and 0.335 (53 calls): the seed-0 gain comes from surrogate
+pre-screening of the gap-free region, not from which risk signal gated
+verification.
 
-**2. Equal budget:** tie. Hybrid 1.4907-1.4940 vs solver-only 1.4911-1.4948
-at 60 calls; no seed separates them beyond noise.
+**2. Equal budget:** hybrid wins on seed 0 at every budget from 10 calls on;
+loses on seeds 1-2. Not robust.
 
-**3. Equal quality:** undefined - all methods sit on the same physical
-floor. Hybrid s0 reached the final level by ~20 calls vs ~40-60 for
-solver-only, but the 0.003 margin is not significant.
+**3. Equal quality:** solver-only never matched hybrid s0's 0.422, so the
+reduction there is unbounded within the sweep; on seeds 1-2 the question
+inverts (hybrid never matched solver-only).
 
-**4. Exploitation prevented: yes, decisively.** Surrogate-only's claimed
-optimum (surrogate J 0.88-0.92, predicting |S21| ~1.4) verified to J
-1.499-1.500 - the WORST designs of the whole campaign (min|S21| 0.0001).
-Every one of the 60 hybrid verifications per run was "badly wrong"
-(|surrogate J - true J| > 0.15, mean error 0.54), and the hybrid never
-reported an unverified design; its verified output matched solver-only.
-The safety contract held under a surrogate with zero skill.
+**4. Exploitation prevented: yes.** Surrogate-only was fooled on 2 of 3
+seeds: its claimed optima (surrogate J ~0.91, gap designs) verified to
+1.494, the worst class of design. The hybrid reported only verified
+designs, and on the losing seeds its verified result (0.82-0.98) still beat
+the surrogate's own belief.
 
-**5. Regime:** topology (structural-novelty) on every pool - correct, the
-design class is outside the training support in every direction. The
-consequence is that per-sample gating degenerates: 100% above p95 means
-"verify everything promising", i.e. solver-only with surrogate pre-screening.
+**5. Regime:** topology, on every pool, correctly. The mechanism of the
+seed 1-2 losses is now precise: the surrogate prefers gap designs (it
+predicts transmission through them), so its population drifts into the gap
+basin; those candidates carry the highest retrieval-gap of the whole
+campaign (mean 3.0-3.1 on the losing seeds vs 2.3 on the winning seed;
+final gap designs 3.08 vs gap-free 1.66-1.99), i.e. the risk signal
+identified the trap, but the declared policy still verified them because
+they were "promising" or "risky-but-within-20%": 40-58 wasted calls per
+losing seed, 59-60 of 60 verifications badly wrong (mean |dJ| 0.53).
 
-**6. Where the surrogate is fooled:** everywhere on this space. The
-DeepSets extrapolates the 7-element cascade into unphysical transmission
-(|S21| > 1) because no training structure combines two stubs with a series
-gap; the optimizer then chases phantom pass-bands. Design QA confirms the
-final geometries are legitimate bound-corner designs, not solver artifacts
-(max singular value 1.004-1.016, within the frozen 1.1 passivity gate).
+**6. Where the surrogate is fooled:** on every gap design (phantom
+pass-bands), and mildly on gap-free ones (it under-predicts J by ~0.4 but
+orders them usefully enough that seed 0 won). The retrieval-gap separates
+the two classes cleanly (>3.0 vs <2.0).
 
-**7. Ready for a realistic PCB/package problem?** Not on this evidence - but
-the blocker is now precisely located and is not the methodology. Two
-protocol changes make the next attempt informative: (a) a feasible task
-(optional gap, or a band the gap passes) so methods can separate on
-quality; (b) a surrogate trained on samples of the design space itself, so
-the hybrid operates in the extrapolation regime where the stack has
-demonstrated 0.66 within-OOD ranking and near-oracle budget recovery, rather
-than in the fully-OOD regime where it can only act as a verified gate. The
-selective stack's guarantees (never trust unverified, rank risk correctly,
-detect the regime) all held; what was absent was a surrogate with any skill
-to be selective about.
+**7. Ready for a realistic PCB/package problem?** Not as a call-saving
+claim; one robust seed is not a demonstration. But the path is now concrete
+and cheap: (a) a verification policy that uses the risk signal to refuse,
+not just to prioritise (the data show a gap threshold near 2.5 would have
+excluded every wasted call on seeds 1-2; recorded here as an observation,
+not applied, because selecting it on these outcomes would be tuning); (b) a
+surrogate trained on in-support samples of the design space so the hybrid
+runs in the extrapolation regime where the stack has demonstrated ranking
+skill. With both, the seed-0 behaviour (8 calls, better design) is the
+expected case rather than the lucky one.

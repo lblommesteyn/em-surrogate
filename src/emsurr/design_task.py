@@ -37,8 +37,14 @@ CACHE = ROOT / "results" / "design_cache"
 OEMS_PY = ROOT / "tools" / "oems-venv" / "Scripts" / "python.exe"
 EVAL_SCRIPT = ROOT / "scripts" / "oems_eval.py"
 
+# TASK v2 (declared 2026-08-23 before any v2 optimization): the series gap is
+# OPTIONAL, as the milestone specification allows. g in [0, 700]; g < 300 um
+# means NO gap (a 300 um floor is the mesh/timestep sanity limit of the
+# frozen simulate()). v1 (mandatory gap) was physically infeasible in-band.
+TASK_VERSION = 2
 BOUNDS = dict(w=(400, 800), s1=(3000, 10000), s2=(3000, 10000), sw=(300, 700),
-              x1=(-8000, -2300), x2=(-7200, -1500), g=(300, 700))
+              x1=(-8000, -2300), x2=(-7200, -1500), g=(0, 700))
+GAP_MIN = 300.0
 KEYS = list(BOUNDS)
 EPR, SUB_T, MSL_LEN = 3.5, 254e-6, 18000.0
 BAND = (2e9, 6e9)
@@ -46,6 +52,8 @@ BAND = (2e9, 6e9)
 
 def clip(d):
     d = {k: float(np.clip(d[k], *BOUNDS[k])) for k in KEYS}
+    if d["g"] < GAP_MIN:
+        d["g"] = 0.0
     if d["x2"] < d["x1"] + 800:
         d["x2"] = min(d["x1"] + 800, BOUNDS["x2"][1])
     return d
@@ -74,10 +82,13 @@ def to_sample(d, freq):
         (EL_STUB_OPEN, z0s, eeffs, 0.02, d["s1"] * 1e-6),
         (EL_LINE, z0, eeff, 0.02, x2 - x1),
         (EL_STUB_OPEN, z0s, eeffs, 0.02, d["s2"] * 1e-6),
-        (EL_LINE, z0, eeff, 0.02, -x2 - g / 2),
-        (EL_SERIES_C, z0, eeff, g, w),
-        (EL_LINE, z0, eeff, 0.02, L - g / 2),
     ]
+    if g > 0:
+        els += [(EL_LINE, z0, eeff, 0.02, -x2 - g / 2),
+                (EL_SERIES_C, z0, eeff, g, w),
+                (EL_LINE, z0, eeff, 0.02, L - g / 2)]
+    else:
+        els += [(EL_LINE, z0, eeff, 0.02, L - x2)]
     return dict(sample_id=key(d), topology_family="design", ports=2,
                 params=np.zeros(1), elements=np.array(els), freq=freq,
                 s=np.zeros((len(freq), 2, 2), complex))
