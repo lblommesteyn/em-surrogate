@@ -1,0 +1,83 @@
+[
+ {
+  "query": "stub_short_00289",
+  "family": "stub_short",
+  "retrieved": "stepped_00343",
+  "retrieved_family": "stepped",
+  "resp_dist_to_retrieved": 0.4870737758434938,
+  "retrieval_gap": 0.6273650180932432,
+  "true_err": 0.8833047903553128
+ },
+ {
+  "query": "stub_short_00368",
+  "family": "stub_short",
+  "retrieved": "stepped_00012",
+  "retrieved_family": "stepped",
+  "resp_dist_to_retrieved": 0.7147292715156067,
+  "retrieval_gap": 0.5756054950395968,
+  "true_err": 1.0067368547766318
+ },
+ {
+  "query": "stub_short_00372",
+  "family": "stub_short",
+  "retrieved": "stub_open_00280",
+  "retrieved_family": "stub_open",
+  "resp_dist_to_retrieved": 0.8692794475944349,
+  "retrieval_gap": 0.5736933685245076,
+  "true_err": 1.036095665536354
+ },
+ {
+  "query": "via_lc_00369",
+  "family": "via_lc",
+  "retrieved": "stepped_00220",
+  "retrieved_family": "stepped",
+  "resp_dist_to_retrieved": 0.5597299493757248,
+  "retrieval_gap": 0.12352332351694621,
+  "true_err": 0.5210710385224682
+ },
+ {
+  "query": "via_lc_00283",
+  "family": "via_lc",
+  "retrieved": "stub_open_00173",
+  "retrieved_family": "stub_open",
+  "resp_dist_to_retrieved": 0.5580940563080594,
+  "retrieval_gap": 0.11392615238961298,
+  "true_err": 0.5708752949418222
+ },
+ {
+  "query": "via_lc_00097",
+  "family": "via_lc",
+  "retrieved": "stepped_00374",
+  "retrieved_family": "stepped",
+  "resp_dist_to_retrieved": 0.7310579259357168,
+  "retrieval_gap": 0.112272711560894,
+  "true_err": 0.5793957555461475
+ },
+ {
+  "query": "via_lc_00377",
+  "family": "via_lc",
+  "retrieved": "stub_open_00025",
+  "retrieved_family": "stub_open",
+  "resp_dist_to_retrieved": 0.4770969490435042,
+  "retrieval_gap": 0.40555676705681887,
+  "true_err": 0.38801379338563313
+ },
+ {
+  "query": "via_lc_00069",
+  "family": "via_lc",
+  "retrieved": "stepped_00096",
+  "retrieved_family": "stepped",
+  "resp_dist_to_retrieved": 0.7836507076597774,
+  "retrieval_gap": 0.43608795022097135,
+  "true_err": 0.43821375704741444
+ },
+ {
+  "query": "via_lc_00359",
+  "family": "via_lc",
+  "retrieved": "stepped_00065",
+  "retrieved_family": "stepped",
+  "resp_dist_to_retrieved": 0.6882874404854964,
+  "retrieval_gap": 0.4684966500927523,
+  "true_err": 0.3296547849260756
+ }
+]
