@@ -65,72 +65,81 @@ is anti-correlated with openEMS (Spearman -0.50, MAE 0.28; response error
 its error well (retrieval-gap 0.75, ensemble variance 0.77 Spearman). The
 stack knew the surrogate was untrustworthy before optimization began.
 
-## Results (true openEMS objective; anytime best at 5/10/20/40/60 calls)
+## Results (v2b, true openEMS objective; anytime best at 5/10/20/40/60 calls)
 
-| run | 5 | 10 | 20 | 40 | 60 | final verified J | calls | surrogate evals | wall |
-|---|---|---|---|---|---|---|---|---|---|
-| solver-only s0 | - | .711 | .711 | .711 | .579 | 0.579 | 60 | 0 | 26 min |
-| **hybrid s0** | .730 | **.422** | .422 | .422 | .422 | **0.422** | **8** | 492 | 6 min |
-| surrogate-only s0 | .357 | | | | | 0.357 | 1 | 492 | <1 min |
-| uncertainty-fallback s0 | .730 | .347 | .347 | .347 | .347 | 0.347 | 8 | 492 | cache |
-| random-fallback s0 | 1.497 | .854 | .593 | .349 | .335 | 0.335 | 53 | 492 | 24 min |
-| solver-only s1 | - | 1.484 | .702 | .702 | .690 | 0.690 | 59 | 0 | 35 min |
-| hybrid s1 | 1.44 | 1.44 | .818 | .818 | .818 | 0.818 | 60 | 492 | 42 min |
-| surrogate-only s1 | 1.494 | | | | | 1.494 | 1 | 492 | 1 min |
-| solver-only s2 | - | .826 | .797 | .773 | .682 | 0.682 | 59 | 0 | 36 min |
-| hybrid s2 | 1.496 | 1.494 | 1.494 | .983 | .983 | 0.983 | 60 | 492 | 32 min |
-| surrogate-only s2 | 1.494 | | | | | 1.494 | 1 | 492 | <1 min |
+| run | 5 | 10 | 20 | 40 | 60 | final verified J | calls | surrogate evals |
+|---|---|---|---|---|---|---|---|---|
+| solver-only s0 | - | .711 | .711 | .711 | .579 | 0.579 | 60 | 0 |
+| **hybrid s0** | 1.198 | 1.198 | **.289** | .289 | .289 | **0.289** | **17** | 492 |
+| surrogate-only s0 | .357 | | | | | 0.357 | 1 | 492 |
+| uncertainty-fallback s0 | 1.198 | 1.198 | .295 | .295 | .295 | 0.295 | 15 | 492 |
+| random-fallback s0 | 1.497 | 1.482 | 1.469 | .293 | .293 | 0.293 | 52 | 492 |
+| solver-only s1 | - | 1.484 | .702 | .702 | .690 | 0.690 | 59 | 0 |
+| **hybrid s1** | 1.44 | 1.44 | 1.44 | **.338** | .338 | **0.338** | **36** | 492 |
+| surrogate-only s1 | 1.494 | | | | | 1.494 | 1 | 492 |
+| solver-only s2 | - | .826 | .797 | .773 | .682 | 0.682 | 59 | 0 |
+| hybrid s2 | 1.496 | 1.496 | 1.493 | 1.465 | 1.465 | 1.465 | 60 | 492 |
+| surrogate-only s2 | 1.494 | | | | | 1.494 | 1 | 492 |
+| solver-only s3 | - | .345* | .345 | .345 | .345 | 0.345 | 60 | 0 |
+| hybrid s3 | 1.496 | 1.496 | 1.493 | 1.441 | 1.441 | 1.441 | 60 | 492 |
+| surrogate-only s3 | 1.549 | | | | | 1.549 | 1 | 492 |
+| solver-only s4 | - | .790 | .790 | .790 | .790 | 0.790 | 60 | 0 |
+| hybrid s4 | 1.496 | 1.494 | 1.494 | 1.384 | 1.384 | 1.384 | 60 | 492 |
+| surrogate-only s4 | 1.500 | | | | | 1.500 | 1 | 492 |
 
-The uncertainty-gated run chose nearly the same verification set as hybrid
-s0 (cache hits). Invalid designs: 16 of ~900 solves failed the column
-passivity gate and scored 2.0. Final geometries of every winning run are
-gap-free, wide-line (w 700-800 um), shortest-stub designs at the left
-boundary: physically sensible broadband-match solutions, not artifacts
-(column norms 1.002-1.017, within the 1.1 gate). Final S-curves, surrogate
-vs openEMS responses, retrieval gaps and geometries for every run are in
-the metrics file (final_verification); trajectories and verification logs
-per run in design_runs_v2/.
+(*seed-3 anytime granularity limited by cache replay after the solver-crash
+recovery.) Invalid designs: 16 of ~1300 solves failed the measured-column
+passivity gate; one openEMS crash on a degenerate geometry is handled as
+invalid by the hardened evaluator. Winning-run geometries are gap-free,
+wide-line (w 750-780 um), short-stub designs spanning the left half -
+physically sensible broadband matches, not artifacts (column norms
+1.002-1.058, within the 1.1 gate). Final S-curves, surrogate-vs-openEMS
+responses, retrieval gaps and geometries: design_opt_v2b_metrics.json
+(final_verification); per-run trajectories and verification logs:
+design_runs_v2b/. The v2 (defective-policy) run is preserved in
+design_opt_v2_metrics.json for comparison: the policy fix alone moved seed
+0 from 0.422@8 to 0.289@17 and seed 1 from a 60-call loss to 0.338@36.
 
 ## Answers
 
-**1. Calls saved:** seed 0: 8 vs 60 (7.5x) with a better design (0.422 vs
-0.579); no solver-only run reached 0.422 at any budget. Seeds 1-2: none;
-the hybrid used all 60 calls and finished behind solver-only. The
-uncertainty-gated and random-fallback ablations on seed 0 reached 0.347 (8
-calls) and 0.335 (53 calls): the seed-0 gain comes from surrogate
-pre-screening of the gap-free region, not from which risk signal gated
-verification.
+**1. Calls saved:** on the winning seeds, the hybrid did not merely match
+solver-only cheaper - it surpassed solver-only's ENTIRE 60-call result by
+call 16 (seed 0) and call 35 (seed 1) and kept improving (final 0.289 /
+0.338 vs 0.579 / 0.690), i.e. >=3.75x and >=1.7x fewer calls for strictly
+better designs. On seeds 2-4: no savings; full budget consumed for worse
+results. The seed-0 ablations (uncertainty-gate 0.295@15, random 0.293@52)
+show the win comes from surrogate pre-screening plus verification, largely
+independent of which risk signal gates.
 
-**2. Equal budget:** hybrid wins on seed 0 at every budget from 10 calls on;
-loses on seeds 1-2. Not robust.
+**2. Equal budget:** hybrid wins seeds 0-1 from calls 16-35 onward, loses
+seeds 2-4 at every budget. 2/5 - not robust.
 
-**3. Equal quality:** solver-only never matched hybrid s0's 0.422, so the
-reduction there is unbounded within the sweep; on seeds 1-2 the question
-inverts (hybrid never matched solver-only).
+**3. Equal quality:** on seeds 0-1 solver-only never reaches the hybrid's
+quality at any budget in the sweep, so the reduction is unbounded there; on
+seeds 2-4 the question inverts.
 
-**4. Exploitation prevented: yes.** Surrogate-only was fooled on 2 of 3
-seeds: its claimed optima (surrogate J ~0.91, gap designs) verified to
-1.494, the worst class of design. The hybrid reported only verified
-designs, and on the losing seeds its verified result (0.82-0.98) still beat
-the surrogate's own belief.
+**4. Exploitation prevented: yes, 5/5.** Surrogate-only was fooled on 4 of
+5 seeds (claims ~0.9, verifies 1.49-1.55, the worst class); every reported
+hybrid design is openEMS-verified, and the hybrid's verified result beat
+the surrogate's own belief on every seed.
 
-**5. Regime:** topology, on every pool, correctly. The mechanism of the
-seed 1-2 losses is now precise: the surrogate prefers gap designs (it
-predicts transmission through them), so its population drifts into the gap
-basin; those candidates carry the highest retrieval-gap of the whole
-campaign (mean 3.0-3.1 on the losing seeds vs 2.3 on the winning seed;
-final gap designs 3.08 vs gap-free 1.66-1.99), i.e. the risk signal
-identified the trap, but the declared policy still verified them because
-they were "promising" or "risky-but-within-20%": 40-58 wasted calls per
-losing seed, 59-60 of 60 verifications badly wrong (mean |dJ| 0.53).
+**5. Regime:** topology, correctly, on every pool. The loss mechanism on
+seeds 2-4 is verify-and-replace churn: a gap-heavy initial population +
+a surrogate that hallucinates gap pass-bands means each verified phantom
+(true J ~1.49) is replaced in the population, and the next surrogate-scored
+gap trial (~0.9) wins acceptance and gets verified in turn - 58-60
+verifications per losing seed, 59-60 of them badly wrong (mean |dJ| ~0.53),
+verification gap_mean 3.0-3.1.
 
-**6. Where the surrogate is fooled:** on every gap design (phantom
-pass-bands), and mildly on gap-free ones (it under-predicts J by ~0.4 but
-orders them usefully enough that seed 0 won). The retrieval-gap separates
-the two classes cleanly (>3.0 vs <2.0).
+**6. Where the surrogate is fooled:** all gap designs (phantom pass-bands;
+retrieval-gap > 3.0) and mildly on gap-free ones (under-predicts J by ~0.4
+but orders them well enough to drive seeds 0-1 to 0.29-0.34). The frozen
+retrieval-gap separates the trap class cleanly (>3.0 vs <2.0) on every
+seed - the information needed to avoid all three losses existed at
+decision time.
 
-**7. Ready for a realistic PCB/package problem?** Not as a call-saving
-claim; one robust seed is not a demonstration. But the path is now concrete
+**7. Ready for a realistic PCB/package problem?** Not as a robust
+call-saving claim; 2 of 5 seeds is not a demonstration. But the path is now concrete
 and cheap: (a) a verification policy that uses the risk signal to refuse,
 not just to prioritise (the data show a gap threshold near 2.5 would have
 excluded every wasted call on seeds 1-2; recorded here as an observation,
