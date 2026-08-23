@@ -1,34 +1,44 @@
 # Design-optimization report: the selective stack on a stub-loaded interconnect
 
-Date: 2026-08-23. Branch `external-data`. Question: can the hybrid
-surrogate + selective-solver system find designs comparable to full openEMS
-optimization with fewer full-wave calls?
+Date: 2026-08-23 (final, 5 seeds). Branch `external-data`. Question: can the
+hybrid surrogate + selective-solver system find designs comparable to full
+openEMS optimization with fewer full-wave calls?
 
-**Verdict: demonstrated on one of three seeds, not robustly.** On seed 0 the
-hybrid reached a verified objective of 0.422 with **8 openEMS calls**, better
-than solver-only's 0.579 after **60 calls** (7.5x fewer calls, better
-design). On seeds 1 and 2 the hybrid spent its full 60-call budget verifying
-surrogate-favoured gap designs and finished worse than solver-only at equal
-budget (0.818 / 0.983 vs 0.690 / 0.682). The selective machinery never
-reported an unverified design and correctly flagged the designs that fooled
-the surrogate; the failure mode is a verification *policy* that did not act
-on a risk signal that had the right answer. All numbers below are true
-openEMS objectives; no methodology was retuned on outcomes.
+## Verdict (5 seeds, corrected policy, all numbers openEMS-verified)
 
-Two campaigns were run. **Task v1** (mandatory 300-700 um series gap) proved
-physically infeasible in-band: every method converged to J ~1.49 (|S21|
-<= 0.018) and nothing could separate; it is kept as
-`design_optimization_report_v1_infeasible.md`. **Task v2** (this report)
-makes the gap optional, as the milestone specification allows; nothing else
-changed. Both were declared before running. Two evaluator fixes were logged
-en route: the frozen simulate() fabricates S22 := S11 (valid only for
-symmetric structures), so the passivity gate for these asymmetric designs
-uses the measured port-1 column norm; and per-run checkpointing was added
-after a PC reboot (solver-only replays bit-identically, DE-driven hybrid
-runs do not). Artifacts: results/design_opt_v2_metrics.json,
-results/design_runs_v2/, solver cache results/design_cache/ (~900 solves,
-content-addressed), scripts/run_design_opt.py, src/emsurr/design_task.py,
-scripts/oems_eval.py.
+| seed | solver-only best @60 | hybrid best | hybrid calls | hybrid beats solver-only's 60-call best at call | surrogate-only |
+|---|---|---|---|---|---|
+| 0 | 0.579 | **0.289** | **17** | 16 | 0.357 |
+| 1 | 0.690 | **0.338** | **36** | 35 | 1.494 |
+| 2 | 0.682 | 1.465 | 60 | never | 1.494 |
+| 3 | 0.345 | 1.441 | 60 | never | 1.549 |
+| 4 | 0.790 | 1.384 | 60 | never | 1.500 |
+
+**The claimed demonstration holds on 2 of 5 seeds and fails on 3.** Where it
+holds, it is dramatic: the hybrid surpasses everything solver-only achieves
+in 60 calls by call 16 (seed 0) and call 35 (seed 1), and finishes at
+roughly half the solver-only objective - a genuine "substantially fewer
+calls at better quality" result. Where it fails, the mechanism is single
+and fully characterized: the surrogate has no in-support coverage of this
+design space (the stack's own validation diagnosed objective Spearman
+-0.50 and 100% of designs beyond the training support BEFORE optimization),
+it hallucinates pass-bands through series-gap designs, and when the initial
+population lands in that basin the verify-and-replace loop burns the budget
+confirming phantom optima. The frozen retrieval-gap flags exactly those
+candidates (mean gap 3.0-3.1 on every losing seed's verifications; the
+fooled designs score >3.0 vs <2.0 for real ones), but the pre-declared
+policy only prioritizes by risk - it never refuses - and changing that
+after seeing these outcomes would be tuning, so it was not changed.
+
+What IS established across all 5 seeds: the safety contract (no unverified
+design was ever reported; surrogate-only was fooled on 4/5 seeds, claiming
+~0.9 for designs that verify at 1.49-1.55, and the hybrid's verified output
+beat the surrogate's belief every time); correct regime detection (topology
+regime on every pool); and the risk signal's diagnostic value (it separates
+the trap class cleanly). What is NOT established is robust solver-call
+savings with a surrogate that has zero skill on the space - the stack can
+refuse to be fooled, but it cannot conjure search efficiency out of a
+model it itself measures as untrustworthy.
 
 ## Task v2 (declared before optimization)
 

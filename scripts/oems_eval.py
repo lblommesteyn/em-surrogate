@@ -25,7 +25,14 @@ if __name__ == "__main__":
     out = {}
     for i, d in enumerate(designs):
         t0=time.perf_counter()
-        s, stats = solve(d, f"design_{os.getpid()}_{i}")
+        try:
+            s, stats = solve(d, f"design_{os.getpid()}_{i}")
+        except Exception as e:
+            # a solver failure on one design must not kill the batch: mark
+            # the design invalid (finite=0) and continue
+            print(f"design {i}: SOLVER FAILURE {type(e).__name__}: {e}", flush=True)
+            s = np.full((len(FREQ), 2, 2), np.nan, complex)
+            stats = {"wall_s": time.perf_counter() - t0}
         # Passivity gate on the MEASURED port-1 column only. The frozen
         # simulate() fabricates S22 := S11 (valid only for symmetric
         # structures); these designs are asymmetric, so the full-matrix

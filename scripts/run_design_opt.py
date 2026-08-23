@@ -38,7 +38,8 @@ from emsurr.risk_cal import spearman
 from emsurr.topo_rep import TopoEmbedding
 
 STACK = Path("results/design_stack")
-RUNS = Path(f"results/design_runs_v{DT.TASK_VERSION}")   # per-run summaries
+POLICY = "b"  # v2b: verified-fitness replacement implemented
+RUNS = Path(f"results/design_runs_v{DT.TASK_VERSION}{POLICY}")   # per-run summaries
 
 
 def _jsonable(o):
@@ -57,7 +58,8 @@ def save_run(name, r):
 def load_run(name):
     p = RUNS / f"{name}.json"
     return json.loads(p.read_text()) if p.exists() else None
-SEEDS = (0, 1, 2)
+import os
+SEEDS = tuple(int(x) for x in os.environ.get("DESIGN_SEEDS", "0,1,2").split(","))
 BUDGET = 60
 POP, GENS = 12, 40
 SOLVER_POP = 8
@@ -207,8 +209,10 @@ def run_search(solver, seed, gap_of, stats, freq, mode, budget=BUDGET):
     if mode != "surrogate":
         # verify the initial surrogate-best few
         order = np.argsort(fit)[:2]
-        verify([pop[i] for i in order], ["init"] * 2,
-               [fit[i] for i in order], [gap[i] for i in order])
+        out0 = verify([pop[i] for i in order], ["init"] * 2,
+                      [fit[i] for i in order], [gap[i] for i in order])
+        for i in order:                      # declared policy: verified J
+            fit[i] = out0.get(DT.key(pop[i]), fit[i])   # replaces fitness
 
     for gen in range(GENS):
         trials = de_step(px, fit, rng)
@@ -241,7 +245,17 @@ def run_search(solver, seed, gap_of, stats, freq, mode, budget=BUDGET):
                 why.append("promising" if promising else "risky")
                 sj.append(tf[i]); gg.append(tgap[i])
         n_room = budget - calls
-        verify(cand[:n_room], why[:n_room], sj[:n_room], gg[:n_room])
+        outg = verify(cand[:n_room], why[:n_room], sj[:n_room], gg[:n_room])
+        # Declared policy (POLICY FIX, v2b): a verified candidate's TRUE
+        # objective permanently replaces its surrogate fitness wherever it
+        # sits in the population, so DE selection stops believing phantom
+        # surrogate optima. The v2 runs omitted this step (logged defect).
+        for i in range(POP):
+            k = DT.key(pop[i])
+            if k in outg:
+                fit[i] = outg[k]
+            elif k in verified:
+                fit[i] = verified[k]
 
     if mode == "surrogate":
         i = int(np.argmin(fit))
@@ -347,9 +361,9 @@ def main():
     res["final_verification"] = qa
     res["final_verification_new_calls"] = final.calls
     res["total_wall_min"] = round((time.perf_counter() - t0) / 60, 1)
-    Path(f"results/design_opt_v{DT.TASK_VERSION}_metrics.json").write_text(
+    Path(f"results/design_opt_v{DT.TASK_VERSION}{POLICY}_metrics.json").write_text(
         json.dumps(res, indent=1, default=lambda o: o if not isinstance(o, np.ndarray) else o.tolist()))
-    print(f"wrote results/design_opt_v{DT.TASK_VERSION}_metrics.json")
+    print(f"wrote results/design_opt_v{DT.TASK_VERSION}{POLICY}_metrics.json")
 
 
 if __name__ == "__main__":
