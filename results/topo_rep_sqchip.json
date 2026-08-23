@@ -1,0 +1,14 @@
+{
+ "batch300": {
+  "auroc": 0.4579365079365079,
+  "spearman_within_ood": 0.029602995588839894
+ },
+ "batchnear50": {
+  "auroc": 0.7765151515151515,
+  "spearman_within_ood": -0.09847179772158932
+ },
+ "sqchip": {
+  "auroc": 0.9025661587810746,
+  "spearman_within_ood": 0.45619362401701424
+ }
+}
