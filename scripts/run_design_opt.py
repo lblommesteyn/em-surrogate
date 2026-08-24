@@ -148,6 +148,102 @@ def unvec(x):
     return DT.clip({k: float(v) for k, v in zip(DT.KEYS, x)})
 
 
+
+def run_multistart(solver, seed, gap_of, stats, freq, budget=BUDGET,
+                   n_restarts=8, top_per=3):
+    """v2c hybrid, aligned with the milestone's C-definition: the surrogate
+    explores freely (surrogate evaluations are free), the solver budget is
+    spent verifying the pooled best candidates, and nothing unverified is
+    ever reported or treated as an incumbent.
+
+    Phase 1: n_restarts independent DE runs on surrogate fitness only.
+    Phase 2: pool each restart's top_per candidates, dedupe, verify in
+             ascending surrogate-J order (tie-break: lower retrieval-gap,
+             i.e. the frozen risk score prioritizes the trustworthy ones)
+             using 60% of the budget.
+    Phase 3: a short DE polish seeded around the best verified design,
+             using the v2b verified-incumbent policy for the remaining
+             budget. Constants are mechanical splits declared a priori.
+    """
+    rng = np.random.default_rng(seed)
+
+    def surr_eval(ds):
+        mu, gap, unc = gap_of([DT.to_sample(d, freq) for d in ds])
+        return ([DT.objective(mu[i], freq) for i in range(len(ds))], gap, unc)
+
+    # ---- phase 1: free multi-start surrogate search
+    pool_c = {}
+    n_surr = 0
+    for r in range(n_restarts):
+        pop = [DT.random_design(rng) for _ in range(POP)]
+        fit, gap, _ = surr_eval(pop)
+        px = [vec(d) for d in pop]
+        n_surr += POP
+        for gen in range(GENS):
+            tds = [unvec(t) for t in de_step(px, fit, rng)]
+            tf, tgap, _ = surr_eval(tds)
+            n_surr += POP
+            for i in range(POP):
+                if tf[i] < fit[i]:
+                    fit[i], gap[i], px[i], pop[i] = tf[i], tgap[i], vec(tds[i]), tds[i]
+        for i in np.argsort(fit)[:top_per]:
+            pool_c[DT.key(pop[i])] = (pop[i], fit[i], gap[i])
+
+    cands = sorted(pool_c.values(), key=lambda t: (t[1], t[2]))
+    calls = 0
+    best_ver = (2.0, None)
+    log, traj = [], []
+
+    def verify_list(items, why):
+        nonlocal calls, best_ver
+        ds = [c[0] for c in items]
+        rs_ = solver.solve_batch(ds)
+        for (d, sj, g), r in zip(items, rs_):
+            calls += 1
+            useful = r["J"] < best_ver[0]
+            if useful:
+                best_ver = (r["J"], d)
+            log.append(dict(call=calls, reason=why, surr_J=float(sj),
+                            true_J=float(r["J"]), gap=float(g),
+                            err=float(abs(sj - r["J"])), improved=bool(useful)))
+            traj.append((calls, best_ver[0]))
+
+    n1 = max(1, int(0.6 * budget))
+    verify_list(cands[:n1], "pooled")
+
+    # ---- phase 3: verified polish around the incumbent
+    if best_ver[1] is not None and calls < budget:
+        center = vec(best_ver[1])
+        span = np.array([hi - lo for lo, hi in DT.BOUNDS.values()])
+        pop = [unvec(center + rng.normal(0, 0.05, len(center)) * span)
+               for _ in range(POP)]
+        fit, gap, _ = surr_eval(pop)
+        n_surr += POP
+        px = [vec(d) for d in pop]
+        verified = {}
+        for gen in range(15):
+            if calls >= budget:
+                break
+            tds = [unvec(t) for t in de_step(px, fit, rng)]
+            tf, tgap, _ = surr_eval(tds)
+            n_surr += POP
+            for i in range(POP):
+                if tf[i] < fit[i]:
+                    fit[i], gap[i], px[i], pop[i] = tf[i], tgap[i], vec(tds[i]), tds[i]
+            picks = [i for i in np.argsort(fit)
+                     if fit[i] < best_ver[0] and DT.key(pop[i]) not in verified][:2]
+            items = [(pop[i], fit[i], gap[i]) for i in picks][: budget - calls]
+            if items:
+                verify_list(items, "polish")
+                # v2b policy: verified J permanently replaces fitness
+                for j, i in enumerate(picks[: len(items)]):
+                    verified[DT.key(pop[i])] = True
+                    fit[i] = log[-len(items) + j]["true_J"]
+
+    return dict(best_J=float(best_ver[0]), best_design=best_ver[1],
+                calls=calls, traj=traj, log=log, n_surr_evals=n_surr)
+
+
 def run_solver_only(solver, seed):
     rng = np.random.default_rng(seed)
     pop = [DT.random_design(rng) for _ in range(SOLVER_POP)]
@@ -310,12 +406,20 @@ def main():
 
     # ---- optimization runs
     res["runs"] = {}
+    modes = os.environ.get("DESIGN_MODES", "solver_only,hybrid,surrogate,multistart,ablations").split(",")
     queue = []
     for seed in SEEDS:
-        queue += [(f"solver_only_s{seed}", "solver_only", seed),
-                  (f"hybrid_s{seed}", "hybrid", seed),
-                  (f"surrogate_s{seed}", "surrogate", seed)]
-    queue += [("unc_s0", "unc", 0), ("random_s0", "random", 0)]
+        if "solver_only" in modes:
+            queue.append((f"solver_only_s{seed}", "solver_only", seed))
+        if "hybrid" in modes:
+            queue.append((f"hybrid_s{seed}", "hybrid", seed))
+        if "surrogate" in modes:
+            queue.append((f"surrogate_s{seed}", "surrogate", seed))
+    for seed in SEEDS:
+        if "multistart" in modes:
+            queue.append((f"multistart_s{seed}", "multistart", seed))
+    if "ablations" in modes:
+        queue += [("unc_s0", "unc", 0), ("random_s0", "random", 0)]
     print("queue:", [q[0] for q in queue])
     for name, mode, seed in queue:
         prev = load_run(name)
@@ -329,6 +433,8 @@ def main():
             r = run_solver_only(sv, seed)
             r["calls"] = sv.calls
             r["n_surr_evals"] = 0
+        elif mode == "multistart":
+            r = run_multistart(sv, seed, gap_of, stats, freq)
         else:
             r = run_search(sv, seed, gap_of, stats, freq, mode)
         r["wall_min"] = round((time.perf_counter() - t1) / 60, 2)
