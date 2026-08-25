@@ -1,0 +1,15 @@
+{
+ "budgets": {
+  "16": {
+   "J_spearman": 0.026956521739130483,
+   "J_mae": 0.9006330649227664,
+   "resp_err_mean": 0.6388579434279033,
+   "gap_spearman_err": -0.20347826086956528,
+   "unc_spearman_err": 0.05043478260869563,
+   "catastrophic_rate": 1.0,
+   "train_min": 3.1
+  }
+ },
+ "threshold": 0.5,
+ "trigger_budget": null
+}
