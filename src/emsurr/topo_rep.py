@@ -30,15 +30,15 @@ EMB = 32
 H = 64
 
 
-def tokens(samples, ordered=True, n_types=N_TYPES):
+def tokens(samples, ordered=True, n_types=N_TYPES, max_el=MAX_EL):
     d = n_types + 5
-    x = np.zeros((len(samples), MAX_EL, d))
-    m = np.zeros((len(samples), MAX_EL))
+    x = np.zeros((len(samples), max_el, d))
+    m = np.zeros((len(samples), max_el))
     for i, s in enumerate(samples):
-        for j, el in enumerate(s["elements"][:MAX_EL]):
+        for j, el in enumerate(s["elements"][:max_el]):
             x[i, j, int(el[0])] = 1
             x[i, j, n_types : n_types + 4] = el[1:5]
-            x[i, j, -1] = (j / MAX_EL) if ordered else 0.0
+            x[i, j, -1] = (j / max_el) if ordered else 0.0
             m[i, j] = 1
     return x, m
 
@@ -75,17 +75,18 @@ class SetEncoder(nn.Module):
 
 class TopoEmbedding:
     def __init__(self, ordered=True, objective="both", epochs=150, lr=1e-3, seed=0,
-                 n_types=N_TYPES):
+                 n_types=N_TYPES, max_el=MAX_EL):
         self.ordered, self.objective, self.n_types = ordered, objective, n_types
+        self.max_el = max_el
         self.epochs, self.lr, self.seed = epochs, lr, seed
 
     def _prep(self, samples):
-        x, m = tokens(samples, self.ordered, self.n_types)
+        x, m = tokens(samples, self.ordered, self.n_types, self.max_el)
         return self.tok_norm(x) * m[..., None], m
 
     def fit(self, train, val):
         torch.manual_seed(self.seed)
-        xr, mr = tokens(train, self.ordered, self.n_types)
+        xr, mr = tokens(train, self.ordered, self.n_types, self.max_el)
         flat = xr.reshape(-1, xr.shape[-1])
         self.tok_norm = Normalizer().fit(flat[mr.reshape(-1) > 0])
         self.ynorm = Normalizer().fit(targets(train))
