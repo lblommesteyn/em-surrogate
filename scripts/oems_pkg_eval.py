@@ -16,7 +16,7 @@ dy2 != 0 and s1 != s2 make the two lines of the pair genuinely unequal ->
 physical mode conversion. Mixed-mode extraction under odd drive as in the
 via task. Validity: finite + odd-drive power <= 1.1.
 """
-import json, os, sys, time, tempfile
+import json, os, shutil, sys, time, tempfile
 import numpy as np
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -170,6 +170,7 @@ def simulate_pkg(p, tag, verbose=False):
     a1, a2 = p1.uf_inc, p2.uf_inc
     b = [pt.uf_ref for pt in ports]
     ad = a1 - a2
+    shutil.rmtree(sim_path, ignore_errors=True)   # keep temp clean (disk!)
     s = np.empty((len(FREQ), 2, 2), complex)
     s[:, 0, 0] = (b[0] - b[1]) / ad
     s[:, 1, 0] = (b[2] - b[3]) / ad
