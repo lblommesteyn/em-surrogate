@@ -38,6 +38,7 @@ from emsurr import dataset, pkg_task as DT, models, splits, synth_ext, via_task
 from emsurr.risk_cal import spearman
 from emsurr.topo_rep import TopoEmbedding
 
+import os
 PKG_N = int(os.environ.get("PKG_N", "0"))       # package solves in training
 VARIANT = os.environ.get("PKG_VARIANT", "orig")
 STACK = Path(f"results/pkg_stack_N{PKG_N}" if PKG_N else "results/pkg_stack")

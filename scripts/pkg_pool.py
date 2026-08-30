@@ -19,9 +19,17 @@ for row in u:
     designs.append(PT.clip(d))
 Path("results/pkg_pool_designs.json").write_text(json.dumps(designs, indent=0))
 
+import shutil as _sh
+
+def disk_free_mb():
+    return _sh.disk_usage("C:\\").free / 1e6
+
 sv = PT.Solver()
 B = 8
 for i in range(0, N, B):
+    if disk_free_mb() < 300:
+        print("DISK GUARD: <300MB free, stopping cleanly", flush=True)
+        break
     batch = designs[i:i + B]
     todo = sum(0 if sv.cached(d) else 1 for d in batch)
     sv.solve_batch(batch)
