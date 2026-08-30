@@ -32,13 +32,16 @@ import torch
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 from emsurr import dataset, pkg_task as DT, models, splits, synth_ext, via_task
 from emsurr.risk_cal import spearman
 from emsurr.topo_rep import TopoEmbedding
 
-STACK = Path("results/pkg_stack")
-RUNS = Path("results/pkg_runs")   # per-run summaries
+PKG_N = int(os.environ.get("PKG_N", "0"))       # package solves in training
+VARIANT = os.environ.get("PKG_VARIANT", "orig")
+STACK = Path(f"results/pkg_stack_N{PKG_N}" if PKG_N else "results/pkg_stack")
+RUNS = Path(f"results/pkg_runs_{VARIANT}")   # per-run summaries
 
 
 def _jsonable(o):
@@ -81,6 +84,13 @@ def train_stack():
     chainm = DT.make_chain_model_family(400, seed=13)
     rs = np.random.RandomState(1)
     pool = train + gapped + viamod + chainm
+    if PKG_N:
+        import json as _json
+        from run_pkg_sample_eff import pkg_solve_to_sample
+        designs = [DT.clip(d) for d in _json.loads(
+            Path("results/pkg_pool_designs.json").read_text())][:PKG_N]
+        sv0 = DT.Solver()
+        pool = pool + [pkg_solve_to_sample(d, sv0) for d in designs] * 8
     idx = rs.permutation(len(pool))
     tr = [pool[i] for i in idx[: int(0.85 * len(pool))]]
     va = [pool[i] for i in idx[int(0.85 * len(pool)) :]]
@@ -470,9 +480,9 @@ def main():
     res["final_verification"] = qa
     res["final_verification_new_calls"] = final.calls
     res["total_wall_min"] = round((time.perf_counter() - t0) / 60, 1)
-    Path("results/pkg_opt_metrics.json").write_text(
+    Path(f"results/pkg_opt_{VARIANT}_metrics.json").write_text(
         json.dumps(res, indent=1, default=lambda o: o if not isinstance(o, np.ndarray) else o.tolist()))
-    print("wrote results/pkg_opt_metrics.json")
+    print(f"wrote results/pkg_opt_{VARIANT}_metrics.json")
 
 
 if __name__ == "__main__":
