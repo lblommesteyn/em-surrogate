@@ -9,6 +9,25 @@
 // length D: D*D MACs/cycle, log2(D)-deep adder tree -> synthesis exposes the
 // timing cost of wide arrays).
 `timescale 1ns/1ps
+
+// One output column's dot product, hoisted into a submodule so synthesis
+// partitions the D*D multiplier array into D tractable D-mult modules
+// (yosys 0.33 aborts on the flat 4096-mult module: hashlib size limit).
+// Identical structure for every D - no per-size optimization.
+module dot_col #(
+    parameter D = 32
+)(
+    input  wire [8*D-1:0]      a,     // activation row
+    input  wire [8*D-1:0]      wcol,  // weight column
+    output reg signed [31:0]   y
+);
+    integer ci;
+    always @* begin
+        y = 0;
+        for (ci = 0; ci < D; ci = ci + 1)
+            y = y + $signed(a[8*ci +: 8]) * $signed(wcol[8*ci +: 8]);
+    end
+endmodule
 module mac_array #(
     parameter D   = 32,
     parameter ACC = 8
@@ -39,21 +58,18 @@ module mac_array #(
     reg signed [31:0] acc [0:ACC-1][0:D-1];
     integer i, j;
 
-    // one output row of D dot products per firing cycle
-    reg signed [31:0] dot [0:D-1];
-    integer ci, cj;
-    always @* begin
-        // synthesis: full combinational dot; simulation guard (state==RUN)
-        // avoids re-evaluating D*D multiplies during LOADW cycles where the
-        // result is architecturally unused (no behavioral difference).
-        if (state == S_RUN)
-            for (cj = 0; cj < D; cj = cj + 1) begin
-                dot[cj] = 0;
-                for (ci = 0; ci < D; ci = ci + 1)
-                    dot[cj] = dot[cj] +
-                        $signed(in_row[8*ci +: 8]) * w[ci][cj];
-            end
-    end
+    // one output row of D dot products per firing cycle; each column is a
+    // dot_col submodule (see header of dot_col). Cycle behavior identical to
+    // the previous flat always-block: dot is pure combinational either way.
+    wire signed [31:0] dot [0:D-1];
+    genvar gc, gr;
+    generate for (gc = 0; gc < D; gc = gc + 1) begin : g_col
+        wire [8*D-1:0] wcol;
+        for (gr = 0; gr < D; gr = gr + 1) begin : g_row
+            assign wcol[8*gr +: 8] = w[gr][gc];
+        end
+        dot_col #(.D(D)) u_dot (.a(in_row), .wcol(wcol), .y(dot[gc]));
+    end endgenerate
     genvar g;
     generate for (g = 0; g < D; g = g + 1)
         assign out_row0[32*g +: 32] = acc[0][g];

@@ -1,7 +1,6 @@
 #!/bin/bash
 # Yosys synthesis + OpenSTA timing for one domain config on Nangate45.
 # Usage: synth_domain.sh <D> <N_UNITS> <ACC> <EXT_BW> <LIB> <OUTDIR>
-set -e
 D=$1; NU=$2; AC=$3; BW=$4; LIB=$5; OUT=$6
 mkdir -p "$OUT"
 TAG=d${D}n${NU}bw${BW}
@@ -11,10 +10,12 @@ chparam -set D $D -set N_UNITS $NU -set ACC $AC -set EXT_BW $BW mac_domain;
 hierarchy -top mac_domain;
 synth -top mac_domain;
 dfflibmap -liberty $LIB;
-abc -liberty $LIB;
+abc -fast -liberty $LIB;
 opt_clean;
 tee -o $OUT/stat_$TAG.txt stat -liberty $LIB;
-write_verilog -noattr $OUT/net_$TAG.v" 2>&1 | tail -3
+write_verilog -noattr $OUT/net_$TAG.v" > $OUT/yosys_$TAG.log 2>&1
+echo "YOSYS_EXIT=$?" >> $OUT/yosys_$TAG.log
+[ -f $OUT/net_$TAG.v ] || { echo "FAIL $TAG"; exit 1; }
 cat > $OUT/sta_$TAG.tcl <<TCL
 read_liberty $LIB
 read_verilog $OUT/net_$TAG.v
