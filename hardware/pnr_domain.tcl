@@ -20,18 +20,23 @@ initialize_floorplan -utilization 60 -aspect_ratio 1 -core_space 4 \
   -site FreePDK45_38x28_10R_NP_162NW_34O
 source $pdir/make_tracks.tcl
 place_pins -hor_layers metal5 -ver_layers metal6
-global_placement -density 0.72
+global_placement -density 0.72 -init_density_penalty 0.001 -max_phi_coef 1.03
 estimate_parasitics -placement
 repair_design
 detailed_placement
-report_design_area > $out/pnr_${tag}_area.txt
 clock_tree_synthesis -buf_list BUF_X4 -sink_clustering_enable
 set_propagated_clock [all_clocks]
 detailed_placement
 global_route -congestion_report_file $out/pnr_${tag}_congestion.rpt -verbose
 estimate_parasitics -global_routing
 report_checks -path_delay max -digits 3 > $out/pnr_${tag}_timing.txt
-report_design_area >> $out/pnr_${tag}_area.txt
+report_checks -path_delay max -from [all_registers] -to [all_registers] -digits 3 >> $out/pnr_${tag}_timing.txt
+catch {
+  set fa [open $out/pnr_${tag}_area.txt w]
+  puts $fa [rsz::design_area]
+  close $fa
+}
+report_design_area
 report_power > $out/pnr_${tag}_power.txt
 puts "PNR_DONE $tag"
 exit

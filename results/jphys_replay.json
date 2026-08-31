@@ -1,0 +1,122 @@
+{
+ "attn_qkv_b1|32|64": {
+  "cycles": 5945.625,
+  "ns": 27718.50375,
+  "rounds": 1,
+  "clk_ns": 4.662
+ },
+ "moe_exp_up_b1|32|64": {
+  "cycles": 5945.625,
+  "ns": 27718.50375,
+  "rounds": 1,
+  "clk_ns": 4.662
+ },
+ "moe_exp_up_b8|32|64": {
+  "cycles": 12971.25,
+  "ns": 60471.9675,
+  "rounds": 1,
+  "clk_ns": 4.662
+ },
+ "dense_gateup_b1|32|64": {
+  "cycles": 118384.0,
+  "ns": 551906.208,
+  "rounds": 7,
+  "clk_ns": 4.662
+ },
+ "prefill|32|64": {
+  "cycles": 207540.0,
+  "ns": 967551.48,
+  "rounds": 1,
+  "clk_ns": 4.662
+ },
+ "attn_qkv_b1|64|64": {
+  "cycles": 5850.0,
+  "ns": 27816.75,
+  "rounds": 2,
+  "clk_ns": 4.755
+ },
+ "moe_exp_up_b1|64|64": {
+  "cycles": 5850.0,
+  "ns": 27816.75,
+  "rounds": 2,
+  "clk_ns": 4.755
+ },
+ "moe_exp_up_b8|64|64": {
+  "cycles": 6480.0,
+  "ns": 30812.399999999998,
+  "rounds": 2,
+  "clk_ns": 4.755
+ },
+ "dense_gateup_b1|64|64": {
+  "cycles": 116480.0,
+  "ns": 553862.4,
+  "rounds": 14,
+  "clk_ns": 4.755
+ },
+ "prefill|64|64": {
+  "cycles": 103680.0,
+  "ns": 492998.39999999997,
+  "rounds": 2,
+  "clk_ns": 4.755
+ },
+ "attn_qkv_b1|32|128": {
+  "cycles": 2986.875,
+  "ns": 12162.555,
+  "rounds": 1,
+  "clk_ns": 4.072
+ },
+ "moe_exp_up_b1|32|128": {
+  "cycles": 2986.875,
+  "ns": 12162.555,
+  "rounds": 1,
+  "clk_ns": 4.072
+ },
+ "moe_exp_up_b8|32|128": {
+  "cycles": 6513.75,
+  "ns": 26523.99,
+  "rounds": 1,
+  "clk_ns": 4.072
+ },
+ "dense_gateup_b1|32|128": {
+  "cycles": 59472.0,
+  "ns": 242169.984,
+  "rounds": 7,
+  "clk_ns": 4.072
+ },
+ "prefill|32|128": {
+  "cycles": 104220.0,
+  "ns": 424383.84,
+  "rounds": 1,
+  "clk_ns": 4.072
+ },
+ "attn_qkv_b1|64|128": {
+  "cycles": 5850.0,
+  "ns": 31554.9,
+  "rounds": 2,
+  "clk_ns": 5.394
+ },
+ "moe_exp_up_b1|64|128": {
+  "cycles": 5850.0,
+  "ns": 31554.9,
+  "rounds": 2,
+  "clk_ns": 5.394
+ },
+ "moe_exp_up_b8|64|128": {
+  "cycles": 6480.0,
+  "ns": 34953.12,
+  "rounds": 2,
+  "clk_ns": 5.394
+ },
+ "dense_gateup_b1|64|128": {
+  "cycles": 116480.0,
+  "ns": 628293.12,
+  "rounds": 14,
+  "clk_ns": 5.394
+ },
+ "prefill|64|128": {
+  "cycles": 103680.0,
+  "ns": 559249.92,
+  "rounds": 2,
+  "clk_ns": 5.394
+ }
+}

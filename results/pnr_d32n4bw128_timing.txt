@@ -1,0 +1,147 @@
+Startpoint: rst (input port clocked by clk)
+Endpoint: g_unit[0].uu/_091455_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (propagated)
+   0.200    0.200 v input external delay
+   0.000    0.200 v rst (in)
+   5.568    5.768 ^ g_unit[0].uu/_050170_/ZN (INV_X1)
+   0.236    6.004 v g_unit[0].uu/_050172_/ZN (NAND2_X1)
+   0.182    6.186 ^ g_unit[0].uu/_050816_/ZN (NOR2_X2)
+   0.092    6.279 ^ max_cap5150/Z (BUF_X4)
+   0.030    6.308 ^ max_cap5149/Z (BUF_X8)
+   0.039    6.347 ^ max_cap5142/Z (BUF_X4)
+   0.049    6.396 ^ max_cap5141/Z (BUF_X4)
+   0.091    6.488 v g_unit[0].uu/_050817_/ZN (INV_X4)
+   0.076    6.563 v g_unit[0].uu/_050818_/ZN (AND2_X4)
+   0.057    6.620 v max_cap2667/Z (BUF_X8)
+   0.312    6.933 ^ g_unit[0].uu/_050819_/ZN (INV_X4)
+   0.096    7.029 ^ max_cap2544/Z (BUF_X8)
+   0.037    7.066 ^ max_cap2543/Z (BUF_X8)
+   0.062    7.128 ^ max_cap2526/Z (BUF_X8)
+   0.036    7.164 ^ max_cap2525/Z (BUF_X8)
+   0.092    7.257 ^ max_cap2513/Z (BUF_X8)
+   0.062    7.319 ^ max_cap2512/Z (BUF_X8)
+   0.033    7.353 ^ max_cap2511/Z (BUF_X8)
+   0.071    7.423 ^ max_cap2510/Z (BUF_X8)
+   0.040    7.463 ^ max_cap2509/Z (BUF_X8)
+   0.062    7.525 ^ max_cap2508/Z (BUF_X8)
+   0.046    7.571 ^ max_cap2506/Z (BUF_X8)
+   0.043    7.614 ^ max_cap2505/Z (BUF_X8)
+   0.118    7.732 ^ max_cap2504/Z (BUF_X8)
+   0.031    7.763 ^ max_cap2503/Z (BUF_X16)
+   0.040    7.803 ^ max_cap2502/Z (BUF_X8)
+   0.055    7.858 v g_unit[0].uu/_077716_/ZN (NAND3_X1)
+   0.023    7.881 ^ g_unit[0].uu/_077717_/ZN (OAI21_X1)
+   0.000    7.881 ^ g_unit[0].uu/_091455_/D (DFF_X1)
+            7.881   data arrival time
+
+   2.000    2.000   clock clk (rise edge)
+   0.611    2.611   clock network delay (propagated)
+   0.000    2.611   clock reconvergence pessimism
+            2.611 ^ g_unit[0].uu/_091455_/CK (DFF_X1)
+  -0.031    2.581   library setup time
+            2.581   data required time
+-----------------------------------------------------------
+            2.581   data required time
+           -7.881   data arrival time
+-----------------------------------------------------------
+           -5.301   slack (VIOLATED)
+
+
+Startpoint: _86035_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _79595_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.625    0.625   clock network delay (propagated)
+   0.000    0.625 ^ _86035_/CK (DFF_X1)
+   0.097    0.722 v _86035_/Q (DFF_X1)
+   0.054    0.777 v g_unit[0].uu/_050038_/ZN (OR2_X1)
+   0.035    0.811 ^ g_unit[0].uu/_050039_/ZN (NOR3_X1)
+   0.023    0.834 v g_unit[0].uu/_050040_/ZN (NAND3_X1)
+   0.044    0.878 ^ g_unit[0].uu/_050056_/ZN (AOI21_X1)
+   0.274    1.153 v g_unit[0].uu/_050057_/ZN (NAND4_X1)
+   0.408    1.561 ^ g_unit[0].uu/_050058_/ZN (NAND2_X1)
+   0.151    1.712 v g_unit[0].uu/_050059_/ZN (INV_X1)
+   0.182    1.894 ^ _52626_/ZN (NOR4_X1)
+   0.040    1.934 ^ _52628_/ZN (AND2_X1)
+   0.085    2.019 ^ _52629_/ZN (AND4_X1)
+   0.028    2.048 v _52630_/ZN (AOI21_X4)
+   0.152    2.199 v max_cap843/Z (BUF_X4)
+   0.055    2.254 v max_cap842/Z (BUF_X4)
+   0.036    2.291 v max_cap841/Z (BUF_X4)
+   0.031    2.322 v max_cap840/Z (BUF_X4)
+   0.036    2.358 v max_cap838/Z (BUF_X4)
+   0.035    2.392 v max_cap817/Z (BUF_X4)
+   0.032    2.425 v max_cap816/Z (BUF_X4)
+   0.032    2.457 v max_cap814/Z (BUF_X4)
+   0.033    2.490 v max_cap813/Z (BUF_X4)
+   0.033    2.523 v max_cap812/Z (BUF_X4)
+   0.033    2.555 v max_cap810/Z (BUF_X4)
+   0.028    2.584 v max_cap809/Z (BUF_X4)
+   0.031    2.614 v max_cap808/Z (BUF_X4)
+   0.033    2.648 v max_cap807/Z (BUF_X4)
+   0.034    2.681 v max_cap791/Z (BUF_X4)
+   0.031    2.713 v max_cap790/Z (BUF_X4)
+   0.035    2.747 v max_cap760/Z (BUF_X4)
+   0.034    2.781 v max_cap758/Z (BUF_X4)
+   0.032    2.813 v max_cap753/Z (BUF_X4)
+   0.033    2.846 v max_cap752/Z (BUF_X4)
+   0.033    2.879 v max_cap751/Z (BUF_X4)
+   0.033    2.913 v max_cap742/Z (BUF_X4)
+   0.033    2.946 v max_cap740/Z (BUF_X4)
+   0.034    2.980 v max_cap732/Z (BUF_X4)
+   0.032    3.012 v max_cap731/Z (BUF_X4)
+   0.035    3.047 v max_cap728/Z (BUF_X4)
+   0.035    3.083 v max_cap722/Z (BUF_X4)
+   0.034    3.117 v max_cap720/Z (BUF_X4)
+   0.033    3.150 v max_cap718/Z (BUF_X4)
+   0.035    3.185 v max_cap717/Z (BUF_X4)
+   0.036    3.220 v max_cap715/Z (BUF_X4)
+   0.031    3.252 v max_cap714/Z (BUF_X4)
+   0.031    3.283 v max_cap713/Z (BUF_X4)
+   0.118    3.401 v max_cap712/Z (BUF_X4)
+   0.067    3.468 v max_cap711/Z (BUF_X4)
+   0.040    3.508 v max_cap710/Z (BUF_X4)
+   0.035    3.543 v max_cap709/Z (BUF_X4)
+   0.032    3.575 v max_cap708/Z (BUF_X4)
+   0.031    3.607 v max_cap707/Z (BUF_X4)
+   0.033    3.640 v max_cap704/Z (BUF_X4)
+   0.034    3.673 v max_cap703/Z (BUF_X4)
+   0.032    3.705 v max_cap702/Z (BUF_X4)
+   0.034    3.739 v max_cap700/Z (BUF_X4)
+   0.031    3.771 v max_cap699/Z (BUF_X4)
+   0.032    3.803 v max_cap698/Z (BUF_X4)
+   0.032    3.835 v max_cap690/Z (BUF_X4)
+   0.032    3.867 v max_cap689/Z (BUF_X4)
+   0.034    3.901 v max_cap688/Z (BUF_X4)
+   0.033    3.933 v max_cap687/Z (BUF_X4)
+   0.032    3.965 v max_cap686/Z (BUF_X4)
+   0.034    3.999 v max_cap685/Z (BUF_X4)
+   0.032    4.031 v max_cap684/Z (BUF_X4)
+   0.017    4.048 ^ _52872_/ZN (NAND3_X1)
+   0.024    4.072 v _52873_/ZN (OAI21_X1)
+   0.000    4.072 v _79595_/D (DFF_X1)
+            4.072   data arrival time
+
+   2.000    2.000   clock clk (rise edge)
+   0.631    2.631   clock network delay (propagated)
+   0.000    2.631   clock reconvergence pessimism
+            2.631 ^ _79595_/CK (DFF_X1)
+  -0.032    2.599   library setup time
+            2.599   data required time
+-----------------------------------------------------------
+            2.599   data required time
+           -4.072   data arrival time
+-----------------------------------------------------------
+           -1.473   slack (VIOLATED)
+
+

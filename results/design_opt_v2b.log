@@ -1,0 +1,16 @@
+training/loading stack...
+stack stats: {'gap_p95': 0.26596889985002486, 'gap_med': 0.1409152803848982, 'gap_iqr': 0.07756473307490898, 'unc_med': 0.07381359736764699, 'unc_iqr': 0.02706481064785786}
+validation: {"J_spearman": -0.4921739130434783, "J_mae": 0.2752540321606944, "resp_err_mean": 1.5994138067461747, "gap_spearman_err": 0.7643478260869566, "unc_spearman_err": 0.7617391304347826, "gap_over_p95_frac": 1.0, "med_gap_z": 25.583731366713078, "med_unc_z": 24.693872035265464}
+queue: ['solver_only_s0', 'hybrid_s0', 'surrogate_s0', 'solver_only_s1', 'hybrid_s1', 'surrogate_s1', 'solver_only_s2', 'hybrid_s2', 'surrogate_s2', 'unc_s0', 'random_s0']
+solver_only_s0: restored from checkpoint (best 0.579)
+hybrid_s0: best 0.289 calls 17 wall 4.47 min
+surrogate_s0: restored from checkpoint (best 0.357)
+solver_only_s1: restored from checkpoint (best 0.690)
+hybrid_s1: best 0.338 calls 36 wall 18.04 min
+surrogate_s1: restored from checkpoint (best 1.494)
+solver_only_s2: restored from checkpoint (best 0.682)
+hybrid_s2: best 1.465 calls 60 wall 35.12 min
+surrogate_s2: restored from checkpoint (best 1.494)
+unc_s0: best 0.295 calls 15 wall 0.87 min
+random_s0: best 0.293 calls 52 wall 26.04 min
+wrote results/design_opt_v2b_metrics.json

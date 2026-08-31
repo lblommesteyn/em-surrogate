@@ -1,0 +1,7 @@
+pool solved: 256/256
+N= 16: Spearman=+0.033 J_MAE=0.902 resp=0.641 gap_sp=-0.622 cat=1.00 (0.7 min)
+N= 32: Spearman=-0.054 J_MAE=0.782 resp=0.515 gap_sp=-0.247 cat=1.00 (6.9 min)
+N= 64: Spearman=+0.328 J_MAE=0.503 resp=0.365 gap_sp=-0.358 cat=0.83 (2.9 min)
+N=128: Spearman=+0.611 J_MAE=0.256 resp=0.250 gap_sp=-0.116 cat=0.12 (3.3 min)
+N=256: Spearman=+0.685 J_MAE=0.133 resp=0.163 gap_sp=+0.423 cat=0.04 (4.3 min)
+trigger budget: 128

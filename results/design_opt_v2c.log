@@ -1,0 +1,35 @@
+training/loading stack...
+stack stats: {'gap_p95': 0.2868312975970562, 'gap_med': 0.150108093251786, 'gap_iqr': 0.08284898044324365, 'unc_med': 0.0746325232015584, 'unc_iqr': 0.026135681993338204}
+validation: {"J_spearman": -0.4930434782608696, "J_mae": 0.2728658886552848, "resp_err_mean": 1.6054954174958482, "gap_spearman_err": 0.7834782608695653, "unc_spearman_err": 0.7660869565217392, "gap_over_p95_frac": 1.0, "med_gap_z": 25.786548466531514, "med_unc_z": 25.588960688012126}
+queue: ['solver_only_s0', 'surrogate_s0', 'solver_only_s1', 'surrogate_s1', 'solver_only_s2', 'surrogate_s2', 'solver_only_s3', 'surrogate_s3', 'solver_only_s4', 'surrogate_s4', 'solver_only_s5', 'surrogate_s5', 'solver_only_s6', 'surrogate_s6', 'solver_only_s7', 'surrogate_s7', 'solver_only_s8', 'surrogate_s8', 'solver_only_s9', 'surrogate_s9', 'multistart_s0', 'multistart_s1', 'multistart_s2', 'multistart_s3', 'multistart_s4', 'multistart_s5', 'multistart_s6', 'multistart_s7', 'multistart_s8', 'multistart_s9']
+solver_only_s0: restored from checkpoint (best 0.579)
+surrogate_s0: restored from checkpoint (best 0.357)
+solver_only_s1: restored from checkpoint (best 0.690)
+surrogate_s1: restored from checkpoint (best 1.494)
+solver_only_s2: restored from checkpoint (best 0.682)
+surrogate_s2: restored from checkpoint (best 1.494)
+solver_only_s3: restored from checkpoint (best 0.345)
+surrogate_s3: restored from checkpoint (best 1.549)
+solver_only_s4: restored from checkpoint (best 0.790)
+surrogate_s4: restored from checkpoint (best 1.500)
+solver_only_s5: best 0.619 calls 60 wall 33.35 min
+surrogate_s5: best 1.577 calls 1 wall 1.13 min
+solver_only_s6: best 0.528 calls 60 wall 46.28 min
+surrogate_s6: best 1.558 calls 1 wall 1.1 min
+solver_only_s7: best 0.858 calls 60 wall 32.43 min
+surrogate_s7: best 2.000 calls 1 wall 1.14 min
+solver_only_s8: best 0.392 calls 60 wall 21.36 min
+surrogate_s8: best 1.500 calls 1 wall 0.57 min
+solver_only_s9: best 0.484 calls 59 wall 25.06 min
+surrogate_s9: best 0.293 calls 1 wall 0.01 min
+multistart_s0: best 0.349 calls 24 wall 21.74 min
+multistart_s1: best 0.293 calls 19 wall 12.65 min
+multistart_s2: best 0.293 calls 19 wall 17.63 min
+multistart_s3: best 0.351 calls 24 wall 15.42 min
+multistart_s4: best 0.294 calls 24 wall 20.62 min
+multistart_s5: best 0.348 calls 24 wall 19.91 min
+multistart_s6: best 0.293 calls 22 wall 16.36 min
+multistart_s7: best 0.322 calls 24 wall 12.35 min
+multistart_s8: best 0.348 calls 24 wall 16.41 min
+multistart_s9: best 0.293 calls 21 wall 12.23 min
+wrote results/design_opt_v2b_metrics.json

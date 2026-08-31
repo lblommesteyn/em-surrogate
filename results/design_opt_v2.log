@@ -1,0 +1,16 @@
+training/loading stack...
+stack stats: {'gap_p95': 0.2855930515701924, 'gap_med': 0.15086574334177155, 'gap_iqr': 0.09170150333765578, 'unc_med': 0.07448840778543024, 'unc_iqr': 0.028024955072571786}
+validation: {"J_spearman": -0.5017391304347826, "J_mae": 0.27811001081920766, "resp_err_mean": 1.6044799038331687, "gap_spearman_err": 0.7478260869565218, "unc_spearman_err": 0.7660869565217392, "gap_over_p95_frac": 1.0, "med_gap_z": 21.01491855560624, "med_unc_z": 23.74642822898683}
+queue: ['solver_only_s0', 'hybrid_s0', 'surrogate_s0', 'solver_only_s1', 'hybrid_s1', 'surrogate_s1', 'solver_only_s2', 'hybrid_s2', 'surrogate_s2', 'unc_s0', 'random_s0']
+solver_only_s0: best 0.579 calls 60 wall 26.39 min
+hybrid_s0: best 0.422 calls 8 wall 5.59 min
+surrogate_s0: best 0.357 calls 1 wall 0.22 min
+solver_only_s1: best 0.690 calls 59 wall 34.72 min
+hybrid_s1: best 0.818 calls 60 wall 41.58 min
+surrogate_s1: best 1.494 calls 1 wall 1.03 min
+solver_only_s2: best 0.682 calls 59 wall 36.05 min
+hybrid_s2: best 0.983 calls 60 wall 31.63 min
+surrogate_s2: best 1.494 calls 1 wall 0.01 min
+unc_s0: best 0.347 calls 8 wall 0.37 min
+random_s0: best 0.335 calls 53 wall 24.09 min
+wrote results/design_opt_v2_metrics.json

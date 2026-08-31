@@ -1,0 +1,32 @@
+training/loading stack...
+training DS6 member 0...
+training DS6 member 1...
+training DS6 member 2...
+training DS6 member 3...
+training DS6 member 4...
+stack stats: {'gap_p95': 0.2705006820115599, 'gap_med': 0.14380788954783671, 'gap_iqr': 0.09934261247199527, 'unc_med': 0.06838373185993538, 'unc_iqr': 0.043379640236069494}
+validation: {"J_spearman": -0.4808695652173913, "J_mae": 0.860861205671786, "resp_err_mean": 0.6823033570106736, "gap_spearman_err": -0.3608695652173914, "unc_spearman_err": -0.17913043478260876, "gap_over_p95_frac": 0.0, "med_gap_z": -0.4916840689117791, "med_unc_z": -0.731545549715861}
+queue: ['solver_only_s0', 'surrogate_s0', 'solver_only_s1', 'surrogate_s1', 'solver_only_s2', 'surrogate_s2', 'solver_only_s3', 'surrogate_s3', 'solver_only_s4', 'surrogate_s4', 'multistart_s0', 'multistart_s1', 'multistart_s2', 'multistart_s3', 'multistart_s4']
+solver_only_s0: best 0.220 calls 60 wall 72.6 min
+surrogate_s0: best 0.397 calls 1 wall 0.67 min
+solver_only_s1: best 0.210 calls 60 wall 93.33 min
+surrogate_s1: best 0.374 calls 1 wall 0.68 min
+solver_only_s2: best 0.271 calls 60 wall 71.45 min
+surrogate_s2: best 2.000 calls 1 wall 2.66 min
+Traceback (most recent call last):
+  File "C:\Users\LukeB\dev\em-surrogate\scripts\run_pkg_opt.py", line 479, in <module>
+    main()
+  File "C:\Users\LukeB\dev\em-surrogate\scripts\run_pkg_opt.py", line 436, in main
+    r = run_solver_only(sv, seed)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LukeB\dev\em-surrogate\scripts\run_pkg_opt.py", line 261, in run_solver_only
+    rs_ = solver.solve_batch(tds)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LukeB\dev\em-surrogate\src\emsurr\pkg_task.py", line 179, in solve_batch
+    raise RuntimeError("oems_pkg_eval failed:\n" + r.stdout[-2000:]
+RuntimeError: object address  : 000001C6F2633460
+object refcount : 3
+object type     : 00007FFC29BF2D90
+object type name: RuntimeError
+object repr     : 
+lost sys.stderr

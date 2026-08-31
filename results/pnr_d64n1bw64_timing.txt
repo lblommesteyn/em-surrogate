@@ -1,0 +1,148 @@
+Startpoint: rst (input port clocked by clk)
+Endpoint: g_unit[0].uu/_315474_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (propagated)
+   0.200    0.200 v input external delay
+   0.000    0.200 v rst (in)
+   3.629    3.829 ^ g_unit[0].uu/_182372_/ZN (INV_X1)
+   0.094    3.923 v g_unit[0].uu/_182488_/ZN (NAND4_X1)
+   0.172    4.095 ^ g_unit[0].uu/_182489_/ZN (INV_X1)
+   0.030    4.125 v g_unit[0].uu/_185130_/ZN (NOR2_X4)
+   0.048    4.173 v max_cap1503/Z (BUF_X4)
+   0.040    4.213 v max_cap1502/Z (BUF_X4)
+   0.044    4.257 v max_cap1500/Z (BUF_X4)
+   0.039    4.296 v max_cap1499/Z (BUF_X4)
+   0.044    4.341 v max_cap1464/Z (BUF_X4)
+   0.061    4.401 v max_cap1463/Z (BUF_X4)
+   0.056    4.457 v max_cap1461/Z (BUF_X4)
+   0.053    4.510 v max_cap1460/Z (BUF_X4)
+   0.059    4.569 v max_cap1458/Z (BUF_X4)
+   0.048    4.616 v max_cap1457/Z (BUF_X4)
+   0.025    4.642 ^ g_unit[0].uu/_185131_/ZN (INV_X8)
+   0.096    4.737 ^ max_cap443/Z (BUF_X8)
+   0.125    4.862 ^ max_cap442/Z (BUF_X8)
+   0.053    4.915 ^ max_cap441/Z (BUF_X8)
+   0.091    5.006 ^ max_cap415/Z (BUF_X8)
+   0.074    5.080 ^ max_cap414/Z (BUF_X8)
+   0.068    5.148 ^ max_cap402/Z (BUF_X8)
+   0.114    5.262 ^ max_cap401/Z (BUF_X8)
+   0.120    5.382 ^ max_cap400/Z (BUF_X8)
+   0.060    5.442 ^ max_cap399/Z (BUF_X8)
+   0.080    5.522 ^ max_cap398/Z (BUF_X8)
+   0.063    5.584 ^ max_cap397/Z (BUF_X8)
+   0.115    5.699 ^ max_cap396/Z (BUF_X8)
+   0.130    5.829 ^ max_cap395/Z (BUF_X8)
+   0.091    5.920 v g_unit[0].uu/_186367_/ZN (NAND3_X1)
+   0.027    5.946 ^ g_unit[0].uu/_186368_/ZN (OAI21_X1)
+   0.000    5.947 ^ g_unit[0].uu/_315474_/D (DFF_X1)
+            5.947   data arrival time
+
+   2.000    2.000   clock clk (rise edge)
+   0.537    2.537   clock network delay (propagated)
+   0.000    2.537   clock reconvergence pessimism
+            2.537 ^ g_unit[0].uu/_315474_/CK (DFF_X1)
+  -0.032    2.505   library setup time
+            2.505   data required time
+-----------------------------------------------------------
+            2.505   data required time
+           -5.947   data arrival time
+-----------------------------------------------------------
+           -3.442   slack (VIOLATED)
+
+
+Startpoint: _7062_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: g_unit[0].uu/_315909_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.563    0.563   clock network delay (propagated)
+   0.000    0.563 ^ _7062_/CK (DFF_X2)
+   0.114    0.677 v _7062_/Q (DFF_X2)
+   0.033    0.711 v max_cap15528/Z (BUF_X8)
+   0.046    0.757 v max_cap15527/Z (BUF_X16)
+   0.103    0.860 v max_cap15526/Z (BUF_X8)
+   0.129    0.989 v max_cap15524/Z (BUF_X8)
+   0.069    1.058 v max_cap15523/Z (BUF_X8)
+   0.190    1.248 v max_cap15520/Z (BUF_X8)
+   0.185    1.433 v max_cap15519/Z (BUF_X8)
+   0.081    1.514 v max_cap15518/Z (BUF_X8)
+   0.034    1.548 v max_cap15517/Z (BUF_X8)
+   0.126    1.674 ^ g_unit[0].uu/g_col[32].u_dot/_080245_/ZN (NAND2_X1)
+   0.029    1.702 v g_unit[0].uu/g_col[32].u_dot/_080246_/ZN (NAND3_X1)
+   0.075    1.777 ^ g_unit[0].uu/g_col[32].u_dot/_080249_/ZN (AOI21_X1)
+   0.044    1.821 v g_unit[0].uu/g_col[32].u_dot/_080252_/ZN (OAI22_X1)
+   0.066    1.887 ^ g_unit[0].uu/g_col[32].u_dot/_080256_/ZN (AOI21_X1)
+   0.042    1.929 v g_unit[0].uu/g_col[32].u_dot/_080258_/ZN (OAI22_X1)
+   0.044    1.973 v g_unit[0].uu/g_col[32].u_dot/_080267_/ZN (AND3_X1)
+   0.052    2.025 ^ g_unit[0].uu/g_col[32].u_dot/_080268_/ZN (OAI22_X1)
+   0.036    2.061 v g_unit[0].uu/g_col[32].u_dot/_080275_/ZN (AOI21_X1)
+   0.078    2.139 ^ g_unit[0].uu/g_col[32].u_dot/_085617_/ZN (OAI211_X1)
+   0.062    2.201 ^ g_unit[0].uu/g_col[32].u_dot/_085618_/ZN (AND2_X1)
+   0.029    2.230 v g_unit[0].uu/g_col[32].u_dot/_095062_/ZN (NAND4_X1)
+   0.068    2.298 ^ g_unit[0].uu/g_col[32].u_dot/_095063_/ZN (OAI211_X1)
+   0.027    2.324 v g_unit[0].uu/g_col[32].u_dot/_102108_/ZN (AOI21_X1)
+   0.053    2.377 ^ g_unit[0].uu/g_col[32].u_dot/_104606_/ZN (OAI211_X1)
+   0.010    2.387 v g_unit[0].uu/g_col[32].u_dot/_104625_/ZN (INV_X1)
+   0.080    2.467 ^ g_unit[0].uu/g_col[32].u_dot/_104628_/ZN (OAI211_X1)
+   0.066    2.533 v g_unit[0].uu/g_col[32].u_dot/_106107_/ZN (AOI21_X1)
+   0.110    2.643 ^ g_unit[0].uu/g_col[32].u_dot/_106155_/ZN (OAI21_X1)
+   0.064    2.707 ^ g_unit[0].uu/g_col[32].u_dot/_106163_/ZN (AND2_X1)
+   0.030    2.737 v g_unit[0].uu/g_col[32].u_dot/_106606_/ZN (NAND3_X1)
+   0.076    2.813 ^ g_unit[0].uu/g_col[32].u_dot/_106611_/ZN (AOI21_X1)
+   0.045    2.858 v g_unit[0].uu/g_col[32].u_dot/_106613_/ZN (OAI22_X1)
+   0.042    2.901 v g_unit[0].uu/g_col[32].u_dot/_106615_/ZN (AND3_X1)
+   0.157    3.058 ^ g_unit[0].uu/g_col[32].u_dot/_106616_/ZN (OAI22_X1)
+   0.045    3.104 v g_unit[0].uu/g_col[32].u_dot/_106630_/ZN (AOI21_X1)
+   0.068    3.172 ^ g_unit[0].uu/g_col[32].u_dot/_106632_/ZN (OAI22_X1)
+   0.019    3.191 v g_unit[0].uu/g_col[32].u_dot/_106633_/ZN (NAND2_X1)
+   0.022    3.213 ^ g_unit[0].uu/g_col[32].u_dot/_106634_/ZN (NAND2_X1)
+   0.026    3.239 v g_unit[0].uu/g_col[32].u_dot/_106636_/ZN (NAND2_X1)
+   0.075    3.314 ^ g_unit[0].uu/g_col[32].u_dot/_106757_/ZN (AOI21_X1)
+   0.041    3.355 v g_unit[0].uu/g_col[32].u_dot/_106979_/ZN (OAI22_X1)
+   0.057    3.412 ^ g_unit[0].uu/g_col[32].u_dot/_106985_/ZN (AOI21_X1)
+   0.040    3.452 v g_unit[0].uu/g_col[32].u_dot/_106987_/ZN (OAI22_X1)
+   0.065    3.517 ^ g_unit[0].uu/g_col[32].u_dot/_106994_/ZN (AOI21_X1)
+   0.062    3.579 v g_unit[0].uu/g_col[32].u_dot/_107142_/ZN (OAI211_X1)
+   0.049    3.628 v g_unit[0].uu/g_col[32].u_dot/_107143_/ZN (AND3_X1)
+   0.048    3.676 ^ g_unit[0].uu/g_col[32].u_dot/_107145_/ZN (OAI21_X1)
+   0.076    3.752 ^ g_unit[0].uu/g_col[32].u_dot/_107153_/ZN (AND4_X1)
+   0.028    3.780 v g_unit[0].uu/g_col[32].u_dot/_107154_/ZN (NAND3_X1)
+   0.059    3.838 ^ g_unit[0].uu/g_col[32].u_dot/_107163_/ZN (OAI21_X1)
+   0.032    3.871 v g_unit[0].uu/g_col[32].u_dot/_107309_/ZN (AOI21_X1)
+   0.060    3.930 v g_unit[0].uu/g_col[32].u_dot/_107344_/ZN (XNOR2_X1)
+   0.033    3.963 ^ g_unit[0].uu/_198039_/ZN (NAND2_X1)
+   0.017    3.980 v g_unit[0].uu/_198040_/ZN (INV_X1)
+   0.060    4.040 ^ g_unit[0].uu/_198042_/ZN (NOR2_X1)
+   0.033    4.074 v g_unit[0].uu/_198075_/ZN (NAND3_X1)
+   0.048    4.122 v g_unit[0].uu/_198076_/ZN (OR2_X1)
+   0.221    4.343 ^ g_unit[0].uu/_198082_/ZN (OAI21_X1)
+   0.142    4.485 v g_unit[0].uu/_198186_/ZN (AOI21_X1)
+   0.094    4.579 ^ g_unit[0].uu/_198241_/ZN (OAI21_X1)
+   0.019    4.598 v g_unit[0].uu/_198267_/ZN (NAND2_X1)
+   0.099    4.697 ^ g_unit[0].uu/_198284_/ZN (AOI21_X1)
+   0.034    4.731 v g_unit[0].uu/_198287_/ZN (OAI211_X1)
+   0.024    4.755 ^ g_unit[0].uu/_198288_/ZN (NAND2_X1)
+   0.000    4.755 ^ g_unit[0].uu/_315909_/D (DFF_X1)
+            4.755   data arrival time
+
+   2.000    2.000   clock clk (rise edge)
+   0.552    2.552   clock network delay (propagated)
+   0.000    2.552   clock reconvergence pessimism
+            2.552 ^ g_unit[0].uu/_315909_/CK (DFF_X1)
+  -0.029    2.522   library setup time
+            2.522   data required time
+-----------------------------------------------------------
+            2.522   data required time
+           -4.755   data arrival time
+-----------------------------------------------------------
+           -2.233   slack (VIOLATED)
+
+

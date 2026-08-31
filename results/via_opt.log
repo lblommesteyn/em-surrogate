@@ -1,0 +1,25 @@
+training/loading stack...
+training DS6 member 0...
+training DS6 member 1...
+training DS6 member 2...
+training DS6 member 3...
+training DS6 member 4...
+stack stats: {'gap_p95': 0.26624018752544937, 'gap_med': 0.1503949013452499, 'gap_iqr': 0.08952254372353305, 'unc_med': 0.07333259679067955, 'unc_iqr': 0.038927261638471766}
+validation: {"J_spearman": 0.8539130434782609, "J_mae": 0.3835670224972773, "resp_err_mean": 0.6669077856445943, "gap_spearman_err": 0.5104347826086958, "unc_spearman_err": 0.5930434782608697, "gap_over_p95_frac": 0.041666666666666664, "med_gap_z": -0.28788063825280313, "med_unc_z": -0.8292942197508789}
+queue: ['solver_only_s0', 'surrogate_s0', 'solver_only_s1', 'surrogate_s1', 'solver_only_s2', 'surrogate_s2', 'solver_only_s3', 'surrogate_s3', 'solver_only_s4', 'surrogate_s4', 'multistart_s0', 'multistart_s1', 'multistart_s2', 'multistart_s3', 'multistart_s4']
+solver_only_s0: best 0.101 calls 60 wall 29.18 min
+surrogate_s0: best 0.100 calls 1 wall 0.43 min
+solver_only_s1: best 0.058 calls 60 wall 23.39 min
+surrogate_s1: best 0.095 calls 1 wall 0.83 min
+solver_only_s2: best 0.075 calls 60 wall 20.23 min
+surrogate_s2: best 0.142 calls 1 wall 0.29 min
+solver_only_s3: best 0.050 calls 60 wall 20.41 min
+surrogate_s3: best 0.095 calls 1 wall 1.17 min
+solver_only_s4: best 0.078 calls 60 wall 27.27 min
+surrogate_s4: best 0.082 calls 1 wall 0.29 min
+multistart_s0: best 0.062 calls 24 wall 13.51 min
+multistart_s1: best 0.068 calls 24 wall 13.39 min
+multistart_s2: best 0.081 calls 24 wall 10.94 min
+multistart_s3: best 0.058 calls 24 wall 11.28 min
+multistart_s4: best 0.068 calls 24 wall 10.39 min
+wrote results/via_opt_metrics.json

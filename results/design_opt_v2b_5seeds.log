@@ -1,0 +1,22 @@
+training/loading stack...
+stack stats: {'gap_p95': 0.28075678245970204, 'gap_med': 0.14701475372760325, 'gap_iqr': 0.09073129791687175, 'unc_med': 0.07290871380192689, 'unc_iqr': 0.027914668564081653}
+validation: {"J_spearman": -0.5017391304347826, "J_mae": 0.2744166198885462, "resp_err_mean": 1.6105817266238116, "gap_spearman_err": 0.748695652173913, "unc_spearman_err": 0.7660869565217392, "gap_over_p95_frac": 1.0, "med_gap_z": 23.304128362759755, "med_unc_z": 24.04850661241512}
+queue: ['solver_only_s0', 'hybrid_s0', 'surrogate_s0', 'solver_only_s1', 'hybrid_s1', 'surrogate_s1', 'solver_only_s2', 'hybrid_s2', 'surrogate_s2', 'solver_only_s3', 'hybrid_s3', 'surrogate_s3', 'solver_only_s4', 'hybrid_s4', 'surrogate_s4', 'unc_s0', 'random_s0']
+solver_only_s0: restored from checkpoint (best 0.579)
+hybrid_s0: restored from checkpoint (best 0.289)
+surrogate_s0: restored from checkpoint (best 0.357)
+solver_only_s1: restored from checkpoint (best 0.690)
+hybrid_s1: restored from checkpoint (best 0.338)
+surrogate_s1: restored from checkpoint (best 1.494)
+solver_only_s2: restored from checkpoint (best 0.682)
+hybrid_s2: restored from checkpoint (best 1.465)
+surrogate_s2: restored from checkpoint (best 1.494)
+solver_only_s3: restored from checkpoint (best 0.345)
+hybrid_s3: restored from checkpoint (best 1.441)
+surrogate_s3: restored from checkpoint (best 1.549)
+solver_only_s4: best 0.790 calls 12 wall 7.02 min
+hybrid_s4: best 1.384 calls 60 wall 74.53 min
+surrogate_s4: best 1.500 calls 1 wall 1.14 min
+unc_s0: restored from checkpoint (best 0.295)
+random_s0: restored from checkpoint (best 0.293)
+wrote results/design_opt_v2b_metrics.json

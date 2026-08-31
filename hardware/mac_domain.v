@@ -36,7 +36,7 @@ module mac_domain #(
     output wire [31:0]            obs,
     output wire [31:0]            c_total, c_starve_sum
 );
-    localparam BUF_BYTES = 2 * D;     // double row buffer per unit
+    localparam BUF_BYTES = (2*D > 2*EXT_BW) ? 2*D : 2*EXT_BW; // double row buffer per unit (holds >= one beat)
 
     genvar u;
     wire [N_UNITS-1:0] done_u;
@@ -65,7 +65,9 @@ module mac_domain #(
                     + ((beat && (k == rr)) ? EXT_BW : 0)
                     - consume_u[k];
                 if (beat && (k == rr))
-                    rowbuf[k] <= {ext_data, rowbuf[k][8*BUF_BYTES-1:8*EXT_BW]};
+                    rowbuf[k] <= (rowbuf[k] >> (8*EXT_BW))
+                        | ({{(8*(BUF_BYTES-EXT_BW)){1'b0}}, ext_data}
+                           << (8*(BUF_BYTES-EXT_BW)));
                 else if (consume_u[k] != 0)
                     rowbuf[k] <= rowbuf[k] >> (8*D);
             end

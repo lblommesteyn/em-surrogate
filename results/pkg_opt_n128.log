@@ -1,0 +1,14 @@
+training/loading stack...
+stack stats: {'gap_p95': 0.43623817274800414, 'gap_med': 0.20215844871002875, 'gap_iqr': 0.12717565059167887, 'unc_med': 0.058546795768778505, 'unc_iqr': 0.04824189176651818}
+validation: {"J_spearman": 0.6460869565217391, "J_mae": 0.25724455159789666, "resp_err_mean": 0.360984918874278, "gap_spearman_err": 0.19304347826086957, "unc_spearman_err": 0.013913043478260863, "gap_over_p95_frac": 0.3333333333333333, "med_gap_z": 0.6092613294282679, "med_unc_z": -0.4695544049824161}
+queue: ['solver_only_s5', 'surrogate_s5', 'solver_only_s6', 'surrogate_s6', 'solver_only_s7', 'surrogate_s7', 'multistart_s5', 'multistart_s6', 'multistart_s7']
+solver_only_s5: best 0.221 calls 12 wall 19.02 min
+surrogate_s5: best 0.389 calls 1 wall 1.52 min
+solver_only_s6: best 0.211 calls 60 wall 96.58 min
+surrogate_s6: best 0.385 calls 1 wall 1.08 min
+solver_only_s7: best 0.242 calls 60 wall 82.81 min
+surrogate_s7: best 0.457 calls 1 wall 1.53 min
+multistart_s5: best 0.323 calls 24 wall 31.12 min
+multistart_s6: best 0.299 calls 24 wall 39.47 min
+multistart_s7: best 0.322 calls 24 wall 44.65 min
+wrote results/pkg_opt_n128_metrics.json

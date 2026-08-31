@@ -1,0 +1,8 @@
+training/loading stack...
+stack stats: {'gap_p95': 0.27850688076695923, 'gap_med': 0.1388206615589445, 'gap_iqr': 0.10438813279653542, 'unc_med': 0.06206950733315839, 'unc_iqr': 0.037806240841280835}
+validation: {"J_spearman": -0.4808695652173913, "J_mae": 0.8478025767767424, "resp_err_mean": 0.6806976706445783, "gap_spearman_err": -0.27478260869565213, "unc_spearman_err": -0.3095652173913044, "gap_over_p95_frac": 0.0, "med_gap_z": -0.4144059881642231, "med_unc_z": -0.6808224219425606}
+queue: ['multistart_s5', 'multistart_s6', 'multistart_s7']
+multistart_s5: best 0.322 calls 24 wall 37.66 min
+multistart_s6: best 0.309 calls 24 wall 63.92 min
+multistart_s7: best 0.331 calls 24 wall 62.68 min
+wrote results/pkg_opt_orig57_metrics.json
