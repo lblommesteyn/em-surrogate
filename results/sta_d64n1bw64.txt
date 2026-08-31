@@ -1,0 +1,34 @@
+Startpoint: g_unit[0].uu/_364633_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: g_unit[0].uu/_315334_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+   0.000    0.000 ^ g_unit[0].uu/_364633_/CK (DFF_X1)
+  32.126   32.126 ^ g_unit[0].uu/_364633_/Q (DFF_X1)
+1896.944 1929.070 v g_unit[0].uu/_182371_/ZN (INV_X1)
+ 109.985 2039.055 ^ g_unit[0].uu/_182486_/ZN (NAND4_X1)
+1690.759 3729.814 v g_unit[0].uu/_182487_/ZN (INV_X1)
+15154.656 18884.471 ^ g_unit[0].uu/_182490_/ZN (NOR2_X1)
+ 230.515 19114.984 v g_unit[0].uu/_182491_/ZN (INV_X1)
+  18.897 19133.883 ^ g_unit[0].uu/_182510_/ZN (OAI21_X1)
+   0.000 19133.883 ^ g_unit[0].uu/_315334_/D (DFF_X1)
+         19133.883   data arrival time
+
+   2.000    2.000   clock clk (rise edge)
+   0.000    2.000   clock network delay (ideal)
+   0.000    2.000   clock reconvergence pessimism
+            2.000 ^ g_unit[0].uu/_315334_/CK (DFF_X1)
+  -0.975    1.025   library setup time
+            1.025   data required time
+-----------------------------------------------------------
+            1.025   data required time
+         -19133.883   data arrival time
+-----------------------------------------------------------
+         -19132.857   slack (VIOLATED)
+
+
