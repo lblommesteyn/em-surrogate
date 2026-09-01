@@ -48,7 +48,7 @@
     <div><span class="sw" style="background:#5a5475"></span>std-cell sea / distributor</div>
   </div>
 </div>
-<div id="note" class="mono">macro positions schematic;<br>die &amp; macro dimensions and all<br>metrics are measured</div>
+<div id="note" class="mono">SRAM positions are the real<br>TritonMacroPlace coordinates;<br>engine regions schematic</div>
 <div id="verdict" class="mono">
   <div class="stat"><div class="k">design area (fine vs coarse)</div><div class="v">8.17 vs <b class="win-c">8.02 Mµm²</b></div></div>
   <div class="stat"><div class="k">reg→reg clock</div><div class="v">6.60 vs <b class="win-c">5.48 ns</b></div></div>
@@ -67,7 +67,7 @@ scene.fog = new THREE.Fog(0x131020, 14000, 26000);
 const cam = new THREE.PerspectiveCamera(38, 1, 10, 60000);
 
 // ---- real dimensions (um) ----
-const DIE_F = 3813, DIE_C = 3790;          // die sides, measured
+const DIE_F = 3813, DIE_C = 3753;          // die sides, measured
 const MW = 151.81, MH = 223.9;             // fakeram45_128x256
 const GAP = 1400;
 const MACRO_Z = 90, ENG_Z = 26, DIE_Z = 60;
@@ -98,32 +98,24 @@ function engine(g, x, z, w, d, mat){
   return e;
 }
 
-// FINE die: 8 engine tiles in a ring, 2 macros hugging each
+// FINE die: REAL TritonMacroPlace coordinates (um, lower-left origin)
 const fineDie = die(DIE_F, -(DIE_F/2+GAP/2));
 const engF=[], engC=[];
+const MAC_F = [[10.08,10.92],[329.56,10.92],[169.96,10.92],[489.44,10.92],[809.2,10.92],[169.96,243.04],[10.08,243.04],[649.32,10.92],[10.08,3578.68],[329.56,3578.68],[169.96,3578.68],[489.44,3578.68],[809.2,3578.68],[169.96,3346.84],[10.08,3346.84],[649.32,3578.68]];
+for (const [mx,my] of MAC_F) macro(fineDie, mx+MW/2-DIE_F/2, -(my+MH/2-DIE_F/2), false);
+// engine regions: 0-3 serve the SW farm, 4-7 the NW farm (placement follows banks)
 for (let i=0;i<8;i++){
-  const a = i/8*Math.PI*2 + Math.PI/8;
-  const r = DIE_F*0.30;
-  const x = Math.cos(a)*r, z = Math.sin(a)*r;
-  engF.push(engine(fineDie, x, z, 620, 620, matFine));
-  const rr = DIE_F*0.44, rot = (i%4===1||i%4===2);
-  const mx = Math.cos(a)*rr, mz = Math.sin(a)*rr;
-  const offx = rot ? 0 : MW+18, offz = rot ? MW+18 : 0;
-  macro(fineDie, mx-offx/2, mz-offz/2, rot);
-  macro(fineDie, mx+offx/2, mz+offz/2, rot);
+  const col=i%4, north=i>=4;
+  engF.push(engine(fineDie, -DIE_F/2+520+col*760, (north?-1:1)*(DIE_F/2-1120), 600, 600, matFine));
 }
 scene.add(fineDie);
 
-// COARSE die: 2 big engines, 8 macros in a bank wall beside each
+// COARSE die: REAL coordinates - all 16 macros packed in the SE corner farm
 const coarseDie = die(DIE_C, DIE_C/2+GAP/2);
-for (let s=0;s<2;s++){
-  const sgn = s ? 1 : -1;
-  engC.push(engine(coarseDie, sgn*DIE_C*0.20, 0, 1150, 1650, matCoarse));
-  for (let j=0;j<8;j++){
-    const col = j%2, row = (j-col)/2;
-    macro(coarseDie, sgn*DIE_C*0.42 + sgn*(col?MW+14:0), (row-1.5)*(MH+16), false);
-  }
-}
+const MAC_C = [[2792.44,10.92],[2472.68,10.92],[3271.8,474.88],[3431.68,474.88],[2312.8,10.92],[3431.68,243.04],[2632.56,10.92],[3591.28,474.88],[3271.8,10.92],[3271.8,243.04],[2952.04,10.92],[3591.28,243.04],[3111.92,243.04],[3431.68,10.92],[3111.92,10.92],[3591.28,10.92]];
+for (const [mx,my] of MAC_C) macro(coarseDie, mx+MW/2-DIE_C/2, -(my+MH/2-DIE_C/2), false);
+engC.push(engine(coarseDie, -DIE_C*0.18, DIE_C*0.16, 1150, 1650, matCoarse));
+engC.push(engine(coarseDie, DIE_C*0.16, -DIE_C*0.18, 1150, 1650, matCoarse));
 scene.add(coarseDie);
 
 // labels via canvas sprites
