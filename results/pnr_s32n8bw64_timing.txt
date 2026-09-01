@@ -1,0 +1,81 @@
+Startpoint: rst (input port clocked by clk)
+Endpoint: _83724_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (propagated)
+   0.200    0.200 v input external delay
+   0.000    0.200 v rst (in)
+ 134.863  135.063 ^ _53589_/ZN (NOR2_X1)
+   0.007  135.069 ^ _83724_/D (DFF_X1)
+          135.069   data arrival time
+
+   2.000    2.000   clock clk (rise edge)
+   0.921    2.921   clock network delay (propagated)
+   0.000    2.921   clock reconvergence pessimism
+            2.921 ^ _83724_/CK (DFF_X1)
+  -1.244    1.678   library setup time
+            1.678   data required time
+-----------------------------------------------------------
+            1.678   data required time
+         -135.069   data arrival time
+-----------------------------------------------------------
+         -133.392   slack (VIOLATED)
+
+
+Startpoint: _86038_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _85937_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.969    0.969   clock network delay (propagated)
+   0.000    0.969 ^ _86038_/CK (DFF_X1)
+   0.111    1.080 v _86038_/Q (DFF_X1)
+   0.033    1.114 ^ g_eng[4].uu/_050036_/ZN (NOR2_X1)
+   0.032    1.145 v g_eng[4].uu/_050037_/ZN (NAND4_X1)
+   0.019    1.165 ^ g_eng[4].uu/_050038_/ZN (NAND4_X1)
+   0.057    1.221 ^ g_eng[4].uu/_050039_/ZN (AND4_X1)
+   0.015    1.236 v g_eng[4].uu/_050040_/ZN (OAI21_X1)
+   0.047    1.283 ^ g_eng[4].uu/_050041_/ZN (NOR4_X1)
+   0.227    1.510 v g_eng[4].uu/_050042_/ZN (NAND2_X1)
+   3.049    4.559 ^ g_eng[4].uu/_050049_/ZN (NAND2_X1)
+   0.548    5.107 v g_eng[4].uu/_050050_/ZN (INV_X1)
+   0.243    5.350 ^ _66247_/ZN (NOR4_X1)
+   0.040    5.390 v _66250_/ZN (NAND4_X1)
+   0.463    5.853 ^ _66256_/ZN (NOR2_X1)
+   0.305    6.158 v _67806_/ZN (OAI21_X1)
+   0.060    6.217 v max_cap508/Z (BUF_X4)
+   0.037    6.255 v max_cap507/Z (BUF_X4)
+   0.031    6.286 v max_cap506/Z (BUF_X4)
+   0.032    6.318 v max_cap505/Z (BUF_X4)
+   0.033    6.352 v max_cap502/Z (BUF_X4)
+   0.036    6.387 v max_cap501/Z (BUF_X4)
+   0.035    6.422 v max_cap500/Z (BUF_X4)
+   0.034    6.456 v max_cap499/Z (BUF_X4)
+   0.034    6.490 v max_cap498/Z (BUF_X4)
+   0.035    6.525 v max_cap496/Z (BUF_X4)
+   0.034    6.558 v max_cap495/Z (BUF_X4)
+   0.024    6.582 ^ _69066_/ZN (OAI21_X1)
+   0.017    6.599 v _69067_/ZN (AOI21_X1)
+   0.000    6.599 v _85937_/D (DFF_X2)
+            6.599   data arrival time
+
+   2.000    2.000   clock clk (rise edge)
+   0.929    2.929   clock network delay (propagated)
+   0.000    2.929   clock reconvergence pessimism
+            2.929 ^ _85937_/CK (DFF_X2)
+  -5.297   -2.368   library setup time
+           -2.368   data required time
+-----------------------------------------------------------
+           -2.368   data required time
+           -6.599   data arrival time
+-----------------------------------------------------------
+           -8.967   slack (VIOLATED)
+
+

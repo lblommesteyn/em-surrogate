@@ -1,0 +1,175 @@
+
+10. Printing statistics.
+
+=== $paramod$3388960bcd300e8fd13bac089e923f62bcf9d8d7\mac_array ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+    51243        - wires
+    73253        - wire bits
+     1236        - public wires
+    23055        - public wire bits
+       15        - ports
+     1509        - port bits
+    50006  9.9E+04 cells
+      460   489.44   AND2_X1
+       38    50.54   AND3_X1
+       55    87.78   AND4_X1
+     2285  2431.24   AOI21_X1
+    12469 5.64E+04   DFF_X1
+     6305  3354.26   INV_X1
+     8608  1.6E+04   MUX2_X1
+     5870  4684.26   NAND2_X1
+     4440  4724.16   NAND3_X1
+      266   353.78   NAND4_X1
+      706  563.388   NOR2_X1
+      122  129.808   NOR3_X1
+       22    29.26   NOR4_X1
+      258   343.14   OAI211_X1
+     6494 6.91E+03   OAI21_X1
+      167  177.688   OR2_X1
+       64    85.12   OR3_X1
+        2    3.192   OR4_X1
+     1011 1.61E+03   XNOR2_X1
+      364  580.944   XOR2_X1
+       32        - submodules
+       32        -   $paramod\dot_col\D=32'00000000000000000000000000100000
+
+   Chip area for module '$paramod$3388960bcd300e8fd13bac089e923f62bcf9d8d7\mac_array': 99024.086000
+     of which used for sequential elements: 56384.818000 (56.94%)
+
+=== $paramod\dot_col\D=32'00000000000000000000000000100000 ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+    26811        - wires
+    27383        - wire bits
+        4        - public wires
+      576        - public wire bits
+        3        - ports
+      544        - port bits
+    26837 2.56E+04 cells
+      281  298.984   AND2_X1
+      819  1089.27   AND3_X1
+       60    95.76   AND4_X1
+      105   139.65   AOI211_X1
+     2390  2542.96   AOI21_X1
+      144   191.52   AOI22_X1
+     4432 2.36E+03   INV_X1
+     6702 5.35E+03   NAND2_X1
+     3391 3.61E+03   NAND3_X1
+      938  1247.54   NAND4_X1
+     1866 1.49E+03   NOR2_X1
+      701  745.864   NOR3_X1
+       29    38.57   NOR4_X1
+      646   859.18   OAI211_X1
+     1942 2.07E+03   OAI21_X1
+        3    4.788   OAI221_X1
+      729   969.57   OAI22_X1
+      265   281.96   OR2_X1
+       38    50.54   OR3_X1
+        1    1.596   OR4_X1
+     1108 1.77E+03   XNOR2_X1
+      247  394.212   XOR2_X1
+
+   Chip area for module '$paramod\dot_col\D=32'00000000000000000000000000100000': 25589.732000
+     of which used for sequential elements: 0.000000 (0.00%)
+
+=== mac_slice ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+    44044        - wires
+    62740        - wire bits
+      195        - public wires
+    18891        - public wire bits
+       13        - ports
+      647        - port bits
+    44091 5.93E+04 cells
+      240   255.36   AND2_X1
+     2101  2794.33   AND3_X1
+       68  108.528   AND4_X1
+     8857 9.42E+03   AOI21_X1
+     4804 2.17E+04   DFF_X1
+     5697 3.03E+03   INV_X1
+     8164 6.51E+03   NAND2_X1
+      350    372.4   NAND3_X1
+      506   672.98   NAND4_X1
+     5422 4.33E+03   NOR2_X1
+       97  103.208   NOR3_X1
+      132   175.56   NOR4_X1
+       83   110.39   OAI211_X1
+     3144 3.35E+03   OAI21_X1
+        8   12.768   OAI221_X1
+     2056  2734.48   OAI22_X1
+      304  323.456   OR2_X1
+        7     9.31   OR3_X1
+     1839 2.94E+03   XNOR2_X1
+      196  312.816   XOR2_X1
+       16        -   fakeram45_128x256
+        8        - submodules
+        8        -   $paramod$3388960bcd300e8fd13bac089e923f62bcf9d8d7\mac_array
+
+   Area for cell type \fakeram45_128x256 is unknown!
+
+   Chip area for module '\mac_slice': 59285.814000
+     of which used for sequential elements: 21723.688000 (36.64%)
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        |        +-Area including submodules.
+        |        | 
+  7314411  7.4E+06 mac_slice
+    50006  9.9E+04 $paramod$3388960bcd300e8fd13bac089e923f62bcf9d8d7\mac_array
+    26837 2.56E+04   $paramod\dot_col\D=32'00000000000000000000000000100000
+
+        +----------Count including submodules.
+        |        +-Area including submodules.
+        |        | 
+  7317604        - wires
+  7658812        - wire bits
+    11107        - public wires
+   350787        - public wire bits
+      901        - ports
+   151983        - port bits
+        -        - memories
+        -        - memory bits
+        -        - processes
+  7314411  7.4E+06 cells
+    75856 8.07E+04   AND2_X1
+   212069 2.82E+05   AND3_X1
+    15868 2.53E+04   AND4_X1
+    26880  35750.4   AOI211_X1
+   638977  6.8E+05   AOI21_X1
+    36864  4.9E+04   AOI22_X1
+   104556 4.73E+05   DFF_X1
+  1190729 6.33E+05   INV_X1
+    68864 1.28E+05   MUX2_X1
+  1770836 1.41E+06   NAND2_X1
+   903966 9.62E+05   NAND3_X1
+   242762 3.23E+05   NAND4_X1
+   488766  3.9E+05   NOR2_X1
+   180529 1.92E+05   NOR3_X1
+     7732 1.03E+04   NOR4_X1
+   167523 2.23E+05   OAI211_X1
+   552248 5.88E+05   OAI21_X1
+      776 1.24E+03   OAI221_X1
+   188680 2.51E+05   OAI22_X1
+    69480 7.39E+04   OR2_X1
+    10247 1.36E+04   OR3_X1
+      272  434.112   OR4_X1
+   293575 4.69E+05   XNOR2_X1
+    66340 1.06E+05   XOR2_X1
+       16        -   fakeram45_128x256
+        8 7.34E+06 submodules
+        8 7.34E+06   $paramod$3388960bcd300e8fd13bac089e923f62bcf9d8d7\mac_array
+
+   Area for cell type \fakeram45_128x256 is unknown!
+
+   Chip area for top module '\mac_slice': 7402449.893998
+     of which used for sequential elements: 472802.232000 (6.39%)
+
