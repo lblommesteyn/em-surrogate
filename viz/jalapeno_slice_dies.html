@@ -1,0 +1,197 @@
+<title>Two Slices of Jalapeño</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+  :root{
+    --substrate:#131020; --panel:#1b1730; --line:#2a2440;
+    --ink:#e9e4d8; --dim:#8d86a8;
+    --copper:#c9874a; --fine:#45c7b8; --coarse:#e8a83c;
+  }
+  html,body{margin:0;height:100%;background:var(--substrate);color:var(--ink);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;overflow:hidden}
+  #c{position:fixed;inset:0;display:block;cursor:grab}
+  #c:active{cursor:grabbing}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+  #hud{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;
+    align-items:flex-start;padding:18px 22px;pointer-events:none}
+  #hud h1{margin:0;font:600 17px/1.2 'IBM Plex Mono',monospace;letter-spacing:.04em}
+  #hud .sub{margin-top:4px;font-size:12.5px;color:var(--dim);max-width:46ch}
+  #legend{background:rgba(27,23,48,.82);
+    border:1px solid var(--line);border-radius:6px;padding:10px 14px;font-size:12px;
+    pointer-events:auto;backdrop-filter:blur(6px)}
+  #legend div{display:flex;align-items:center;gap:8px;margin:4px 0}
+  .sw{width:12px;height:12px;border-radius:2px;flex:none}
+  #verdict{position:fixed;left:0;right:0;bottom:0;display:flex;
+    border-top:1px solid var(--line);
+    background:rgba(27,23,48,.88);backdrop-filter:blur(6px)}
+  .stat{flex:1;padding:12px 18px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+  .stat .k{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font:500 16px/1.5 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+  .stat .v b{font-weight:600}
+  .win-f{color:var(--fine)} .win-c{color:var(--coarse)}
+  #note{position:fixed;bottom:76px;right:22px;font-size:11px;color:var(--dim);
+    max-width:34ch;text-align:right}
+  @media (max-width:900px){ #verdict{flex-wrap:wrap}.stat{min-width:45%} #note{display:none}}
+  :focus-visible{outline:2px solid var(--fine);outline-offset:2px}
+</style>
+<canvas id="c" tabindex="0" aria-label="3D view of the two Jalapeño slice floorplans; drag to orbit, scroll to zoom"></canvas>
+<div id="hud">
+  <div>
+    <h1>TWO SLICES OF JALAPEÑO</h1>
+    <div class="sub">8&times;32&times;32 vs 2&times;64&times;64 &mdash; equal 8192 MACs, 64&thinsp;KB SRAM.
+    Placed &amp; routed, Nangate45. Drag to orbit &middot; scroll to zoom.</div>
+  </div>
+  <div id="legend" class="mono">
+    <div><span class="sw" style="background:var(--fine)"></span>fine engines (8&times;32&times;32)</div>
+    <div><span class="sw" style="background:var(--coarse)"></span>coarse engines (2&times;64&times;64)</div>
+    <div><span class="sw" style="background:var(--copper)"></span>fakeram45 128&times;256 SRAM</div>
+    <div><span class="sw" style="background:#5a5475"></span>std-cell sea / distributor</div>
+  </div>
+</div>
+<div id="note" class="mono">macro positions schematic;<br>die &amp; macro dimensions and all<br>metrics are measured</div>
+<div id="verdict" class="mono">
+  <div class="stat"><div class="k">design area (fine vs coarse)</div><div class="v">8.17 vs <b class="win-c">8.02 Mµm²</b></div></div>
+  <div class="stat"><div class="k">reg→reg clock</div><div class="v">6.60 vs <b class="win-c">5.48 ns</b></div></div>
+  <div class="stat"><div class="k">wirelength</div><div class="v"><b class="win-f">103.8</b> vs 108.5 Mµm</div></div>
+  <div class="stat"><div class="k">power @ 2 ns</div><div class="v">1.09 vs <b class="win-c">1.01 W</b></div></div>
+  <div class="stat"><div class="k">verdict</div><div class="v win-c">slice infra favors 64×64</div></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+<script>
+const CV = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({canvas:CV, antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x131020);
+scene.fog = new THREE.Fog(0x131020, 14000, 26000);
+const cam = new THREE.PerspectiveCamera(38, 1, 10, 60000);
+
+// ---- real dimensions (um) ----
+const DIE_F = 3813, DIE_C = 3790;          // die sides, measured
+const MW = 151.81, MH = 223.9;             // fakeram45_128x256
+const GAP = 1400;
+const MACRO_Z = 90, ENG_Z = 26, DIE_Z = 60;
+
+const matSub   = new THREE.MeshStandardMaterial({color:0x1c1830, roughness:.85, metalness:.25});
+const matSea   = new THREE.MeshStandardMaterial({color:0x2c2745, roughness:.7, metalness:.35});
+const matCu    = new THREE.MeshStandardMaterial({color:0xc9874a, roughness:.35, metalness:.75});
+const matFine  = new THREE.MeshStandardMaterial({color:0x2c8478, roughness:.5, metalness:.4, emissive:0x0e3a34});
+const matCoarse= new THREE.MeshStandardMaterial({color:0xa87728, roughness:.5, metalness:.4, emissive:0x3a2a08});
+
+function die(side, cx){
+  const g = new THREE.Group();
+  const base = new THREE.Mesh(new THREE.BoxGeometry(side, DIE_Z, side), matSub);
+  base.position.y = -DIE_Z/2; g.add(base);
+  const sea = new THREE.Mesh(new THREE.BoxGeometry(side-160, 8, side-160), matSea);
+  sea.position.y = 4; g.add(sea);
+  const grid = new THREE.GridHelper(side-160, 18, 0x2a2440, 0x231e38);
+  grid.position.y = 9; g.add(grid);
+  g.position.x = cx; return g;
+}
+function macro(g, x, z, rot){
+  const m = new THREE.Mesh(new THREE.BoxGeometry(rot?MH:MW, MACRO_Z, rot?MW:MH), matCu);
+  m.position.set(x, MACRO_Z/2+8, z); g.add(m);
+}
+function engine(g, x, z, w, d, mat){
+  const e = new THREE.Mesh(new THREE.BoxGeometry(w, ENG_Z, d), mat);
+  e.position.set(x, ENG_Z/2+8, z); g.add(e);
+  return e;
+}
+
+// FINE die: 8 engine tiles in a ring, 2 macros hugging each
+const fineDie = die(DIE_F, -(DIE_F/2+GAP/2));
+const engF=[], engC=[];
+for (let i=0;i<8;i++){
+  const a = i/8*Math.PI*2 + Math.PI/8;
+  const r = DIE_F*0.30;
+  const x = Math.cos(a)*r, z = Math.sin(a)*r;
+  engF.push(engine(fineDie, x, z, 620, 620, matFine));
+  const rr = DIE_F*0.44, rot = (i%4===1||i%4===2);
+  const mx = Math.cos(a)*rr, mz = Math.sin(a)*rr;
+  const offx = rot ? 0 : MW+18, offz = rot ? MW+18 : 0;
+  macro(fineDie, mx-offx/2, mz-offz/2, rot);
+  macro(fineDie, mx+offx/2, mz+offz/2, rot);
+}
+scene.add(fineDie);
+
+// COARSE die: 2 big engines, 8 macros in a bank wall beside each
+const coarseDie = die(DIE_C, DIE_C/2+GAP/2);
+for (let s=0;s<2;s++){
+  const sgn = s ? 1 : -1;
+  engC.push(engine(coarseDie, sgn*DIE_C*0.20, 0, 1150, 1650, matCoarse));
+  for (let j=0;j<8;j++){
+    const col = j%2, row = (j-col)/2;
+    macro(coarseDie, sgn*DIE_C*0.42 + sgn*(col?MW+14:0), (row-1.5)*(MH+16), false);
+  }
+}
+scene.add(coarseDie);
+
+// labels via canvas sprites
+function label(txt, x, z, group){
+  const c2 = document.createElement('canvas'); c2.width=512; c2.height=128;
+  const ctx = c2.getContext('2d');
+  ctx.font = '600 58px "IBM Plex Mono", monospace';
+  ctx.fillStyle = '#e9e4d8'; ctx.textAlign='center';
+  ctx.fillText(txt, 256, 80);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c2), transparent:true}));
+  sp.scale.set(1600,400,1); sp.position.set(x, 330, z); group.add(sp);
+}
+label('8 × 32×32', 0, -DIE_F*0.62, fineDie);
+label('2 × 64×64', 0, -DIE_C*0.62, coarseDie);
+
+// operand beats: particles streaming from the south-edge port to engines
+const beats = [];
+function spawnBeat(group, targets, tint, dieSide){
+  const m = new THREE.Mesh(new THREE.SphereGeometry(26,8,8),
+    new THREE.MeshBasicMaterial({color:tint, transparent:true}));
+  const tgt = targets[Math.floor(Math.random()*targets.length)].position.clone();
+  const src = new THREE.Vector3(0, 60, dieSide*0.52);
+  m.position.copy(src);
+  group.add(m);
+  beats.push({m, group, src, t:new THREE.Vector3(tgt.x, 120, tgt.z), p:0});
+}
+setInterval(()=>{ if(!document.hidden){
+  spawnBeat(fineDie, engF, 0x45c7b8, DIE_F);
+  spawnBeat(coarseDie, engC, 0xe8a83c, DIE_C);} }, 260);
+
+// lights
+scene.add(new THREE.AmbientLight(0x8880aa, .55));
+const key = new THREE.DirectionalLight(0xfff2dd, 1.1); key.position.set(-4000,6000,3000); scene.add(key);
+const rim = new THREE.DirectionalLight(0x45c7b8, .35); rim.position.set(5000,2000,-4000); scene.add(rim);
+
+// tiny custom orbit
+let th=0.35, ph=0.95, R=9200, dragging=false, px=0, py=0;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function setCam(){
+  cam.position.set(R*Math.sin(ph)*Math.sin(th), R*Math.cos(ph), R*Math.sin(ph)*Math.cos(th));
+  cam.lookAt(0,-150,0);
+}
+CV.addEventListener('pointerdown', e=>{dragging=true;px=e.clientX;py=e.clientY;CV.setPointerCapture(e.pointerId)});
+CV.addEventListener('pointermove', e=>{ if(!dragging) return;
+  th -= (e.clientX-px)*0.005; ph = Math.min(1.45, Math.max(0.25, ph-(e.clientY-py)*0.004));
+  px=e.clientX; py=e.clientY; });
+CV.addEventListener('pointerup', ()=>dragging=false);
+CV.addEventListener('wheel', e=>{ e.preventDefault(); R=Math.min(24000,Math.max(3600,R*(1+e.deltaY*0.001))); }, {passive:false});
+
+function resize(){
+  renderer.setSize(innerWidth, innerHeight, false);
+  cam.aspect = innerWidth/innerHeight; cam.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+let t0 = performance.now();
+function frame(now){
+  const dt = Math.min(0.05,(now-t0)/1000); t0=now;
+  if(!dragging && !reduced) th += dt*0.06;
+  for (let i=beats.length-1;i>=0;i--){
+    const b=beats[i]; b.p += dt*1.4;
+    if (b.p>=1){ b.group.remove(b.m); beats.splice(i,1); continue; }
+    b.m.position.lerpVectors(b.src, b.t, b.p);
+    b.m.position.y = 60 + Math.sin(b.p*Math.PI)*260;
+    b.m.material.opacity = 1-b.p*0.5;
+  }
+  setCam(); renderer.render(scene, cam);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
