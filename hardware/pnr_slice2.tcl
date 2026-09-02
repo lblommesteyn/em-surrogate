@@ -15,7 +15,7 @@ link_design mac_slice2
 create_clock -name clk -period 2.0 [get_ports clk]
 set_input_delay 0.2 -clock clk [all_inputs]
 set_output_delay 0.2 -clock clk [all_outputs]
-initialize_floorplan -utilization 55 -aspect_ratio 1 -core_space 6 \
+initialize_floorplan -utilization 45 -aspect_ratio 1 -core_space 6 \
   -site FreePDK45_38x28_10R_NP_162NW_34O
 source $pdir/make_tracks.tcl
 place_pins -hor_layers metal5 -ver_layers metal6
