@@ -28,9 +28,7 @@ detailed_placement
 clock_tree_synthesis -buf_list BUF_X4 -sink_clustering_enable
 set_propagated_clock [all_clocks]
 detailed_placement
-set_routing_layers -signal metal2-metal7
-global_route -congestion_report_file $out/pnr_${tag}_congestion.rpt -verbose
-estimate_parasitics -global_routing
+estimate_parasitics -placement
 report_checks -path_delay max -digits 3 > $out/pnr_${tag}_timing.txt
 report_checks -path_delay max -from [all_registers] -to [all_registers] -digits 3 >> $out/pnr_${tag}_timing.txt
 catch {
@@ -40,5 +38,10 @@ catch {
 }
 report_design_area
 report_power > $out/pnr_${tag}_power.txt
+puts "PRE_ROUTE_METRICS_SAVED $tag"
+set_routing_layers -signal metal2-metal5
+global_route -congestion_report_file $out/pnr_${tag}_congestion.rpt -verbose
+estimate_parasitics -global_routing
+report_checks -path_delay max -from [all_registers] -to [all_registers] -digits 3 > $out/pnr_${tag}_timing_routed.txt
 puts "PNR_DONE $tag"
 exit
