@@ -60,11 +60,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 <script>
 const CV = document.getElementById('c');
-const renderer = new THREE.WebGLRenderer({canvas:CV, antialias:true});
+const renderer = new THREE.WebGLRenderer({canvas:CV, antialias:true, logarithmicDepthBuffer:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x101016);
-const cam = new THREE.PerspectiveCamera(34, 1, 10, 400000);
+const cam = new THREE.PerspectiveCamera(34, 1, 40, 400000);
 
 // --- std-cell row texture: fine horizontal striping like real placement rows
 function rowTexture(w, reps){
@@ -98,10 +98,10 @@ function block(grp, w,h,d, x,y,z, material, edgeMat){
 function region(grp, w,d, x,z, color, y){
   const m = new THREE.Mesh(new THREE.PlaneGeometry(w,d),
     new THREE.MeshLambertMaterial({color, transparent:true, opacity:.32}));
-  m.rotation.x = -Math.PI/2; m.position.set(x, y, z); grp.add(m);
+  m.rotation.x = -Math.PI/2; m.position.set(x, y+6, z); grp.add(m);
   const o = new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),
     new THREE.LineBasicMaterial({color}));
-  o.rotation.copy(m.rotation); o.position.copy(m.position); o.position.y += 0.5;
+  o.rotation.copy(m.rotation); o.position.copy(m.position); o.position.y += 2;
   grp.add(o);
 }
 
@@ -114,7 +114,7 @@ function die(side, cx){
   base.position.y = -23; g.add(base); g.add(edged(base));
   const sea = new THREE.Mesh(new THREE.PlaneGeometry(side-140, side-140),
     new THREE.MeshLambertMaterial({map:rowTexture(side, (side-140)/40)}));
-  sea.rotation.x = -Math.PI/2; sea.position.y = 0.5; g.add(sea);
+  sea.rotation.x = -Math.PI/2; sea.position.y = 2; g.add(sea);
   g.position.x = cx; grpA.add(g); return g;
 }
 const fineDie = die(DIE_F, -(DIE_F/2+GAP/2));
@@ -140,7 +140,7 @@ const chip = new THREE.Mesh(new THREE.BoxGeometry(CW, 260, CH), matDie);
 chip.position.y = -130; grpB.add(chip); grpB.add(edged(chip));
 const chipSea = new THREE.Mesh(new THREE.PlaneGeometry(CW-500, CH-500),
   new THREE.MeshLambertMaterial({map:rowTexture(CW, 90)}));
-chipSea.rotation.x = -Math.PI/2; chipSea.position.y = 1; grpB.add(chipSea);
+chipSea.rotation.x = -Math.PI/2; chipSea.position.y = 4; grpB.add(chipSea);
 for (let r=0;r<8;r++) for (let q=0;q<8;q++){
   const gx = (q-3.5)*(CW/8), gz = (r-3.5)*(CH/8);
   const grpTint = (((r>>1)+(q>>1))%2) ? 0xa08a58 : 0x5a9a92;
