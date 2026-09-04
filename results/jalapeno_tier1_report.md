@@ -38,13 +38,14 @@ bandwidth-gated effect, now with the knee at aggregate 128 B/cycle
 
 | metric | fine @141 | coarse @141 | fine @64 | coarse @64 |
 |---|---|---|---|---|
-| reg-to-reg (ns) | **2.901** | 3.256 (+12%) | 3.215 | pending |
-| design area (um^2) | 9.77M | **9.46M (-3.2%)** | 9.77M | pending |
-| power @2ns (W) | **2.01** | 2.32 (+15%) | 2.00 | pending |
+| reg-to-reg (ns) | **2.901** | 3.256 (+12%) | **3.215** | 3.514 (+9%) |
+| design area (um^2) | 9.77M | **9.46M (-3.2%)** | 9.77M | **9.46M (-3.2%)** |
+| power @2ns (W) | **2.01** | 2.32 (+15%) | **2.00** | 2.28 (+14%) |
 
-(The 4th config re-runs after a VM panic mid-placement; it cross-checks
-BW sensitivity and cannot change the verdict, which the BW=141 pair
-carries. Numbers will be appended when banked.)
+(All four configs banked. The BW=64 pair CONFIRMS the verdict: fine
+faster and lower-power, coarse smaller, at both operand bandwidths -
+the result is not a single-point artifact. Both slices run ~0.25-0.3 ns
+slower at BW=64 than at 141, consistent placement-seed variance.)
 
 ## The verdict, and what it overturns
 
