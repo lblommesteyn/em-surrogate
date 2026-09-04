@@ -4,7 +4,7 @@
   :root{
     --substrate:#131020; --panel:#1b1730; --line:#2a2440;
     --ink:#e9e4d8; --dim:#8d86a8;
-    --copper:#c9874a; --fine:#45c7b8; --coarse:#e8a83c;
+    --copper:#c9874a; --fine:#45c7b8; --coarse:#e8a83c; --hbm:#7b6fd4;
   }
   html,body{margin:0;height:100%;background:var(--substrate);color:var(--ink);
     font-family:'IBM Plex Sans',system-ui,sans-serif;overflow:hidden}
@@ -14,167 +14,248 @@
   #hud{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;
     align-items:flex-start;padding:18px 22px;pointer-events:none}
   #hud h1{margin:0;font:600 17px/1.2 'IBM Plex Mono',monospace;letter-spacing:.04em}
-  #hud .sub{margin-top:4px;font-size:12.5px;color:var(--dim);max-width:46ch}
-  #legend{background:rgba(27,23,48,.82);
-    border:1px solid var(--line);border-radius:6px;padding:10px 14px;font-size:12px;
-    pointer-events:auto;backdrop-filter:blur(6px)}
+  #hud .sub{margin-top:4px;font-size:12.5px;color:var(--dim);max-width:48ch}
+  #right{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+  #legend{background:rgba(27,23,48,.82);border:1px solid var(--line);border-radius:6px;
+    padding:10px 14px;font-size:12px;pointer-events:auto;backdrop-filter:blur(6px)}
   #legend div{display:flex;align-items:center;gap:8px;margin:4px 0}
   .sw{width:12px;height:12px;border-radius:2px;flex:none}
+  #scenes{display:flex;gap:6px;pointer-events:auto}
+  #scenes button{font:500 12px 'IBM Plex Mono',monospace;color:var(--dim);
+    background:rgba(27,23,48,.82);border:1px solid var(--line);border-radius:6px;
+    padding:8px 14px;cursor:pointer;backdrop-filter:blur(6px)}
+  #scenes button.on{color:var(--ink);border-color:var(--fine)}
+  #scenes button:focus-visible{outline:2px solid var(--fine);outline-offset:2px}
   #verdict{position:fixed;left:0;right:0;bottom:0;display:flex;
-    border-top:1px solid var(--line);
-    background:rgba(27,23,48,.88);backdrop-filter:blur(6px)}
+    border-top:1px solid var(--line);background:rgba(27,23,48,.88);backdrop-filter:blur(6px)}
   .stat{flex:1;padding:12px 18px;border-right:1px solid var(--line)}
   .stat:last-child{border-right:0}
   .stat .k{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
-  .stat .v{font:500 16px/1.5 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+  .stat .v{font:500 15px/1.5 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
   .stat .v b{font-weight:600}
   .win-f{color:var(--fine)} .win-c{color:var(--coarse)}
   #note{position:fixed;bottom:76px;right:22px;font-size:11px;color:var(--dim);
-    max-width:34ch;text-align:right}
+    max-width:36ch;text-align:right}
   @media (max-width:900px){ #verdict{flex-wrap:wrap}.stat{min-width:45%} #note{display:none}}
-  :focus-visible{outline:2px solid var(--fine);outline-offset:2px}
 </style>
-<canvas id="c" tabindex="0" aria-label="3D view of the two Jalapeño slice floorplans; drag to orbit, scroll to zoom"></canvas>
+<canvas id="c" tabindex="0" aria-label="3D visualization of the Jalapeño granularity study; drag to orbit, scroll to zoom"></canvas>
 <div id="hud">
   <div>
-    <h1>TWO SLICES OF JALAPEÑO</h1>
-    <div class="sub">8&times;32&times;32 vs 2&times;64&times;64 &mdash; equal 8192 MACs, 64&thinsp;KB SRAM.
+    <h1 id="title">TWO SLICES OF JALAPEÑO</h1>
+    <div class="sub" id="subtitle">8&times;32&times;32 vs 2&times;64&times;64 &mdash; equal 8192 MACs, 64&thinsp;KB SRAM.
     Placed &amp; routed, Nangate45. Drag to orbit &middot; scroll to zoom.</div>
   </div>
-  <div id="legend" class="mono">
-    <div><span class="sw" style="background:var(--fine)"></span>fine engines (8&times;32&times;32)</div>
-    <div><span class="sw" style="background:var(--coarse)"></span>coarse engines (2&times;64&times;64)</div>
-    <div><span class="sw" style="background:var(--copper)"></span>fakeram45 128&times;256 SRAM</div>
-    <div><span class="sw" style="background:#5a5475"></span>std-cell sea / distributor</div>
+  <div id="right">
+    <div id="scenes">
+      <button id="btnSlices" class="on">measured slices</button>
+      <button id="btnChip">full-chip reconstruction</button>
+    </div>
+    <div id="legend" class="mono"></div>
   </div>
 </div>
-<div id="note" class="mono">SRAM positions are the real<br>TritonMacroPlace coordinates;<br>engine regions schematic</div>
-<div id="verdict" class="mono">
-  <div class="stat"><div class="k">design area (fine vs coarse)</div><div class="v">8.17 vs <b class="win-c">8.02 Mµm²</b></div></div>
-  <div class="stat"><div class="k">reg→reg clock</div><div class="v">6.60 vs <b class="win-c">5.48 ns</b></div></div>
-  <div class="stat"><div class="k">wirelength</div><div class="v"><b class="win-f">103.8</b> vs 108.5 Mµm</div></div>
-  <div class="stat"><div class="k">power @ 2 ns</div><div class="v">1.09 vs <b class="win-c">1.01 W</b></div></div>
-  <div class="stat"><div class="k">verdict</div><div class="v win-c">slice infra favors 64×64</div></div>
+<div id="note" class="mono" >SRAM positions: real TritonMacroPlace<br>coordinates. Full-chip view is a<br>SPECULATIVE reconstruction (zartbot).</div>
+<div id="verdict" class="mono" >
+  <div class="stat"><div class="k">pipelined clock (fine vs coarse)</div><div class="v"><b class="win-f">2.90</b> vs 3.26 ns</div></div>
+  <div class="stat"><div class="k">area</div><div class="v">9.77 vs <b class="win-c">9.46 Mµm²</b></div></div>
+  <div class="stat"><div class="k">power @ 2 ns</div><div class="v"><b class="win-f">2.01</b> vs 2.32 W</div></div>
+  <div class="stat"><div class="k">cycles @ real feed</div><div class="v">tie (both starved)</div></div>
+  <div class="stat"><div class="k">final verdict</div><div class="v">physics ~neutral; BW decides</div></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 <script>
 const CV = document.getElementById('c');
 const renderer = new THREE.WebGLRenderer({canvas:CV, antialias:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x131020);
-scene.fog = new THREE.Fog(0x131020, 14000, 26000);
-const cam = new THREE.PerspectiveCamera(38, 1, 10, 60000);
+const cam = new THREE.PerspectiveCamera(38, 1, 10, 300000);
 
-// ---- real dimensions (um) ----
-const DIE_F = 3813, DIE_C = 3753;          // die sides, measured
-const MW = 151.81, MH = 223.9;             // fakeram45_128x256
-const GAP = 1400;
-const MACRO_Z = 90, ENG_Z = 26, DIE_Z = 60;
+// ---------------- shared materials ----------------
+const matSub   = new THREE.MeshStandardMaterial({color:0x1c1830, roughness:.8, metalness:.3});
+const matSea   = new THREE.MeshStandardMaterial({color:0x2c2745, roughness:.65, metalness:.4});
+const matCu    = new THREE.MeshStandardMaterial({color:0xc9874a, roughness:.3, metalness:.85});
+const matCuTop = new THREE.MeshStandardMaterial({color:0xe8aa6a, roughness:.25, metalness:.9, emissive:0x351b05});
+const matFine  = new THREE.MeshStandardMaterial({color:0x2c8478, roughness:.45, metalness:.45, emissive:0x0e3a34});
+const matCoarse= new THREE.MeshStandardMaterial({color:0xa87728, roughness:.45, metalness:.45, emissive:0x3a2a08});
+const matHBM   = new THREE.MeshStandardMaterial({color:0x4f45a0, roughness:.35, metalness:.6, emissive:0x181245});
+const matIO    = new THREE.MeshStandardMaterial({color:0x3a3358, roughness:.5, metalness:.5});
 
-const matSub   = new THREE.MeshStandardMaterial({color:0x1c1830, roughness:.85, metalness:.25});
-const matSea   = new THREE.MeshStandardMaterial({color:0x2c2745, roughness:.7, metalness:.35});
-const matCu    = new THREE.MeshStandardMaterial({color:0xc9874a, roughness:.35, metalness:.75});
-const matFine  = new THREE.MeshStandardMaterial({color:0x2c8478, roughness:.5, metalness:.4, emissive:0x0e3a34});
-const matCoarse= new THREE.MeshStandardMaterial({color:0xa87728, roughness:.5, metalness:.4, emissive:0x3a2a08});
+function makeLabel(txt, scale){
+  const c2 = document.createElement('canvas'); c2.width=1024; c2.height=192;
+  const ctx = c2.getContext('2d');
+  ctx.font = '600 84px "IBM Plex Mono", monospace';
+  ctx.fillStyle = '#e9e4d8'; ctx.textAlign='center';
+  ctx.fillText(txt, 512, 120);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c2), transparent:true, depthTest:false}));
+  sp.scale.set(scale, scale*0.1875, 1); return sp;
+}
 
-function die(side, cx){
+// ---------------- SCENE A: measured slices ----------------
+const grpSlices = new THREE.Group();
+const DIE_F = 3813, DIE_C = 3753, MW = 151.81, MH = 223.9, GAP = 1500;
+const MACRO_Z = 95, ENG_Z = 28, DIE_Z = 65;
+function die(side, cx, grp){
   const g = new THREE.Group();
   const base = new THREE.Mesh(new THREE.BoxGeometry(side, DIE_Z, side), matSub);
   base.position.y = -DIE_Z/2; g.add(base);
   const sea = new THREE.Mesh(new THREE.BoxGeometry(side-160, 8, side-160), matSea);
   sea.position.y = 4; g.add(sea);
-  const grid = new THREE.GridHelper(side-160, 18, 0x2a2440, 0x231e38);
+  const grid = new THREE.GridHelper(side-160, 20, 0x312a4d, 0x241f3a);
   grid.position.y = 9; g.add(grid);
-  g.position.x = cx; return g;
+  // metal stack rim
+  for (let i=0;i<4;i++){
+    const rim = new THREE.Mesh(new THREE.BoxGeometry(side+8+i*5, 2, side+8+i*5),
+      new THREE.MeshStandardMaterial({color:0x6a5f8f, roughness:.4, metalness:.8, transparent:true, opacity:.16-i*.03}));
+    rim.position.y = 14+i*7; g.add(rim);
+  }
+  g.position.x = cx; grp.add(g); return g;
 }
-function macro(g, x, z, rot){
-  const m = new THREE.Mesh(new THREE.BoxGeometry(rot?MH:MW, MACRO_Z, rot?MW:MH), matCu);
+function macro(g, x, z){
+  const m = new THREE.Mesh(new THREE.BoxGeometry(MW, MACRO_Z, MH), matCu);
   m.position.set(x, MACRO_Z/2+8, z); g.add(m);
+  const cap = new THREE.Mesh(new THREE.BoxGeometry(MW*0.9, 4, MH*0.9), matCuTop);
+  cap.position.set(x, MACRO_Z+10, z); g.add(cap);
 }
 function engine(g, x, z, w, d, mat){
   const e = new THREE.Mesh(new THREE.BoxGeometry(w, ENG_Z, d), mat);
-  e.position.set(x, ENG_Z/2+8, z); g.add(e);
-  return e;
+  e.position.set(x, ENG_Z/2+8, z); g.add(e); return e;
 }
-
-// FINE die: REAL TritonMacroPlace coordinates (um, lower-left origin)
-const fineDie = die(DIE_F, -(DIE_F/2+GAP/2));
-const engF=[], engC=[];
 const MAC_F = [[10.08,10.92],[329.56,10.92],[169.96,10.92],[489.44,10.92],[809.2,10.92],[169.96,243.04],[10.08,243.04],[649.32,10.92],[10.08,3578.68],[329.56,3578.68],[169.96,3578.68],[489.44,3578.68],[809.2,3578.68],[169.96,3346.84],[10.08,3346.84],[649.32,3578.68]];
-for (const [mx,my] of MAC_F) macro(fineDie, mx+MW/2-DIE_F/2, -(my+MH/2-DIE_F/2), false);
-// engine regions: 0-3 serve the SW farm, 4-7 the NW farm (placement follows banks)
+const MAC_C = [[2792.44,10.92],[2472.68,10.92],[3271.8,474.88],[3431.68,474.88],[2312.8,10.92],[3431.68,243.04],[2632.56,10.92],[3591.28,474.88],[3271.8,10.92],[3271.8,243.04],[2952.04,10.92],[3591.28,243.04],[3111.92,243.04],[3431.68,10.92],[3111.92,10.92],[3591.28,10.92]];
+const fineDie = die(DIE_F, -(DIE_F/2+GAP/2), grpSlices);
+const coarseDie = die(DIE_C, DIE_C/2+GAP/2, grpSlices);
+for (const [mx,my] of MAC_F) macro(fineDie, mx+MW/2-DIE_F/2, -(my+MH/2-DIE_F/2));
+for (const [mx,my] of MAC_C) macro(coarseDie, mx+MW/2-DIE_C/2, -(my+MH/2-DIE_C/2));
+const engF=[], engC=[];
 for (let i=0;i<8;i++){
   const col=i%4, north=i>=4;
   engF.push(engine(fineDie, -DIE_F/2+520+col*760, (north?-1:1)*(DIE_F/2-1120), 600, 600, matFine));
 }
-scene.add(fineDie);
-
-// COARSE die: REAL coordinates - all 16 macros packed in the SE corner farm
-const coarseDie = die(DIE_C, DIE_C/2+GAP/2);
-const MAC_C = [[2792.44,10.92],[2472.68,10.92],[3271.8,474.88],[3431.68,474.88],[2312.8,10.92],[3431.68,243.04],[2632.56,10.92],[3591.28,474.88],[3271.8,10.92],[3271.8,243.04],[2952.04,10.92],[3591.28,243.04],[3111.92,243.04],[3431.68,10.92],[3111.92,10.92],[3591.28,10.92]];
-for (const [mx,my] of MAC_C) macro(coarseDie, mx+MW/2-DIE_C/2, -(my+MH/2-DIE_C/2), false);
 engC.push(engine(coarseDie, -DIE_C*0.18, DIE_C*0.16, 1150, 1650, matCoarse));
 engC.push(engine(coarseDie, DIE_C*0.16, -DIE_C*0.18, 1150, 1650, matCoarse));
-scene.add(coarseDie);
+const lb1 = makeLabel('8 × 32×32', 2400); lb1.position.set(0, 420, -DIE_F*0.64); fineDie.add(lb1);
+const lb2 = makeLabel('2 × 64×64', 2400); lb2.position.set(0, 420, -DIE_C*0.64); coarseDie.add(lb2);
+scene.add(grpSlices);
 
-// labels via canvas sprites
-function label(txt, x, z, group){
-  const c2 = document.createElement('canvas'); c2.width=512; c2.height=128;
-  const ctx = c2.getContext('2d');
-  ctx.font = '600 58px "IBM Plex Mono", monospace';
-  ctx.fillStyle = '#e9e4d8'; ctx.textAlign='center';
-  ctx.fillText(txt, 256, 80);
-  const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c2), transparent:true}));
-  sp.scale.set(1600,400,1); sp.position.set(x, 330, z); group.add(sp);
-}
-label('8 × 32×32', 0, -DIE_F*0.62, fineDie);
-label('2 × 64×64', 0, -DIE_C*0.62, coarseDie);
-
-// operand beats: particles streaming from the south-edge port to engines
+// operand beat particles (scene A)
 const beats = [];
 function spawnBeat(group, targets, tint, dieSide){
   const m = new THREE.Mesh(new THREE.SphereGeometry(26,8,8),
     new THREE.MeshBasicMaterial({color:tint, transparent:true}));
   const tgt = targets[Math.floor(Math.random()*targets.length)].position.clone();
   const src = new THREE.Vector3(0, 60, dieSide*0.52);
-  m.position.copy(src);
-  group.add(m);
+  m.position.copy(src); group.add(m);
   beats.push({m, group, src, t:new THREE.Vector3(tgt.x, 120, tgt.z), p:0});
 }
-setInterval(()=>{ if(!document.hidden){
-  spawnBeat(fineDie, engF, 0x45c7b8, DIE_F);
-  spawnBeat(coarseDie, engC, 0xe8a83c, DIE_C);} }, 260);
 
-// lights
-scene.add(new THREE.AmbientLight(0x8880aa, .55));
-const key = new THREE.DirectionalLight(0xfff2dd, 1.1); key.position.set(-4000,6000,3000); scene.add(key);
-const rim = new THREE.DirectionalLight(0x45c7b8, .35); rim.position.set(5000,2000,-4000); scene.add(rim);
-
-// tiny custom orbit
-let th=0.35, ph=0.95, R=9200, dragging=false, px=0, py=0;
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-function setCam(){
-  cam.position.set(R*Math.sin(ph)*Math.sin(th), R*Math.cos(ph), R*Math.sin(ph)*Math.cos(th));
-  cam.lookAt(0,-150,0);
+// ---------------- SCENE B: full-chip reconstruction ----------------
+const grpChip = new THREE.Group();
+// compute die ~ reticle: 26mm x 33mm => 26000 x 33000 um; 8x8 slice grid
+const CW = 26000, CH = 33000, SLICE_W = CW/8*0.86, SLICE_H = CH/8*0.86;
+const chipBase = new THREE.Mesh(new THREE.BoxGeometry(CW, 300, CH), matSub);
+chipBase.position.y = -150; grpChip.add(chipBase);
+const chipSea = new THREE.Mesh(new THREE.BoxGeometry(CW-600, 30, CH-600), matSea);
+chipSea.position.y = 15; grpChip.add(chipSea);
+const sliceMeshes = [];
+for (let r=0;r<8;r++) for (let q=0;q<8;q++){
+  const gx = (q-3.5)*(CW/8), gz = (r-3.5)*(CH/8);
+  const groupHue = ((r>>1)*2+(q>>1))%2; // 8-slice collective groups (2x4 blocks)
+  const m = new THREE.Mesh(new THREE.BoxGeometry(SLICE_W, 120, SLICE_H),
+    new THREE.MeshStandardMaterial({color: groupHue?0xa87728:0x2c8478, roughness:.5, metalness:.45,
+      emissive: groupHue?0x2a1e06:0x0b2e29}));
+  m.position.set(gx, 90, gz); grpChip.add(m); sliceMeshes.push(m);
+  // 16-macro farm dot in each slice corner (nod to the measured layouts)
+  const farm = new THREE.Mesh(new THREE.BoxGeometry(SLICE_W*0.28, 150, SLICE_H*0.16), matCu);
+  farm.position.set(gx+SLICE_W*0.30, 110, gz+SLICE_H*0.36); grpChip.add(farm);
 }
+// 6 HBM4 stacks: 3 per long side
+for (let s=0;s<6;s++){
+  const side = s<3?-1:1, idx = s%3;
+  const h = new THREE.Mesh(new THREE.BoxGeometry(9000, 1400, 8000), matHBM);
+  h.position.set(side*(CW/2+5600), 700, (idx-1)*10500); grpChip.add(h);
+  for (let l=0;l<7;l++){
+    const layer = new THREE.Mesh(new THREE.BoxGeometry(9050, 30, 8050),
+      new THREE.MeshBasicMaterial({color:0x9a8fe8, transparent:true, opacity:.35}));
+    layer.position.set(side*(CW/2+5600), 180+l*190, (idx-1)*10500); grpChip.add(layer);
+  }
+}
+// IO die strip at south
+const io = new THREE.Mesh(new THREE.BoxGeometry(CW*0.8, 500, 5200), matIO);
+io.position.set(0, 250, CH/2+4300); grpChip.add(io);
+const lbC = makeLabel('JALAPEÑO — SPECULATIVE RECONSTRUCTION', 26000);
+lbC.position.set(0, 4200, -CH*0.68); grpChip.add(lbC);
+const lbH = makeLabel('HBM4 ×6', 9000); lbH.position.set(-(CW/2+5600), 2400, -10500); grpChip.add(lbH);
+grpChip.visible = false; scene.add(grpChip);
+// NoC pulses (scene B): flashes traveling between slice groups
+const pulses = [];
+function spawnPulse(){
+  const a = sliceMeshes[Math.floor(Math.random()*64)].position;
+  const b = sliceMeshes[Math.floor(Math.random()*64)].position;
+  const m = new THREE.Mesh(new THREE.SphereGeometry(260,8,8),
+    new THREE.MeshBasicMaterial({color:0x9a8fe8, transparent:true}));
+  m.position.copy(a); grpChip.add(m);
+  pulses.push({m, a:a.clone(), b:b.clone(), p:0});
+}
+
+// ---------------- legend / scene switching ----------------
+const legend = document.getElementById('legend');
+const LEG_A = `<div><span class="sw" style="background:var(--fine)"></span>fine engines (8×32×32)</div>
+<div><span class="sw" style="background:var(--coarse)"></span>coarse engines (2×64×64)</div>
+<div><span class="sw" style="background:var(--copper)"></span>fakeram45 SRAM (real coords)</div>
+<div><span class="sw" style="background:#5a5475"></span>std-cell sea / distributor</div>`;
+const LEG_B = `<div><span class="sw" style="background:var(--fine)"></span><span class="sw" style="background:var(--coarse)"></span>64 core slices (8×8, alt. collective groups)</div>
+<div><span class="sw" style="background:var(--copper)"></span>per-slice SRAM/L1 region</div>
+<div><span class="sw" style="background:var(--hbm)"></span>HBM4 stacks (216 GB, 15.4 TB/s)</div>
+<div><span class="sw" style="background:#3a3358"></span>IO die (N3E chiplet)</div>`;
+let mode = 'A';
+let R = 9800, Rtarget = 9800;
+function setMode(m){
+  mode = m;
+  grpSlices.visible = m==='A'; grpChip.visible = m==='B';
+  legend.innerHTML = m==='A' ? LEG_A : LEG_B;
+  document.getElementById('btnSlices').classList.toggle('on', m==='A');
+  document.getElementById('btnChip').classList.toggle('on', m==='B');
+  document.getElementById('title').textContent = m==='A' ? 'TWO SLICES OF JALAPEÑO' : 'JALAPEÑO, RECONSTRUCTED';
+  document.getElementById('subtitle').innerHTML = m==='A'
+    ? '8&times;32&times;32 vs 2&times;64&times;64 &mdash; equal 8192 MACs, 64&thinsp;KB SRAM. Placed &amp; routed, Nangate45.'
+    : '64 core slices &times; ~15 tensor units (64&times;64 @ MXFP4), no L2, 8&times;8 collective network. Geometry speculative, per the public record.';
+  Rtarget = m==='A' ? 9800 : 72000;
+}
+legend.innerHTML = LEG_A;
+document.getElementById('btnSlices').onclick = ()=>setMode('A');
+document.getElementById('btnChip').onclick = ()=>setMode('B');
+
+// ---------------- lights ----------------
+scene.add(new THREE.AmbientLight(0x8880aa, .5));
+const key = new THREE.DirectionalLight(0xfff2dd, 1.2); key.position.set(-40000,60000,30000); scene.add(key);
+const rim = new THREE.DirectionalLight(0x45c7b8, .35); rim.position.set(50000,20000,-40000); scene.add(rim);
+const warm = new THREE.PointLight(0xc9874a, .5, 0, 1.8); warm.position.set(0, 9000, 0); scene.add(warm);
+
+// ---------------- orbit ----------------
+let th=0.35, ph=0.95, dragging=false, px=0, py=0;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 CV.addEventListener('pointerdown', e=>{dragging=true;px=e.clientX;py=e.clientY;CV.setPointerCapture(e.pointerId)});
 CV.addEventListener('pointermove', e=>{ if(!dragging) return;
-  th -= (e.clientX-px)*0.005; ph = Math.min(1.45, Math.max(0.25, ph-(e.clientY-py)*0.004));
+  th -= (e.clientX-px)*0.005; ph = Math.min(1.45, Math.max(0.2, ph-(e.clientY-py)*0.004));
   px=e.clientX; py=e.clientY; });
 CV.addEventListener('pointerup', ()=>dragging=false);
-CV.addEventListener('wheel', e=>{ e.preventDefault(); R=Math.min(24000,Math.max(3600,R*(1+e.deltaY*0.001))); }, {passive:false});
-
-function resize(){
-  renderer.setSize(innerWidth, innerHeight, false);
-  cam.aspect = innerWidth/innerHeight; cam.updateProjectionMatrix();
-}
+CV.addEventListener('wheel', e=>{ e.preventDefault(); Rtarget=Math.min(180000,Math.max(2600,Rtarget*(1+e.deltaY*0.001))); }, {passive:false});
+function resize(){ renderer.setSize(innerWidth, innerHeight, false);
+  cam.aspect = innerWidth/innerHeight; cam.updateProjectionMatrix(); }
 addEventListener('resize', resize); resize();
+
+setInterval(()=>{ if(document.hidden) return;
+  if (mode==='A'){ spawnBeat(fineDie, engF, 0x45c7b8, DIE_F); spawnBeat(coarseDie, engC, 0xe8a83c, DIE_C); }
+  else if (pulses.length < 24) spawnPulse();
+}, 240);
 
 let t0 = performance.now();
 function frame(now){
   const dt = Math.min(0.05,(now-t0)/1000); t0=now;
-  if(!dragging && !reduced) th += dt*0.06;
+  if(!dragging && !reduced) th += dt*0.05;
+  R += (Rtarget-R)*Math.min(1, dt*4);
   for (let i=beats.length-1;i>=0;i--){
     const b=beats[i]; b.p += dt*1.4;
     if (b.p>=1){ b.group.remove(b.m); beats.splice(i,1); continue; }
@@ -182,7 +263,16 @@ function frame(now){
     b.m.position.y = 60 + Math.sin(b.p*Math.PI)*260;
     b.m.material.opacity = 1-b.p*0.5;
   }
-  setCam(); renderer.render(scene, cam);
+  for (let i=pulses.length-1;i>=0;i--){
+    const u=pulses[i]; u.p += dt*0.9;
+    if (u.p>=1){ grpChip.remove(u.m); pulses.splice(i,1); continue; }
+    u.m.position.lerpVectors(u.a, u.b, u.p);
+    u.m.position.y = 300 + Math.sin(u.p*Math.PI)*2600;
+    u.m.material.opacity = 0.9*(1-u.p*0.6);
+  }
+  cam.position.set(R*Math.sin(ph)*Math.sin(th), R*Math.cos(ph), R*Math.sin(ph)*Math.cos(th));
+  cam.lookAt(0,-150,0);
+  renderer.render(scene, cam);
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
